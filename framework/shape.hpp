@@ -2,12 +2,10 @@
 #define SHAPE_HPP
 
 template <typename T>
-Class Shape{
-
+class Shape{
   public:
-  
-  virtual T area const = 0;
-  virtual T volume const = 0;
+    virtual float area const = 0;
+    virtual float volume const = 0;
 };
 
 #endif
