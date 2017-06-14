@@ -2,10 +2,17 @@
 #include <cmath>
 
 Sphere::Sphere():
+  Shape{"Sphere"},
   center_{glm::vec3{0.0f}},
   r_{1.0} {}
 
 Sphere::Sphere(glm::vec3 const& center, float r):
+  Shape{"Sphere"},
+  center_{center},
+  r_{r} {}
+
+Sphere::Sphere(glm::vec3 const& center, float r, Color const& col, std::string const& name):
+  Shape{col, name},
   center_{center},
   r_{r} {}
 

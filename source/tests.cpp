@@ -2,8 +2,9 @@
 #include <catch.hpp>
 #include <box.cpp>
 #include <sphere.cpp>
+#include <shape.cpp>
 
-TEST_CASE ("default constructor box", "[aufgabe 5.2]"){
+TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   Box b;
   glm::vec3 min = b.get_min();
   glm::vec3 max = b.get_max();
@@ -13,10 +14,15 @@ TEST_CASE ("default constructor box", "[aufgabe 5.2]"){
   REQUIRE(max.x == 1.0f);
   REQUIRE(max.y == 1.0f);
   REQUIRE(max.z == 1.0f);
+  REQUIRE(b.get_name() == "Box");
+  Color col = b.get_color();
+  REQUIRE(col.r == 1.0f);
+  REQUIRE(col.g == 1.0f);
+  REQUIRE(col.b == 1.0f);
 }
 
-TEST_CASE ("user constructor box", "[aufgabe 5.2]"){
-  Box b{glm::vec3{1.0,2.0,3.0},glm::vec3{4.0,5.0,6.0}};
+TEST_CASE ("user constructor box", "[aufgabe 5.2/5.3]"){
+  Box b{glm::vec3{1.0,2.0,3.0},glm::vec3{4.0,5.0,6.0},Color{1.0,0.5,0.0},"TestBox"};
   glm::vec3 min = b.get_min();
   glm::vec3 max = b.get_max();
   REQUIRE(min.x == 1.0f);
@@ -25,24 +31,39 @@ TEST_CASE ("user constructor box", "[aufgabe 5.2]"){
   REQUIRE(max.x == 4.0f);
   REQUIRE(max.y == 5.0f);
   REQUIRE(max.z == 6.0f);
+  REQUIRE(b.get_name() == "TestBox");
+  Color col = b.get_color();
+  REQUIRE(col.r == 1.0f);
+  REQUIRE(col.g == 0.5f);
+  REQUIRE(col.b == 0.0f);
 }
 
-TEST_CASE ("default constructor sphere", "[aufgabe 5.2]"){
+TEST_CASE ("default constructor sphere", "[aufgabe 5.2/5.3]"){
   Sphere s;
   glm::vec3 center = s.get_center();
   REQUIRE(center.x == 0.0f);
   REQUIRE(center.y == 0.0f);
   REQUIRE(center.z == 0.0f);
   REQUIRE(s.get_r() == 1.0f);
+  REQUIRE(s.get_name() == "Sphere");
+  Color col = s.get_color();
+  REQUIRE(col.r == 1.0f);
+  REQUIRE(col.g == 1.0f);
+  REQUIRE(col.b == 1.0f);
 }
 
-TEST_CASE ("user constructor sphere", "[aufgabe 5.2]"){
-  Sphere s{glm::vec3{1.0,2.0,3.0},4.0};
+TEST_CASE ("user constructor sphere", "[aufgabe 5.2/5.3]"){
+  Sphere s{glm::vec3{1.0,2.0,3.0},4.0,Color{1.0,0.5,0.0},"TestSphere"};
   glm::vec3 center = s.get_center();
   REQUIRE(center.x == 1.0f);
   REQUIRE(center.y == 2.0f);
   REQUIRE(center.z == 3.0f);
   REQUIRE(s.get_r() == 4.0f);
+  REQUIRE(s.get_name() == "TestSphere");
+  Color col = s.get_color();
+  REQUIRE(col.r == 1.0f);
+  REQUIRE(col.g == 0.5f);
+  REQUIRE(col.b == 0.0f);
 }
 
 TEST_CASE ("area box", "[aufgabe 5.2]"){
