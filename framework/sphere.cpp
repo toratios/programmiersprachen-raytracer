@@ -10,11 +10,11 @@ Sphere::Sphere(glm::vec3 const& center, float r):
   r_{r} {}
 
 glm::vec3 const& Sphere::get_center() const{
-  return this->center_;
+  return center_;
 }
     
 float Sphere::get_r() const{
-  return this->r_;
+  return r_;
 }
 
 float Sphere::area() const{
@@ -22,5 +22,5 @@ float Sphere::area() const{
 }
 
 float Sphere::volume() const{
-  return (4/3)*M_PI*pow(r_,3);
+  return fabs((4.0/3.0)*M_PI*pow(r_,3));
 }
