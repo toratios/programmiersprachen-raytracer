@@ -14,6 +14,7 @@ class Sphere: public Shape{
     Sphere();
     Sphere(glm::vec3 const& center, float r);
     Sphere(glm::vec3 const& center, float r, Color const& col, std::string const& name);
+    ~Sphere() /*override*/;
 
     glm::vec3 const& get_center() const;
     float get_r() const;

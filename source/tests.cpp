@@ -99,7 +99,7 @@ TEST_CASE ("print sphere", "[aufgabe 5.5]"){
   std::cout << "\n";
   s.print(std::cout);
 }
-
+/*
 TEST_CASE ("intersectRaySphere", "[intersect]"){
   //Ray
   glm::vec3 ray_origin{0.0,0.0,0.0};
@@ -119,17 +119,28 @@ TEST_CASE ("intersectRaySphere", "[intersect]"){
     sphere_radius * sphere_radius, // squared radius !!!
     distance);
   REQUIRE (distance == Approx(4.0f));
-}
+}*/
 
-TEST_CASE ("intersectRaySphereAgain", "[aufgabe5.6]"){
+TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
   Sphere s{glm::vec3{5.0},1.0};
   Ray r{glm::vec3{0.0},glm::vec3{1.0}};
 
-  REQUIRE (s.intersect(r,10.0) == true);
+  REQUIRE (s.intersect(r,0.0) == true);
 
   Ray r2{glm::vec3{0.0},glm::vec3{-1.0}};
 
-  REQUIRE (s.intersect(r2,10.0) == false);
+  REQUIRE (s.intersect(r2,0.0) == false);
+}
+
+TEST_CASE ("blablabla", "[aufgabe 5.8]"){
+  Color red (255,0,0);
+  glm::vec3 position(0.0);
+  Sphere* s1 = new Sphere(position, 1.2, red, "sphere0");
+  Shape* s2 = new Sphere(position, 1.2, red, "sphere1");
+  s1 -> print(std::cout);
+  s2 -> print(std::cout);
+  delete s1;
+  delete s2;
 }
 
 int main(int argc, char *argv[])
