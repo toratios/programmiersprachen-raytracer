@@ -2,6 +2,8 @@
 #define SPHERE_HPP
 
 #include <glm/vec3.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 #include "shape.hpp"
 
 class Sphere: public Shape{
@@ -19,6 +21,7 @@ class Sphere: public Shape{
     std::ostream& print(std::ostream& os) const override;
     float area() const override;
     float volume() const override;
+    bool intersect(Ray r, float distance);
 };
 
 #endif

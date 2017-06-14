@@ -3,6 +3,8 @@
 #include <box.cpp>
 #include <sphere.cpp>
 #include <shape.cpp>
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
 TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   Box b;
@@ -96,6 +98,38 @@ TEST_CASE ("print sphere", "[aufgabe 5.5]"){
   Sphere s;
   std::cout << "\n";
   s.print(std::cout);
+}
+
+TEST_CASE ("intersectRaySphere", "[intersect]"){
+  //Ray
+  glm::vec3 ray_origin{0.0,0.0,0.0};
+  //ray direction has to be normalized !
+  //you can use:
+  //v = glm::normalize(some_vector)
+  glm::vec3 ray_direction{0.0,0.0,1.0};
+
+  //Sphere
+  glm::vec3 sphere_center{0.0,0.0,5.0};
+  float sphere_radius{1.0};
+
+  float distance{0.0};
+  auto result = glm::intersectRaySphere(
+    ray_origin, ray_direction,
+    sphere_center,
+    sphere_radius * sphere_radius, // squared radius !!!
+    distance);
+  REQUIRE (distance == Approx(4.0f));
+}
+
+TEST_CASE ("intersectRaySphereAgain", "[aufgabe5.6]"){
+  Sphere s{glm::vec3{5.0},1.0};
+  Ray r{glm::vec3{0.0},glm::vec3{1.0}};
+
+  REQUIRE (s.intersect(r,10.0) == true);
+
+  Ray r2{glm::vec3{0.0},glm::vec3{-1.0}};
+
+  REQUIRE (s.intersect(r2,10.0) == false);
 }
 
 int main(int argc, char *argv[])

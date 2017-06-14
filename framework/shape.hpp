@@ -2,6 +2,7 @@
 #define SHAPE_HPP
 
 #include "color.hpp"
+#include "ray.hpp"
 
 //typedef std::string String;
 //typdef glm::vec3 Vec3
