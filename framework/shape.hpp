@@ -18,8 +18,11 @@ class Shape{
     Color const& get_color() const;
     std::string const& get_name() const;
 
+    virtual std::ostream& print(std::ostream& os) const;
     virtual float area() const = 0;
     virtual float volume() const = 0;
 };
+
+std::ostream& operator<<(std::ostream& os, Shape const& s);
 
 #endif

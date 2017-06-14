@@ -86,6 +86,18 @@ TEST_CASE ("volume sphere", "[aufgabe 5.2]"){
   REQUIRE(s.volume()== Approx(33.5103).epsilon(0.001));
 }
 
+TEST_CASE ("print box", "[aufgabe 5.5]"){
+  Box b;
+  b.print(std::cout);
+  std::cout << "\n";
+}
+
+TEST_CASE ("print sphere", "[aufgabe 5.5]"){
+  Sphere s;
+  std::cout << "\n";
+  s.print(std::cout);
+}
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
