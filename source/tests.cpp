@@ -16,6 +16,7 @@ TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   REQUIRE(max.x == 1.0f);
   REQUIRE(max.y == 1.0f);
   REQUIRE(max.z == 1.0f);
+
   REQUIRE(b.get_name() == "Box");
   Color col = b.get_color();
   REQUIRE(col.r == 1.0f);
@@ -33,6 +34,7 @@ TEST_CASE ("user constructor box", "[aufgabe 5.2/5.3]"){
   REQUIRE(max.x == 4.0f);
   REQUIRE(max.y == 5.0f);
   REQUIRE(max.z == 6.0f);
+
   REQUIRE(b.get_name() == "TestBox");
   Color col = b.get_color();
   REQUIRE(col.r == 1.0f);
@@ -139,7 +141,9 @@ TEST_CASE ("blablabla", "[aufgabe 5.8]"){
   Shape* s2 = new Sphere(position, 1.2, red, "sphere1");
   s1 -> print(std::cout);
   s2 -> print(std::cout);
+  std::cout << "delete s1\n";
   delete s1;
+  std::cout << "delete s2\n";
   delete s2;
 }
 
