@@ -22,7 +22,7 @@ class Sphere: public Shape{
     std::ostream& print(std::ostream& os) const override;
     float area() const override;
     float volume() const override;
-    bool intersect(Ray r, float distance);
+    bool intersect(Ray r, float& distance);
 };
 
 #endif

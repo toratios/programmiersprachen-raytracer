@@ -101,7 +101,7 @@ TEST_CASE ("print sphere", "[aufgabe 5.5]"){
   std::cout << "\n";
   s.print(std::cout);
 }
-/*
+
 TEST_CASE ("intersectRaySphere", "[intersect]"){
   //Ray
   glm::vec3 ray_origin{0.0,0.0,0.0};
@@ -121,17 +121,18 @@ TEST_CASE ("intersectRaySphere", "[intersect]"){
     sphere_radius * sphere_radius, // squared radius !!!
     distance);
   REQUIRE (distance == Approx(4.0f));
-}*/
+}
 
 TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
-  Sphere s{glm::vec3{5.0},1.0};
-  Ray r{glm::vec3{0.0},glm::vec3{1.0}};
+  Sphere s{glm::vec3{5.0,0.0,0.0},1.0};
+  float dis = 10;
+  Ray r{glm::vec3{0.0},glm::vec3{1.0,0.0,0.0}};
 
-  REQUIRE (s.intersect(r,0.0) == true);
-
+  REQUIRE (s.intersect(r,dis) == true);
+  std::cout << dis << "\n";
   Ray r2{glm::vec3{0.0},glm::vec3{-1.0}};
 
-  REQUIRE (s.intersect(r2,0.0) == false);
+  REQUIRE (s.intersect(r2,dis) == false);
 }
 
 TEST_CASE ("blablabla", "[aufgabe 5.8]"){
