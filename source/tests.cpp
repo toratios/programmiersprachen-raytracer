@@ -126,7 +126,9 @@ TEST_CASE ("intersectRaySphere", "[intersect]"){
 TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
   Sphere s{glm::vec3{5.0,0.0,0.0},1.0};
   float dis = 10;
+
   Ray r{glm::vec3{0.0},glm::vec3{1.0,0.0,0.0}};
+  r.direction = glm::normalize(r.direction);
 
   REQUIRE (s.intersect(r,dis) == true);
   std::cout << dis << "\n";

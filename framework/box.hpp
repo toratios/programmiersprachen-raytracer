@@ -19,6 +19,7 @@ class Box: public Shape{
     std::ostream& print(std::ostream& os) const override;
     float area() const override;
     float volume() const override;
+    bool intersect(Ray const& ray, float& t) override;
 };
 
 #endif

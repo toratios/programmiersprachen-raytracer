@@ -42,3 +42,8 @@ std::ostream& Box::print(std::ostream& os) const{
      << "Min: " << "(" << max_.x << "," << max_.y << "," << max_.z << ")";
   return os; 
 }
+
+bool Box::intersect(Ray const& ray, float& t){
+  return true;
+
+}
