@@ -18,14 +18,16 @@ TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   REQUIRE(max.z == 1.0f);
 
   REQUIRE(b.get_name() == "Box");
+  /*
   Color col = b.get_color();
   REQUIRE(col.r == 1.0f);
   REQUIRE(col.g == 1.0f);
   REQUIRE(col.b == 1.0f);
+  */
 }
 
 TEST_CASE ("user constructor box", "[aufgabe 5.2/5.3]"){
-  Box b{glm::vec3{4.0,2.0,3.0},glm::vec3{1.0,5.0,6.0},Color{1.0,0.5,0.0},"TestBox"};
+  Box b{glm::vec3{4.0,2.0,3.0},glm::vec3{1.0,5.0,6.0},Material{},"TestBox"};
   glm::vec3 min = b.get_min();
   glm::vec3 max = b.get_max();
   REQUIRE(min.x == 1.0f);
@@ -36,10 +38,12 @@ TEST_CASE ("user constructor box", "[aufgabe 5.2/5.3]"){
   REQUIRE(max.z == 6.0f);
 
   REQUIRE(b.get_name() == "TestBox");
+  /*
   Color col = b.get_color();
   REQUIRE(col.r == 1.0f);
   REQUIRE(col.g == 0.5f);
   REQUIRE(col.b == 0.0f);
+  */
 }
 
 TEST_CASE ("default constructor sphere", "[aufgabe 5.2/5.3]"){
@@ -50,24 +54,28 @@ TEST_CASE ("default constructor sphere", "[aufgabe 5.2/5.3]"){
   REQUIRE(center.z == 0.0f);
   REQUIRE(s.get_r() == 1.0f);
   REQUIRE(s.get_name() == "Sphere");
+  /*
   Color col = s.get_color();
   REQUIRE(col.r == 1.0f);
   REQUIRE(col.g == 1.0f);
   REQUIRE(col.b == 1.0f);
+  */
 }
 
 TEST_CASE ("user constructor sphere", "[aufgabe 5.2/5.3]"){
-  Sphere s{glm::vec3{1.0,2.0,3.0},4.0,Color{1.0,0.5,0.0},"TestSphere"};
+  Sphere s{glm::vec3{1.0,2.0,3.0},4.0,Material{},"TestSphere"};
   glm::vec3 center = s.get_center();
   REQUIRE(center.x == 1.0f);
   REQUIRE(center.y == 2.0f);
   REQUIRE(center.z == 3.0f);
   REQUIRE(s.get_r() == 4.0f);
   REQUIRE(s.get_name() == "TestSphere");
+  /*
   Color col = s.get_color();
   REQUIRE(col.r == 1.0f);
   REQUIRE(col.g == 0.5f);
   REQUIRE(col.b == 0.0f);
+  */
 }
 
 TEST_CASE ("area box", "[aufgabe 5.2]"){
@@ -140,9 +148,11 @@ TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
 TEST_CASE ("blablabla", "[aufgabe 5.8]"){
   Color red (255,0,0);
   glm::vec3 position(0.0);
-  Sphere* s1 = new Sphere(position, 1.2, red, "sphere0");
-  Shape* s2 = new Sphere(position, 1.2, red, "sphere1");
+  Sphere* s1 = new Sphere(position, 1.2, Material{}, "sphere0");
+  Shape* s2 = new Sphere(position, 1.2, Material{}, "sphere1");
+  std::cout << "\n";
   s1 -> print(std::cout);
+  std::cout << "\n";
   s2 -> print(std::cout);
   //std::cout << "delete s1\n";
   delete s1;
@@ -154,11 +164,11 @@ TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
   Box b{glm::vec3{-1.0},glm::vec3{1.0}};
   float dis = 10;
 
-  Ray r{glm::vec3{0.0},glm::vec3{-1.0,0.0,0.0}};
+  Ray r{glm::vec3{5.0},glm::vec3{-1.0,-1.0,-1.0}};
   r.direction = glm::normalize(r.direction);
 
   REQUIRE (b.intersect(r,dis) == true);
-  std::cout << dis << "\n";
+  std::cout << "\n" << "distance: " << dis << "\n";
 }
 
 int main(int argc, char *argv[])

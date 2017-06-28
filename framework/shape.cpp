@@ -1,23 +1,23 @@
 #include "shape.hpp"
 
 Shape::Shape():
-  color_{Color{1.0,1.0,1.0}},
+  mat_{},
   name_{"Shape"} {/*std::cout << "ctor class Shape\n";*/}
 
 Shape::Shape(std::string const& name):
-  color_{Color{1.0,1.0,1.0}},
+  mat_{},
   name_{name} {/*std::cout << "ctor class Shape\n";*/}
 
-Shape::Shape(Color const& col, std::string const& name):
-  color_{col},
+Shape::Shape(Material const& mat, std::string const& name):
+  mat_{mat},
   name_{name} {/*std::cout << "ctor class Shape\n";*/}
 
 Shape::~Shape(){
   /*std::cout << "dtor class Shape\n";*/
 }
 
-Color const& Shape::get_color() const{
-  return color_;
+Material const& Shape::get_material() const{
+  return mat_;
 }
 
 std::string const& Shape::get_name() const{
@@ -25,7 +25,7 @@ std::string const& Shape::get_name() const{
 }
 
 std::ostream& Shape::print(std::ostream& os) const{
-  os << "Name: " << name_ << "\n" << "Color: " << color_ ;
+  os << "Name: " << name_ << "\n" << "Material: \n" << mat_ ;
   return os; 
 }
 

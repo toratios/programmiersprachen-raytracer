@@ -1,23 +1,23 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "color.hpp"
+#include "material.hpp"
 #include "ray.hpp"
 
 //typedef std::string String;
 //typdef glm::vec3 Vec3
 
 class Shape{
-    Color color_;
+    Material mat_;
     std::string name_;
 
   public:
     Shape();
     Shape(std::string const& name);
-    Shape(Color const& col, std::string const& name);
+    Shape(Material const& mat, std::string const& name);
     virtual ~Shape();
 
-    Color const& get_color() const;
+    Material const& get_material() const;
     std::string const& get_name() const;
 
     virtual std::ostream& print(std::ostream& os) const;
