@@ -4,20 +4,20 @@
 Sphere::Sphere():
   Shape{"Sphere"},
   center_{glm::vec3{0.0f}},
-  r_{1.0} {std::cout << "ctor class Sphere\n";}
+  r_{1.0} {/*std::cout << "ctor class Sphere\n";*/}
 
 Sphere::Sphere(glm::vec3 const& center, float r):
   Shape{"Sphere"},
   center_{center},
-  r_{r} {std::cout << "ctor class Sphere\n";}
+  r_{r} {/*std::cout << "ctor class Sphere\n";*/}
 
 Sphere::Sphere(glm::vec3 const& center, float r, Color const& col, std::string const& name):
   Shape{col, name},
   center_{center},
-  r_{r} {std::cout << "ctor class Sphere\n";}
+  r_{r} {/*std::cout << "ctor class Sphere\n";*/}
 
-Sphere::~Sphere(){
-  std::cout << "dtor class Sphere\n";
+Sphere::~Sphere(){/*
+  std::cout << "dtor class Sphere\n";*/
 }
 
 glm::vec3 const& Sphere::get_center() const{

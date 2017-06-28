@@ -25,7 +25,7 @@ TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
 }
 
 TEST_CASE ("user constructor box", "[aufgabe 5.2/5.3]"){
-  Box b{glm::vec3{1.0,2.0,3.0},glm::vec3{4.0,5.0,6.0},Color{1.0,0.5,0.0},"TestBox"};
+  Box b{glm::vec3{4.0,2.0,3.0},glm::vec3{1.0,5.0,6.0},Color{1.0,0.5,0.0},"TestBox"};
   glm::vec3 min = b.get_min();
   glm::vec3 max = b.get_max();
   REQUIRE(min.x == 1.0f);
@@ -144,10 +144,21 @@ TEST_CASE ("blablabla", "[aufgabe 5.8]"){
   Shape* s2 = new Sphere(position, 1.2, red, "sphere1");
   s1 -> print(std::cout);
   s2 -> print(std::cout);
-  std::cout << "delete s1\n";
+  //std::cout << "delete s1\n";
   delete s1;
-  std::cout << "delete s2\n";
+  //std::cout << "delete s2\n";
   delete s2;
+}
+
+TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
+  Box b{glm::vec3{1.0},glm::vec3{5.0}};
+  float dis = 10;
+
+  Ray r{glm::vec3{0.0},glm::vec3{-1.0,-1.0,-1.0}};
+  r.direction = glm::normalize(r.direction);
+
+  REQUIRE (b.intersect(r,dis) == true);
+  std::cout << dis << "\n";
 }
 
 int main(int argc, char *argv[])
