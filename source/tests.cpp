@@ -151,10 +151,10 @@ TEST_CASE ("blablabla", "[aufgabe 5.8]"){
 }
 
 TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
-  Box b{glm::vec3{1.0},glm::vec3{5.0}};
+  Box b{glm::vec3{-1.0},glm::vec3{1.0}};
   float dis = 10;
 
-  Ray r{glm::vec3{0.0},glm::vec3{-1.0,-1.0,-1.0}};
+  Ray r{glm::vec3{0.0},glm::vec3{-1.0,0.0,0.0}};
   r.direction = glm::normalize(r.direction);
 
   REQUIRE (b.intersect(r,dis) == true);
