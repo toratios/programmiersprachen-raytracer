@@ -53,6 +53,7 @@ TEST_CASE ("default constructor sphere", "[aufgabe 5.2/5.3]"){
   REQUIRE(center.y == 0.0f);
   REQUIRE(center.z == 0.0f);
   REQUIRE(s.get_r() == 1.0f);
+
   REQUIRE(s.get_name() == "Sphere");
   /*
   Color col = s.get_color();
@@ -69,6 +70,7 @@ TEST_CASE ("user constructor sphere", "[aufgabe 5.2/5.3]"){
   REQUIRE(center.y == 2.0f);
   REQUIRE(center.z == 3.0f);
   REQUIRE(s.get_r() == 4.0f);
+  
   REQUIRE(s.get_name() == "TestSphere");
   /*
   Color col = s.get_color();
@@ -162,7 +164,7 @@ TEST_CASE ("blablabla", "[aufgabe 5.8]"){
 
 TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
   Box b{glm::vec3{-1.0},glm::vec3{1.0}};
-  float dis = 10;
+  float dis = 5;
 
   Ray r{glm::vec3{5.0},glm::vec3{-1.0,-1.0,-1.0}};
   r.direction = glm::normalize(r.direction);

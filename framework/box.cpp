@@ -64,7 +64,6 @@ std::ostream& Box::print(std::ostream& os) const{
 }
 
 bool Box::intersect(Ray const& ray, float& t){
-  bool hit = false;
   float hit_x = 0.0;
   float hit_y = 0.0;
   float hit_z = 0.0;
@@ -98,10 +97,8 @@ bool Box::intersect(Ray const& ray, float& t){
   hit_z = ray.origin.z + dis*ray.direction.z;;
   
   if(hit_y >= min_.y && hit_y <= max_.y && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
-    hit = true;
-    if(dis < t){
-      t = dis;
-    }
+    t = dis;
+    return true;
   }
 
   dis = (hitvec.y - ray.origin.y)/ray.direction.y;
@@ -109,10 +106,8 @@ bool Box::intersect(Ray const& ray, float& t){
   hit_z = ray.origin.z + dis*ray.direction.z;;
   
   if(hit_x >= min_.x && hit_x <= max_.x && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
-    hit = true;
-    if(dis < t){
-      t = dis;
-    }
+    t = dis;
+    return true;
   }
 
   dis = (hitvec.z - ray.origin.z)/ray.direction.z;
@@ -120,11 +115,9 @@ bool Box::intersect(Ray const& ray, float& t){
   hit_y = ray.origin.y + dis*ray.direction.y;;
   
   if(hit_x >= min_.x && hit_x <= max_.x && hit_y >= min_.y && hit_y <= max_.y && dis >= 0){
-    hit = true;
-    if(dis < t){
-      t = dis;
-    }
+    t = dis;
+    return true;
   }
 
-  return hit;
+  return false;
 }
