@@ -5,6 +5,7 @@
 #include <shape.cpp>
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
+#include <sdfloader.cpp>
 
 TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   Box b;
@@ -166,10 +167,10 @@ TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
   Box b{glm::vec3{-1.0},glm::vec3{1.0}};
   float dis = 5;
 
-  Ray r{glm::vec3{5.0},glm::vec3{-1.0,-1.0,-1.0}};
+  Ray r{glm::vec3{5.0},glm::vec3{1.0,1.0,1.0}};
   r.direction = glm::normalize(r.direction);
 
-  REQUIRE (b.intersect(r,dis) == true);
+  REQUIRE (b.intersect(r,dis) == false);
   std::cout << "\n" << "distance: " << dis << "\n";
 }
 

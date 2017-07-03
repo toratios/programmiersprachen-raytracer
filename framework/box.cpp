@@ -119,5 +119,6 @@ bool Box::intersect(Ray const& ray, float& t){
     return true;
   }
 
+  t = -1;
   return false;
 }
