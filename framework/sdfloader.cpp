@@ -6,7 +6,7 @@ SDFloader::SDFloader():
 void SDFloader::sdfLoad(std::string const& inputFile)
 {
 	std::fstream input;
-	input.open(inputFile);
+	input.open("material.txt");
 
 	if(input.is_open())
 	{
