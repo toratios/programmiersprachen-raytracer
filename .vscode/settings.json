@@ -36,6 +36,11 @@
     "tuple": "cpp",
     "type_traits": "cpp",
     "typeinfo": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "particles.c": "cpp",
+    "simple.c": "cpp",
+    "wave.c": "cpp",
+    "threads.c": "cpp",
+    "windows.c": "cpp"
   }
 }

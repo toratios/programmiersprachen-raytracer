@@ -164,14 +164,28 @@ TEST_CASE ("blablabla", "[aufgabe 5.8]"){
 }
 
 TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
-  Box b{glm::vec3{-1.0},glm::vec3{1.0}};
   float dis = 5;
 
-  Ray r{glm::vec3{5.0},glm::vec3{1.0,1.0,1.0}};
+  Box b{glm::vec3{-1.0},glm::vec3{1.0}};
+  Ray r{glm::vec3{0.0,5.0,0.0},glm::vec3{0.0,-1.0,0.0}};
   r.direction = glm::normalize(r.direction);
 
-  REQUIRE (b.intersect(r,dis) == false);
-  std::cout << "\n" << "distance: " << dis << "\n";
+  REQUIRE (b.intersect(r,dis) == true);
+  REQUIRE (dis == 4);
+
+  Box b2{glm::vec3{-1.0},glm::vec3{1.0}};
+  Ray r2{glm::vec3{0.0,5.0,0.0},glm::vec3{1.0,1.0,1.0}};
+  r2.direction = glm::normalize(r2.direction);
+
+  REQUIRE (b2.intersect(r2,dis) == false);
+  REQUIRE (dis == -1);
+
+  Box b3{glm::vec3{-1.0},glm::vec3{2.0}};
+  Ray r3{glm::vec3{0.0,0.0,0.0},glm::vec3{1.0,1.0,1.0}};
+  r3.direction = glm::normalize(r3.direction);
+
+  REQUIRE (b3.intersect(r3,dis) == true);
+  REQUIRE (dis == Approx(3.4641f));
 }
 
 int main(int argc, char *argv[])
