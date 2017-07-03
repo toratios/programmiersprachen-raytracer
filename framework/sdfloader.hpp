@@ -11,10 +11,8 @@ struct SDFloader{
     std::vector<Material> vecMaterial_;
 
   public:
-
 	  SDFloader();
 
-	  void addMaterial(Material const& material);
 	  void sdfLoad(std::string const& inputFile);
 };
 

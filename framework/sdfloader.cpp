@@ -3,11 +3,6 @@
 SDFloader::SDFloader():
   vecMaterial_{}{}
 
-void SDFloader::addMaterial(Material const& material)
-{
-	vecMaterial_.push_back(material);
-}
-
 void SDFloader::sdfLoad(std::string const& inputFile)
 {
 	std::fstream input;
@@ -42,7 +37,7 @@ void SDFloader::sdfLoad(std::string const& inputFile)
 					stream >> mat.ks_.g;
 					stream >> mat.ks_.b;
 
-					addMaterial(mat);
+					vecMaterial_.push_back(mat);
 				}
 			}
 		}
