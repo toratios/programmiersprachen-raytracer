@@ -1,4 +1,4 @@
-#ifndef SDF_LOADER_HPP
+/*#ifndef SDF_LOADER_HPP
 #define SDF_LOADER_HPP
 
 #include <iostream>
@@ -6,14 +6,15 @@
 #include <string>
 #include <vector>
 #include "material.hpp"
+#include "scene.hpp"
 
 struct SDFloader{
-    std::vector<Material> vecMaterial_;
 
   public:
 	  SDFloader();
 
-	  void sdfLoad(std::string const& inputFile);
+	  static Scene sdfLoad(std::string const& inputFile);
 };
 
 #endif
+*/

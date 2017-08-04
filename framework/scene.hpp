@@ -1,6 +1,7 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
+#include <memory>
 #include <vector>
 #include <map>
 #include <string>
@@ -24,8 +25,6 @@ struct Scene
 
     //Lights
     vector<shared_ptr<Light>> lights_;
-
-
 };
 
 #endif

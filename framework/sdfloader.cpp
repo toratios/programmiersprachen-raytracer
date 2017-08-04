@@ -1,16 +1,15 @@
-#include "sdfloader.hpp"
+/*#include "sdfloader.hpp"
 
-SDFloader::SDFloader():
-  vecMaterial_{}{}
 
-void SDFloader::sdfLoad(std::string const& inputFile)
+Scene SDFloader::sdfLoad(std::string const& inputFile)
 {
+	Scene scene;
+
 	std::fstream input;
 	input.open("material.txt");
 
 	if(input.is_open())
 	{
-		std::stringstream stream;
 		std::string line;
 		std::string word;
 		
@@ -37,7 +36,7 @@ void SDFloader::sdfLoad(std::string const& inputFile)
 					stream >> mat.ks_.g;
 					stream >> mat.ks_.b;
 
-					vecMaterial_.push_back(mat);
+					//vecMaterial_.push_back(mat);
 				}
 			}
 		}
@@ -47,3 +46,5 @@ void SDFloader::sdfLoad(std::string const& inputFile)
 		std::cout << "File not found." << std::endl;
 	}
 }
+
+*/
