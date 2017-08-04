@@ -14,16 +14,16 @@ struct Scene
     using namespace std;
 
     //Shapes
-    vector<shared_ptr<Shape>> shapes;
+    vector<shared_ptr<Shape>> shapes_;
 
     //Materials
-    map<string, shared_ptr<Material>> materials;
+    map<string, shared_ptr<Material>> materials_;
 
     //Camera
     Camera camera;
 
     //Lights
-    vector<shared_ptr<Light>> lights;
+    vector<shared_ptr<Light>> lights_;
 
 
 };

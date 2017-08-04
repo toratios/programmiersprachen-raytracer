@@ -12,7 +12,7 @@ struct Light
 
 	glm::vec3 pos_;			//Position
 	
-	Color color_;			//Farbe
+	Color color_;			//Color
 
 };
 

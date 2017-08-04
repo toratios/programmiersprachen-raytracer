@@ -2,7 +2,7 @@
 
 SDFloader::SDFloader():
   vecMaterial_{}{}
-
+/*
 void SDFloader::sdfLoad(std::string const& inputFile)
 {
 	std::fstream input;
@@ -46,4 +46,4 @@ void SDFloader::sdfLoad(std::string const& inputFile)
 	{
 		std::cout << "File not found." << std::endl;
 	}
-}
+}*/
