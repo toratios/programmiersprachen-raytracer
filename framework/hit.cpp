@@ -6,7 +6,7 @@ Hit::Hit():
   hit_ {false},
   t_ {INFINITY},
   intersection_{glm::vec3{INFINITY}},
-  normal_{glm::vec3},
+  normal_{glm::vec3{INFINITY}},
   shape_{nullptr} {}
 
 Hit::Hit(bool hit, float t, glm::vec3 const& intersect, 

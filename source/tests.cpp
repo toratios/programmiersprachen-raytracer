@@ -7,7 +7,7 @@
 #include <glm/gtx/intersect.hpp>
 #include <sdfloader.cpp>
 #include <scene.hpp>
-#include <hit.hpp>
+#include <hit.cpp>
 
 TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   Box b;

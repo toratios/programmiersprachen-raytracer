@@ -1,7 +1,6 @@
 #ifndef HIT_HPP
 #define HIT_HPP
 
-
 #include "shape.hpp"
 
 class Shape;
