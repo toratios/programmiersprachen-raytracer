@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 #include <sdfloader.cpp>
+#include <scene.hpp>
 
 TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   Box b;
