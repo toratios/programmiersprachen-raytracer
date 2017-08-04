@@ -4,6 +4,7 @@
 #include <memory>
 #include "material.hpp"
 #include "ray.hpp"
+#include "hit.hpp"
 
 class Shape{
     std::shared_ptr<Material> mat_;
