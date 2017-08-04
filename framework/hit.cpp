@@ -16,3 +16,10 @@ Hit::Hit(bool hit, float t, glm::vec3 const& intersect,
   intersection_{intersect},
   normal_{normal},
   shape_{shape} {}
+
+Hit::Hit(Hit const& hit_copy):
+  hit_{hit_copy.hit_},
+  t_{hit_copy.t_},
+  intersection_{hit_copy.intersection_},
+  normal_{hit_copy.normal_},
+  shape_{hit_copy.shape_} {}
