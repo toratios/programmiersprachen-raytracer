@@ -2,7 +2,7 @@
 #define LIGHT_HPP
 
 #include <string>
-#include <glm/vec3>
+#include <glm/vec3.hpp>
 #include "color.hpp"
 
 struct Light

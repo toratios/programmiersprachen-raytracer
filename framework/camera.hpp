@@ -1,12 +1,17 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 
-#include <glm/vec3>
-#include <glm/mat4>
+#include <glm/vec3.hpp>
+#include <glm/mat4x4.hpp>
 
 
 struct Camera
 {
+
+    Camera();
+
+    //rotate();
+
 
     glm::vec3 pos_;     //Position
 

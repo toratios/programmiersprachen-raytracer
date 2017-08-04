@@ -4,9 +4,6 @@
 #include "material.hpp"
 #include "ray.hpp"
 
-//typedef std::string String;
-//typdef glm::vec3 Vec3
-
 class Shape{
     Material mat_;
     std::string name_;
