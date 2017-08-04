@@ -27,7 +27,7 @@ TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   REQUIRE(col.b == 1.0f);
   */
 }
-
+/*
 TEST_CASE ("user constructor box", "[aufgabe 5.2/5.3]"){
   Box b{glm::vec3{4.0,2.0,3.0},glm::vec3{1.0,5.0,6.0},Material{},"TestBox"};
   glm::vec3 min = b.get_min();
@@ -40,13 +40,13 @@ TEST_CASE ("user constructor box", "[aufgabe 5.2/5.3]"){
   REQUIRE(max.z == 6.0f);
 
   REQUIRE(b.get_name() == "TestBox");
-  /*
+  
   Color col = b.get_color();
   REQUIRE(col.r == 1.0f);
   REQUIRE(col.g == 0.5f);
   REQUIRE(col.b == 0.0f);
-  */
-}
+  
+}*/
 
 TEST_CASE ("default constructor sphere", "[aufgabe 5.2/5.3]"){
   Sphere s;
@@ -65,6 +65,7 @@ TEST_CASE ("default constructor sphere", "[aufgabe 5.2/5.3]"){
   */
 }
 
+/*
 TEST_CASE ("user constructor sphere", "[aufgabe 5.2/5.3]"){
   Sphere s{glm::vec3{1.0,2.0,3.0},4.0,Material{},"TestSphere"};
   glm::vec3 center = s.get_center();
@@ -74,13 +75,13 @@ TEST_CASE ("user constructor sphere", "[aufgabe 5.2/5.3]"){
   REQUIRE(s.get_r() == 4.0f);
   
   REQUIRE(s.get_name() == "TestSphere");
-  /*
+  
   Color col = s.get_color();
   REQUIRE(col.r == 1.0f);
   REQUIRE(col.g == 0.5f);
   REQUIRE(col.b == 0.0f);
-  */
-}
+  
+}*/
 
 TEST_CASE ("area box", "[aufgabe 5.2]"){
   Box b{glm::vec3{5.0},glm::vec3{1.0,1.0,6.0}};
@@ -148,7 +149,7 @@ TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
 
   REQUIRE (s.intersect(r2,dis) == false);
 }
-
+/*
 TEST_CASE ("blablabla", "[aufgabe 5.8]"){
   Color red (255,0,0);
   glm::vec3 position(0.0);
@@ -162,7 +163,7 @@ TEST_CASE ("blablabla", "[aufgabe 5.8]"){
   delete s1;
   //std::cout << "delete s2\n";
   delete s2;
-}
+}*/
 
 TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
   float dis = 5;

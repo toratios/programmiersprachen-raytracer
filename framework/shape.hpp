@@ -1,20 +1,21 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
+#include <memory>
 #include "material.hpp"
 #include "ray.hpp"
 
 class Shape{
-    Material mat_;
+    std::shared_ptr<Material> mat_;
     std::string name_;
 
   public:
     Shape();
     Shape(std::string const& name);
-    Shape(Material const& mat, std::string const& name);
+    Shape(std::shared_ptr<Material> const& mat, std::string const& name);
     virtual ~Shape();
 
-    Material const& get_material() const;
+    std::shared_ptr<Material> const& get_material() const;
     std::string const& get_name() const;
 
     virtual std::ostream& print(std::ostream& os) const;

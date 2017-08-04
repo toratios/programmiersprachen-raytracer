@@ -8,7 +8,7 @@ Shape::Shape(std::string const& name):
   mat_{},
   name_{name} {/*std::cout << "ctor class Shape\n";*/}
 
-Shape::Shape(Material const& mat, std::string const& name):
+Shape::Shape(std::shared_ptr<Material> const& mat, std::string const& name):
   mat_{mat},
   name_{name} {/*std::cout << "ctor class Shape\n";*/}
 
@@ -16,7 +16,7 @@ Shape::~Shape(){
   /*std::cout << "dtor class Shape\n";*/
 }
 
-Material const& Shape::get_material() const{
+std::shared_ptr<Material> const& Shape::get_material() const{
   return mat_;
 }
 

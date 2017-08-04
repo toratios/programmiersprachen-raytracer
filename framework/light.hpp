@@ -5,8 +5,7 @@
 #include <glm/vec3.hpp>
 #include "color.hpp"
 
-struct Light
-{
+struct Light{
 
 	Light():
 		name_{"default_light"},
@@ -18,10 +17,10 @@ struct Light
 		pos_{pos},
 		color_{col} {}
 
+
 	std::string name_;		//Name
 	glm::vec3 pos_;			//Position
 	Color color_;			//Color
-
 };
 
 #endif

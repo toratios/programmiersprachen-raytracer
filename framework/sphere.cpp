@@ -11,7 +11,7 @@ Sphere::Sphere(glm::vec3 const& center, float r):
   center_{center},
   r_{r} {/*std::cout << "ctor class Sphere\n";*/}
 
-Sphere::Sphere(glm::vec3 const& center, float r, Material const& mat, std::string const& name):
+Sphere::Sphere(glm::vec3 const& center, float r, std::shared_ptr<Material> const& mat, std::string const& name):
   Shape{mat, name},
   center_{center},
   r_{r} {/*std::cout << "ctor class Sphere\n";*/}
