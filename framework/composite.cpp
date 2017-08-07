@@ -15,7 +15,7 @@
 		shapes_.push_back(shape);
 	}
 
-	std::vector<std::shared_ptr<Shape>> get_children() const
+	std::vector<std::shared_ptr<Shape>> Composite::get_children() const
 	{
 		return shapes_;
 	}
