@@ -48,7 +48,7 @@ TEST_CASE ("user constructor box", "[aufgabe 5.2/5.3]"){
   REQUIRE(col.b == 0.0f);
   
 }*/
-
+/*
 TEST_CASE ("default constructor sphere", "[aufgabe 5.2/5.3]"){
   Sphere s;
   glm::vec3 center = s.get_center();
@@ -58,13 +58,12 @@ TEST_CASE ("default constructor sphere", "[aufgabe 5.2/5.3]"){
   REQUIRE(s.get_r() == 1.0f);
 
   REQUIRE(s.get_name() == "Sphere");
-  /*
+  
   Color col = s.get_color();
   REQUIRE(col.r == 1.0f);
   REQUIRE(col.g == 1.0f);
   REQUIRE(col.b == 1.0f);
-  */
-}
+}*/
 
 /*
 TEST_CASE ("user constructor sphere", "[aufgabe 5.2/5.3]"){
@@ -82,7 +81,7 @@ TEST_CASE ("user constructor sphere", "[aufgabe 5.2/5.3]"){
   REQUIRE(col.g == 0.5f);
   REQUIRE(col.b == 0.0f);
   
-}*/
+}
 
 TEST_CASE ("area box", "[aufgabe 5.2]"){
   Box b{glm::vec3{5.0},glm::vec3{1.0,1.0,6.0}};
@@ -128,6 +127,7 @@ TEST_CASE ("intersectRaySphere", "[intersect]"){
   glm::vec3 sphere_center{0.0,0.0,5.0};
   float sphere_radius{1.0};
 
+
   float distance{0.0};
   auto result = glm::intersectRaySphere(
     ray_origin, ray_direction,
@@ -135,21 +135,24 @@ TEST_CASE ("intersectRaySphere", "[intersect]"){
     sphere_radius * sphere_radius, // squared radius !!!
     distance);
   REQUIRE (distance == Approx(4.0f));
-}
+}*/
 
 TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
   Sphere s{glm::vec3{5.0,0.0,0.0},1.0};
-  float dis = 10;
 
   Ray r{glm::vec3{0.0},glm::vec3{1.0,0.0,0.0}};
   r.direction = glm::normalize(r.direction);
 
-  REQUIRE (s.intersect(r,dis) == true);
-  std::cout << dis << "\n";
-  Ray r2{glm::vec3{0.0},glm::vec3{-1.0}};
-
-  REQUIRE (s.intersect(r2,dis) == false);
+  Hit testhit = s.intersect(r);
+  REQUIRE (testhit.hit_ == true);
+  REQUIRE (testhit.t_ == 4.0);
+  REQUIRE (testhit.intersection_.x == 4.0);
+  REQUIRE (testhit.intersection_.y == 0.0);
+  REQUIRE (testhit.intersection_.z == 0.0);
+  REQUIRE (testhit.normal_.x == -1.0);
 }
+
+
 /*
 TEST_CASE ("blablabla", "[aufgabe 5.8]"){
   Color red (255,0,0);
@@ -165,7 +168,7 @@ TEST_CASE ("blablabla", "[aufgabe 5.8]"){
   //std::cout << "delete s2\n";
   delete s2;
 }*/
-
+/*
 TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
   float dis = 5;
 
@@ -190,7 +193,7 @@ TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
   REQUIRE (b3.intersect(r3,dis) == true);
   REQUIRE (dis == Approx(3.4641f));
 }
-
+*/
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);

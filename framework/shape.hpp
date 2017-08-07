@@ -22,7 +22,7 @@ class Shape{
     virtual std::ostream& print(std::ostream& os) const;
     virtual float area() const = 0;
     virtual float volume() const = 0;
-    virtual bool intersect(Ray const& ray, float& t) = 0;
+    virtual Hit intersect(Ray const& ray) = 0;
 };
 
 std::ostream& operator<<(std::ostream& os, Shape const& s);

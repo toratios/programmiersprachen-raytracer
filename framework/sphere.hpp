@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 #include "shape.hpp"
+#include "hit.hpp"
 
 class Sphere: public Shape{
     glm::vec3 center_;
@@ -22,7 +23,7 @@ class Sphere: public Shape{
     std::ostream& print(std::ostream& os) const override;
     float area() const override;
     float volume() const override;
-    bool intersect(Ray const& ray, float& t) override;
+    Hit intersect(Ray const& ray) override;
 };
 
 #endif
