@@ -8,6 +8,8 @@
 #include <sdfloader.cpp>
 #include <scene.hpp>
 #include <hit.cpp>
+#include <composite.hpp>
+
 
 TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   Box b;
