@@ -10,7 +10,7 @@ Hit::Hit():
   shape_{nullptr} {}
 
 Hit::Hit(bool hit, float t, glm::vec3 const& intersect, 
-      glm::vec3 const& normal, std::shared_ptr<Shape> shape):
+  glm::vec3 const& normal, std::shared_ptr<Shape> shape):
   hit_{hit},
   t_{t},
   intersection_{intersect},
