@@ -4,6 +4,10 @@
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
 #include <string>
+#include <cmath>
+#include <vector>
+
+#include "ray.hpp"
 
 
 class Camera
@@ -30,7 +34,7 @@ public:
     glm::vec3 get_up() const;
 
 
-    void generate_rays() const;
+    std::vector<Ray> generate_rays(unsigned int width, unsigned int heighth) const;
 
 private:
 

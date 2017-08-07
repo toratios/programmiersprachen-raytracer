@@ -6,6 +6,8 @@
 #include "ray.hpp"
 #include "hit.hpp"
 
+class Hit;
+
 class Shape{
     std::shared_ptr<Material> mat_;
     std::string name_;

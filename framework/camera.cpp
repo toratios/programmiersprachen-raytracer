@@ -51,7 +51,12 @@
     	return up_;
     }
 
-	void Camera::generate_rays()
+	std::vector<Ray> Camera::generate_rays(unsigned int width, unsigned int height) const
 	{
+		std::vector<Ray> eye_rays;
 
+		float distance = (width / 2) / tan(fov_x_ * M_PI / 360);
+
+
+		return eye_rays;
 	}
