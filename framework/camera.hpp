@@ -30,7 +30,7 @@ public:
     glm::vec3 get_up() const;
 
 
-    void generate_rays();
+    void generate_rays() const;
 
 private:
 
