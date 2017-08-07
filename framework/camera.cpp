@@ -25,3 +25,33 @@
 		dir_{dir},
 		up_{up}
 		{}
+
+	std::string Camera::get_name() const
+	{
+		return name_;
+	}
+
+    float Camera::get_fov() const
+    {
+    	return fov_x_;
+    }
+
+    glm::vec3 Camera::get_eye() const
+    {
+    	return eye_;
+    }
+
+    glm::vec3 Camera::get_dir() const
+    {
+    	return dir_;
+    }
+
+    glm::vec3 Camera::get_up() const
+    {
+    	return up_;
+    }
+
+	void Camera::generate_rays()
+	{
+
+	}

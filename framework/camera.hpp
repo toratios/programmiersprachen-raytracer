@@ -6,8 +6,10 @@
 #include <string>
 
 
-struct Camera
+class Camera
 {
+	
+public:
 
     Camera();
 
@@ -15,6 +17,22 @@ struct Camera
 
     Camera(std::string name, float fov_x, glm::vec3 const& eye,
     		glm::vec3 const& dir, glm::vec3 const& up);
+
+
+    std::string get_name() const;
+
+    float get_fov() const;
+
+    glm::vec3 get_eye() const;
+
+    glm::vec3 get_dir() const;
+
+    glm::vec3 get_up() const;
+
+
+    void generate_rays();
+
+private:
 
     std::string name_;	//Name
 
