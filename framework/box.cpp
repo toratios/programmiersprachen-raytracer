@@ -149,6 +149,5 @@ Hit Box::intersect(Ray const& inray){
   }
 
   boxhit.hit_ = false;
-  boxhit.t_ = -1;
   return boxhit;
 }

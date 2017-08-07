@@ -54,7 +54,7 @@ Hit Sphere::intersect(Ray const& inray){
   if(spherehit.hit_ == true){
     spherehit.intersection_ = ray.origin + ray.direction * spherehit.t_;
     spherehit.normal_ = glm::normalize(spherehit.intersection_ - center_);
-    //spherehit.shape_ = std::shared_ptr<Shape>(this);
+    spherehit.material_ = mat_;
   }
 
   return spherehit;

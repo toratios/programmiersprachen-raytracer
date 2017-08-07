@@ -192,7 +192,7 @@ TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
   Hit hit2 = b2.intersect(r2);
 
   REQUIRE (hit2.hit_ == true);
-  //REQUIRE (hit.t_ == 4);
+  REQUIRE (hit.t_ == 4);
   //REQUIRE (hit.intersection_.x == 0.0);
   //REQUIRE (hit.intersection_.y == 1.0);
   //REQUIRE (hit.intersection_.z == 0.0);
