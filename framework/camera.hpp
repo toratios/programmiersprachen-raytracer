@@ -26,11 +26,11 @@ public:
 
     float get_fov() const;
 
-    glm::vec3 get_eye() const;
+    glm::vec3 const& get_eye() const;
 
-    glm::vec3 get_dir() const;
+    glm::vec3 const& get_dir() const;
 
-    glm::vec3 get_up() const;
+    glm::vec3 const& get_up() const;
 
 
     std::vector<Ray> generate_rays(unsigned int width, unsigned int heighth) const;

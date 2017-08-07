@@ -36,17 +36,17 @@
     	return fov_x_;
     }
 
-    glm::vec3 Camera::get_eye() const
+    glm::vec3 const& Camera::get_eye() const
     {
     	return eye_;
     }
 
-    glm::vec3 Camera::get_dir() const
+    glm::vec3 const& Camera::get_dir() const
     {
     	return dir_;
     }
 
-    glm::vec3 Camera::get_up() const
+    glm::vec3 const& Camera::get_up() const
     {
     	return up_;
     }
