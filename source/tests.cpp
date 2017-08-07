@@ -142,8 +142,7 @@ TEST_CASE ("intersectRaySphere", "[intersect]"){
 TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
   Sphere s{glm::vec3{5.0,0.0,0.0},1.0};
 
-  Ray r{glm::vec3{0.0},glm::vec3{1.0,0.0,0.0}};
-  r.direction = glm::normalize(r.direction);
+  Ray r{glm::vec3{0.0},glm::vec3{4.0,0.0,0.0}};
 
   Hit testhit = s.intersect(r);
   REQUIRE (testhit.hit_ == true);
@@ -152,6 +151,8 @@ TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
   REQUIRE (testhit.intersection_.y == 0.0);
   REQUIRE (testhit.intersection_.z == 0.0);
   REQUIRE (testhit.normal_.x == -1.0);
+  REQUIRE (testhit.normal_.y == 0.0);
+  REQUIRE (testhit.normal_.z == 0.0);
 }
 
 
@@ -170,32 +171,38 @@ TEST_CASE ("blablabla", "[aufgabe 5.8]"){
   //std::cout << "delete s2\n";
   delete s2;
 }*/
-/*
+
 TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
-  float dis = 5;
 
   Box b{glm::vec3{-1.0},glm::vec3{1.0}};
   Ray r{glm::vec3{0.0,5.0,0.0},glm::vec3{0.0,-1.0,0.0}};
-  r.direction = glm::normalize(r.direction);
 
-  REQUIRE (b.intersect(r,dis) == true);
-  REQUIRE (dis == 4);
+  Hit hit = b.intersect(r);
 
-  Box b2{glm::vec3{-1.0},glm::vec3{1.0}};
-  Ray r2{glm::vec3{0.0,5.0,0.0},glm::vec3{1.0,1.0,1.0}};
-  r2.direction = glm::normalize(r2.direction);
+  REQUIRE (hit.hit_ == true);
+  REQUIRE (hit.t_ == 4);
+  REQUIRE (hit.intersection_.x == 0.0);
+  REQUIRE (hit.intersection_.y == 1.0);
+  REQUIRE (hit.intersection_.z == 0.0);
+  REQUIRE (hit.normal_.x == 0.0);
+  REQUIRE (hit.normal_.y == 1.0);
+  REQUIRE (hit.normal_.z == 0.0);
 
-  REQUIRE (b2.intersect(r2,dis) == false);
-  REQUIRE (dis == -1);
+  Box b2{glm::vec3{-5.0},glm::vec3{0.0}};
+  Ray r2{glm::vec3{2.0,2.0,4.0},glm::vec3{-1.0,-1.0,-1.0}};
 
-  Box b3{glm::vec3{-1.0},glm::vec3{2.0}};
-  Ray r3{glm::vec3{0.0,0.0,0.0},glm::vec3{1.0,1.0,1.0}};
-  r3.direction = glm::normalize(r3.direction);
+  Hit hit2 = b2.intersect(r2);
 
-  REQUIRE (b3.intersect(r3,dis) == true);
-  REQUIRE (dis == Approx(3.4641f));
+  REQUIRE (hit2.hit_ == true);
+  //REQUIRE (hit.t_ == 4);
+  //REQUIRE (hit.intersection_.x == 0.0);
+  //REQUIRE (hit.intersection_.y == 1.0);
+  //REQUIRE (hit.intersection_.z == 0.0);
+  REQUIRE (hit2.normal_.x == 0.0);
+  REQUIRE (hit2.normal_.y == 0.0);
+  REQUIRE (hit2.normal_.z == 1.0);
 }
-*/
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);

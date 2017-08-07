@@ -104,6 +104,13 @@ Hit Box::intersect(Ray const& inray){
   if(hit_y >= min_.y && hit_y <= max_.y && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
     boxhit.hit_ = true;
     boxhit.t_ = dis;
+    boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
+    if(hitvec.x == min_.x){
+      boxhit.normal_ = glm::vec3{-1.0,0.0,0.0};
+      }
+    else{
+      boxhit.normal_ = glm::vec3{1.0,0.0,0.0};
+    }
     return boxhit;
   }
 
@@ -114,6 +121,13 @@ Hit Box::intersect(Ray const& inray){
   if(hit_x >= min_.x && hit_x <= max_.x && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
     boxhit.hit_ = true;
     boxhit.t_ = dis;
+    boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
+    if(hitvec.y == min_.y){
+      boxhit.normal_ = glm::vec3{0.0,-1.0,0.0};
+      }
+    else{
+      boxhit.normal_ = glm::vec3{0.0,1.0,0.0};
+    }      
     return boxhit;
   }
 
@@ -125,6 +139,12 @@ Hit Box::intersect(Ray const& inray){
     boxhit.hit_ = true;
     boxhit.t_ = dis;
     boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
+    if(hitvec.z == min_.z){
+      boxhit.normal_ = glm::vec3{0.0,0.0,-1.0};
+      }
+    else{
+      boxhit.normal_ = glm::vec3{0.0,0.0,1.0};
+    }
     return boxhit;
   }
 

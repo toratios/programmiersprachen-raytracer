@@ -43,13 +43,13 @@ std::ostream& Sphere::print(std::ostream& os) const{
   return os; 
 }
 
-Hit Sphere::intersect(Ray const& ray){
+Hit Sphere::intersect(Ray const& inray){
   
   Hit spherehit;
-  Ray hitray;
-  hitray.origin = ray.origin;
-  hitray.direction = glm::normalize(ray.direction);
-  spherehit.hit_ = glm::intersectRaySphere(hitray.origin, hitray.direction, center_, r_ * r_, spherehit.t_);
+  Ray ray;
+  ray.origin = inray.origin;
+  ray.direction = glm::normalize(inray.direction);
+  spherehit.hit_ = glm::intersectRaySphere(ray.origin, ray.direction, center_, r_ * r_, spherehit.t_);
   
   if(spherehit.hit_ == true){
     spherehit.intersection_ = ray.origin + ray.direction * spherehit.t_;
