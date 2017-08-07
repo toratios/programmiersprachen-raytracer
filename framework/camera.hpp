@@ -2,7 +2,6 @@
 #define CAMERA_HPP
 
 #include <glm/vec3.hpp>
-#include <glm/mat4x4.hpp>
 #include <string>
 #include <cmath>
 #include <vector>
