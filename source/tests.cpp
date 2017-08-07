@@ -8,6 +8,7 @@
 #include <sdfloader.cpp>
 #include <scene.hpp>
 #include <hit.cpp>
+#include <color.hpp>
 
 TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   Box b;
@@ -199,6 +200,39 @@ TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
   REQUIRE (hit2.normal_.x == 0.0);
   REQUIRE (hit2.normal_.y == 0.0);
   REQUIRE (hit2.normal_.z == 1.0);
+}
+
+TEST_CASE("Color Operatoren")
+{
+  Color clr_1{0.5,0.5,0.5};
+  Color clr_2{0.2,0.2,0.2};
+
+  Color clr_3 = clr_1 + clr_2;
+  REQUIRE(clr_3.r == 0.7f);
+  REQUIRE(clr_3.g == 0.7f);
+  REQUIRE(clr_3.b == 0.7f);
+
+  Color clr_4 = clr_1 - clr_2;
+  REQUIRE(clr_4.r == 0.3f);
+  REQUIRE(clr_4.g == 0.3f);
+  REQUIRE(clr_4.b == 0.3f);
+
+  Color clr_5 = clr_1 * clr_2;
+  REQUIRE(clr_5.r == 0.1f);
+  REQUIRE(clr_5.g == 0.1f);
+  REQUIRE(clr_5.b == 0.1f);
+
+  Color clr_6 = clr_5 * 8.0f;
+  REQUIRE(clr_6.r == 0.8f);
+  REQUIRE(clr_6.g == 0.8f);
+  REQUIRE(clr_6.b == 0.8f);
+
+
+  REQUIRE(!(clr_5 == clr_1));
+
+  clr_1 = clr_5;
+
+  REQUIRE(clr_1 == clr_5);
 }
 
 int main(int argc, char *argv[])
