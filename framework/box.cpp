@@ -63,12 +63,16 @@ std::ostream& Box::print(std::ostream& os) const{
   return os; 
 }
 
-Hit Box::intersect(Ray const& ray){
+Hit Box::intersect(Ray const& inray){
   float hit_x = 0.0;
   float hit_y = 0.0;
   float hit_z = 0.0;
   float dis = 0.0;
   Hit boxhit;
+  Ray ray;
+  ray.direction = glm::normalize(inray.direction);
+  ray.origin = inray.origin;
+
 
   glm::vec3 hitvec{glm::vec3{0.0}};
 
@@ -98,7 +102,8 @@ Hit Box::intersect(Ray const& ray){
   hit_z = ray.origin.z + dis*ray.direction.z;;
   
   if(hit_y >= min_.y && hit_y <= max_.y && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
-    t = dis;
+    boxhit.hit_ = true;
+    boxhit.t_ = dis;
     return boxhit;
   }
 
@@ -107,7 +112,8 @@ Hit Box::intersect(Ray const& ray){
   hit_z = ray.origin.z + dis*ray.direction.z;;
   
   if(hit_x >= min_.x && hit_x <= max_.x && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
-    t = dis;
+    boxhit.hit_ = true;
+    boxhit.t_ = dis;
     return boxhit;
   }
 
@@ -116,10 +122,13 @@ Hit Box::intersect(Ray const& ray){
   hit_y = ray.origin.y + dis*ray.direction.y;;
   
   if(hit_x >= min_.x && hit_x <= max_.x && hit_y >= min_.y && hit_y <= max_.y && dis >= 0){
-    t = dis;
+    boxhit.hit_ = true;
+    boxhit.t_ = dis;
+    boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
     return boxhit;
   }
 
-  t = -1;
+  boxhit.hit_ = false;
+  boxhit.t_ = -1;
   return boxhit;
 }

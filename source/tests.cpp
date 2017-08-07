@@ -139,12 +139,11 @@ TEST_CASE ("intersectRaySphere", "[intersect]"){
 
 TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
   Sphere s{glm::vec3{5.0,0.0,0.0},1.0};
-  float dis = 10;
 
   Ray r{glm::vec3{0.0},glm::vec3{1.0,0.0,0.0}};
   r.direction = glm::normalize(r.direction);
 
-  Hit testhit = s.intersect(r,dis);
+  Hit testhit = s.intersect(r);
   REQUIRE (testhit.hit_ == true);
   REQUIRE (testhit.t_ == 4.0);
   REQUIRE (testhit.intersection_.x == 4.0);

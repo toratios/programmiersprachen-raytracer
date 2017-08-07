@@ -50,9 +50,12 @@ Hit Sphere::intersect(Ray const& ray){
   hitray.origin = ray.origin;
   hitray.direction = glm::normalize(ray.direction);
   spherehit.hit_ = glm::intersectRaySphere(hitray.origin, hitray.direction, center_, r_ * r_, spherehit.t_);
-  spherehit.intersection_ = ray.origin + ray.direction * spherehit.t_;
-  spherehit.normal_ = glm::normalize(spherehit.intersection_ - center_);
-  //spherehit.shape_ = std::shared_ptr<Shape>(this);
+  
+  if(spherehit.hit_ == true){
+    spherehit.intersection_ = ray.origin + ray.direction * spherehit.t_;
+    spherehit.normal_ = glm::normalize(spherehit.intersection_ - center_);
+    //spherehit.shape_ = std::shared_ptr<Shape>(this);
+  }
 
   return spherehit;
 }
