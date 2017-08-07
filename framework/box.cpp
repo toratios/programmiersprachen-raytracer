@@ -63,11 +63,12 @@ std::ostream& Box::print(std::ostream& os) const{
   return os; 
 }
 
-bool Box::intersect(Ray const& ray, float& t){
+Hit Box::intersect(Ray const& ray){
   float hit_x = 0.0;
   float hit_y = 0.0;
   float hit_z = 0.0;
   float dis = 0.0;
+  Hit boxhit;
 
   glm::vec3 hitvec{glm::vec3{0.0}};
 
@@ -98,7 +99,7 @@ bool Box::intersect(Ray const& ray, float& t){
   
   if(hit_y >= min_.y && hit_y <= max_.y && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
     t = dis;
-    return true;
+    return boxhit;
   }
 
   dis = (hitvec.y - ray.origin.y)/ray.direction.y;
@@ -107,7 +108,7 @@ bool Box::intersect(Ray const& ray, float& t){
   
   if(hit_x >= min_.x && hit_x <= max_.x && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
     t = dis;
-    return true;
+    return boxhit;
   }
 
   dis = (hitvec.z - ray.origin.z)/ray.direction.z;
@@ -116,9 +117,9 @@ bool Box::intersect(Ray const& ray, float& t){
   
   if(hit_x >= min_.x && hit_x <= max_.x && hit_y >= min_.y && hit_y <= max_.y && dis >= 0){
     t = dis;
-    return true;
+    return boxhit;
   }
 
   t = -1;
-  return false;
+  return boxhit;
 }
