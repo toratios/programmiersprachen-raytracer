@@ -57,6 +57,17 @@
 
 		float distance = (width / 2) / tan(fov_x_ * M_PI / 360);
 
+		for(int x = ((int)width / -2); x < ((int)width / 2); ++x)
+		{
+			for(int y = ((int)height / -2); y < ((int)height / 2); ++y)
+			{
+				glm::vec3 temp_direction(x, y, -(distance));
+
+				Ray temp_ray(eye_, temp_direction);
+
+				eye_rays.push_back(temp_ray);
+			}
+		}
 
 		return eye_rays;
 	}
