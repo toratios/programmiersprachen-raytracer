@@ -15,7 +15,7 @@ struct Hit{
   float t_;
   glm::vec3 intersection_;
   glm::vec3 normal_;
-  std::shared_ptr<Material> material_;
+  std::shared_ptr<Shape> shape_;
 };
 
 #endif
