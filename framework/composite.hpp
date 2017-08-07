@@ -18,7 +18,7 @@ public:
 	Composite();
 
 	Composite(std::string name);
-	
+
 
 	void add(std::shared_ptr<Shape> const& shape);
 
