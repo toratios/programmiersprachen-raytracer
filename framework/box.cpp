@@ -111,6 +111,7 @@ Hit Box::intersect(Ray const& inray){
     else{
       boxhit.normal_ = glm::vec3{1.0,0.0,0.0};
     }
+    boxhit.shape_ = this;
     return boxhit;
   }
 
@@ -127,7 +128,8 @@ Hit Box::intersect(Ray const& inray){
       }
     else{
       boxhit.normal_ = glm::vec3{0.0,1.0,0.0};
-    }      
+    }
+    boxhit.shape_ = this;    
     return boxhit;
   }
 
@@ -145,6 +147,7 @@ Hit Box::intersect(Ray const& inray){
     else{
       boxhit.normal_ = glm::vec3{0.0,0.0,1.0};
     }
+    boxhit.shape_ = this;
     return boxhit;
   }
 
