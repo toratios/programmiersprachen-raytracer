@@ -2,12 +2,12 @@
 
 	Composite::Composite():
 		name_{"default_composite"},
-		shape_{}
+		shapes_{}
 		{}
 
 	Composite::Composite(std::string name):
 		name_{name},
-		shape_{}
+		shapes_{}
 		{}
 
 	void Composite::add(std::shared_ptr<Shape> const& shape)
@@ -17,10 +17,10 @@
 
 	std::vector<std::shared_ptr<Shape>> get_children() const
 	{
-		return shape_;
+		return shapes_;
 	}
 
-	Hit Composite::intersect(Ray const& ray) const
+	Hit Composite::intersect(Ray const& ray)
 	{
 		Hit hit;
 		Hit temp_hit;

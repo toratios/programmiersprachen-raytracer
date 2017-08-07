@@ -24,7 +24,7 @@ public:
 
 	std::vector<std::shared_ptr<Shape>> get_children() const;
 
-	Hit intersect(Ray const& ray) const override;
+	Hit intersect(Ray const& ray) override;
 
 private:
 
