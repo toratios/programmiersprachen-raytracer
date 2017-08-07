@@ -1,5 +1,4 @@
 #include "composite.hpp"
-#include <memory>
 
 	Composite::Composite():
 		name_{"default_composite"},
@@ -11,17 +10,30 @@
 		shape_{}
 		{}
 
-	void Composite::add(std::shared_ptr<Shape> shape)
+	void Composite::add(std::shared_ptr<Shape> const& shape)
 	{
-		shapes_.insert(shape -> name_, shape);
+		shapes_.push_back(shape);
 	}
 
-	void Composite::remove(std::string name)
-	{
-		shapes_.erase(name);
-	}
-
-	std::map<std::string, std::shared_ptr<Shape>> get_children() const
+	std::vector<std::shared_ptr<Shape>> get_children() const
 	{
 		return shape_;
+	}
+
+	Hit Composite::intersect(Ray const& ray) const
+	{
+		Hit hit;
+		Hit temp_hit;
+
+		for(auto& shape : shapes_)
+		{
+			temp_hit = shape -> intersect(ray);
+
+			if(temp_hit.t_ < hit.t_)
+			{
+				hit = temp_hit;
+			}
+		}
+
+		return hit;
 	}

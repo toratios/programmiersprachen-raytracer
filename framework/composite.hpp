@@ -1,15 +1,16 @@
 #ifndef COMPOSITE_HPP
 #define COMPOSITE_HPP
 
-#include <map>
+#include <vector>
 #include <memory>
 #include <string>
 
 #include "shape.hpp"
 #include "box.hpp"
 #include "sphere.hpp"
+#include "hit.hpp"
 
-class Composite : Shape
+class Composite : public Shape
 {
 
 public:
@@ -17,18 +18,19 @@ public:
 	Composite();
 
 	Composite(std::string name);
+	
 
-	void add(std::shared_ptr<Shape> shape);
+	void add(std::shared_ptr<Shape> const& shape);
 
-	void remove(std::string name);
+	std::vector<std::shared_ptr<Shape>> get_children() const;
 
-	std::map<std::string, std::shared_ptr<Shape>> get_children() const;
+	Hit intersect(Ray const& ray) const override;
 
 private:
 
 	std::string name_;
 
-	std::map<std::string, std::shared_ptr<Shape>> shapes_;
+	std::vector<std::shared_ptr<Shape>> shapes_;
 
 };
 
