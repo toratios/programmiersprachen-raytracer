@@ -3,6 +3,7 @@
 
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
+#include <string>
 
 
 struct Camera
@@ -10,14 +11,20 @@ struct Camera
 
     Camera();
 
-    //rotate();
+    Camera(std::string name, float fov_x);
 
+    Camera(std::string name, float fov_x, glm::vec3 const& eye,
+    		glm::vec3 const& dir, glm::vec3 const& up);
 
-    glm::vec3 pos_;     //Position
+    std::string name_;	//Name
 
-    glm::vec3 dir_;     //Direction
+    float fov_x_;		//Horizontaler Öffnungswinkel
 
-    glm::mat4 c_;       //Transformation
+    glm::vec3 eye_;     //Position
+
+    glm::vec3 dir_;     //Blickrichtung
+
+    glm::vec3 up_;		//Up-Vector
 
 };
 
