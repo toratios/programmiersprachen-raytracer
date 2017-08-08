@@ -106,11 +106,11 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 					}
 
 					else if (word == "composite")
-					{
+					{/*
 						std::string compname;
 						std::string shapename;
 
-						std::shared_ptr<Shape> composite = std::make_shared<Composite>(compname);
+						std::shared_ptr<Composite> composite = std::make_shared<Composite>(compname);
 
 						while(!stream.eof())
 						{
@@ -120,9 +120,9 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 							if(shape_ptr != tempshapes.end())
 							{
 								std::shared_ptr<Shape> tempshape = shape_ptr->second;
-								scene.composite_->add(tempshape);
+								composite->add(tempshape);
 							}
-						}
+						}*/
 					}
 				}
 			}
