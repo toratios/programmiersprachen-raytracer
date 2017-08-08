@@ -75,6 +75,24 @@ void Renderer::ambient_light(Color & pixel_clr, Color const& ka)
   pixel_clr += (scene_.ambient_ * ka); 
 }
 
+void Renderer::point_light(Color & pixel_clr, std::shared_ptr<Light> const& light, Hit const& hit, Ray const& ray)
+{
+  glm::vec3 light_direction = glm::normalize((light -> pos_) - (hit.intersection_));
+
+  Ray light_ray{hit.intersection_, light_direction};
+
+  float distance = glm::length(hit.intersection_ - (light -> pos_));
+
+  Hit light_hit = closest_hit(light_ray);
+
+  if(light_hit.t_ > distance)
+  {
+    diffuse_light(pixel_clr, hit, light, light_ray);
+
+    specular_light(pixel_clr, hit, light, light_ray, ray);
+  }
+}
+
 void Renderer::diffuse_light(Color & pixel_clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray)
 {
   float factor = glm::dot(glm::normalize(hit.normal_), glm::normalize(light_ray.direction));
@@ -89,4 +107,15 @@ void Renderer::specular_light(Color & pixel_clr, Hit const& hit, std::shared_ptr
   float factor = std::max(0.0f, glm::dot(reflection, glm::normalize(-(ray.direction))));
 
   pixel_clr += (light -> color_) * (hit.shape_ -> get_material() -> ks_) * pow(factor, hit.shape_ -> get_material() -> m_);
+}
+
+Color Renderer::tone_mapping(Color const& raytrace_color)
+{
+  Color final_color;
+
+  final_color.r = (raytrace_color.r / (raytrace_color.r + 1));
+  final_color.g = (raytrace_color.g / (raytrace_color.g + 1));
+  final_color.b = (raytrace_color.b / (raytrace_color.b + 1));
+
+  return final_color;
 }

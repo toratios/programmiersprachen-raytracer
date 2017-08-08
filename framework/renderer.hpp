@@ -20,6 +20,8 @@
 #include <glm/ext.hpp>
 #include "hit.hpp"
 #include "scene.hpp"
+#include "composite.hpp"
+
 
 class Renderer
 {
@@ -38,9 +40,14 @@ public:
 
   void ambient_light(Color & clr, Color const& ka);
 
+  void point_light(Color & pixel_clr, std::shared_ptr<Light> const& light, Hit const& hit, Ray const& ray);
+
   void diffuse_light(Color & clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray);
 
   void specular_light(Color & pixel_clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray, Ray const& ray);
+
+  Color tone_mapping(Color const& color);
+
 
 private:
   Scene scene_;
