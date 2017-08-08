@@ -9,9 +9,20 @@
 #include "material.hpp"
 #include "camera.hpp"
 #include "light.hpp"
+#include "color.hpp"
 
 struct Scene
 {
+	Scene():
+		ambient_{},
+		camera_{}
+		{}
+
+	Scene(Color const& ambient, Camera const& camera):
+		ambient_{ambient},
+		camera_{camera}
+		{}
+
 
     //Shapes
     std::vector<std::shared_ptr<Shape>> shapes_;
@@ -19,11 +30,15 @@ struct Scene
     //Materials
     std::map<std::string, std::shared_ptr<Material>> materials_;
 
+    //Lights
+    std::vector<std::shared_ptr<Light>> lights_;
+
+    //Ambient Light
+    Color ambient_;
+
     //Camera
     Camera camera_;
 
-    //Lights
-    std::vector<std::shared_ptr<Light>> lights_;
 };
 
 #endif
