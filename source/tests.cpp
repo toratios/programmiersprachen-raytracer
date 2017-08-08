@@ -9,6 +9,7 @@
 #include <scene.hpp>
 #include <hit.cpp>
 #include <color.hpp>
+#include <renderer.hpp>
 
 TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   Box b;

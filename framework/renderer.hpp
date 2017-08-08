@@ -10,11 +10,16 @@
 #ifndef BUW_RENDERER_HPP
 #define BUW_RENDERER_HPP
 
+#define GLM_FORCE_RADIANS
+
 #include "color.hpp"
 #include "pixel.hpp"
 #include "ppmwriter.hpp"
 #include <string>
 #include <glm/glm.hpp>
+#include <glm/ext.hpp>
+#include "hit.hpp"
+#include "scene.hpp"
 
 class Renderer
 {
@@ -29,7 +34,16 @@ public:
     return colorbuffer_;
   }
 
+  Hit closest_hit(Ray const& ray);
+
+  void ambient_light(Color & clr, Color const& ka);
+
+  void diffuse_light(Color & clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray);
+
+  void specular_light(Color & pixel_clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray, Ray const& ray);
+
 private:
+  Scene scene_;
   unsigned width_;
   unsigned height_;
   std::vector<Color> colorbuffer_;
