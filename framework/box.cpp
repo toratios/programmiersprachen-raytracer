@@ -43,7 +43,7 @@ void Box::sortMinMax(){
     max_.z = temp;
   }
 }
-  
+/*  
 float Box::area() const{
   float x = max_.x - min_.x;
   float y = max_.y - min_.y;
@@ -54,7 +54,7 @@ float Box::area() const{
 float Box::volume() const{
   float volume = (max_.x - min_.x)*(max_.y - min_.y)*(max_.z - min_.z);
   return volume;
-}
+}*/
 
 std::ostream& Box::print(std::ostream& os) const{
   Shape::print(os);

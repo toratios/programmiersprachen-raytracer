@@ -21,8 +21,8 @@ class Sphere: public Shape{
     float get_r() const;
 
     std::ostream& print(std::ostream& os) const override;
-    float area() const override;
-    float volume() const override;
+    //float area() const override;
+    //float volume() const override;
     Hit intersect(Ray const& ray) override;
 };
 

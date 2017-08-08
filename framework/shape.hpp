@@ -22,8 +22,8 @@ class Shape{
     std::string const& get_name() const;
 
     virtual std::ostream& print(std::ostream& os) const;
-    virtual float area() const = 0;
-    virtual float volume() const = 0;
+    //virtual float area() const = 0;
+    //virtual float volume() const = 0;
     virtual Hit intersect(Ray const& ray) = 0;
 };
 

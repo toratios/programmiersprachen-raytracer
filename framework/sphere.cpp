@@ -27,14 +27,14 @@ glm::vec3 const& Sphere::get_center() const{
 float Sphere::get_r() const{
   return r_;
 }
-
+/*
 float Sphere::area() const{
   return 4*M_PI*pow(r_,2);
 }
 
 float Sphere::volume() const{
   return fabs((4.0/3.0)*M_PI*pow(r_,3));
-}
+}*/
 
 std::ostream& Sphere::print(std::ostream& os) const{
   Shape::print(os);
