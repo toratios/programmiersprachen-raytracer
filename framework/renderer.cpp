@@ -51,3 +51,42 @@ void Renderer::write(Pixel const& p)
 
   ppm_.write(p);
 }
+
+Hit Renderer::closest_hit(Ray const& ray)
+{
+  Hit closest_hit;
+  Hit temp_hit;
+
+  for(auto& comp : scene_.shapes_)
+  {
+    temp_hit = comp -> intersect(ray);
+
+    if(temp_hit.t_ < closest_hit.t_)
+    {
+      closest_hit = temp_hit;
+    }
+  }
+
+  return closest_hit;
+}
+
+void Renderer::ambient_light(Color & pixel_clr, Color const& ka)
+{
+  pixel_clr += (scene_.ambient_ * ka); 
+}
+
+void Renderer::diffuse_light(Color & pixel_clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray)
+{
+  float factor = glm::dot(glm::normalize(hit.normal_), glm::normalize(light_ray.direction));
+
+  pixel_clr += (light -> color_) * (hit.shape_ -> get_material() -> kd_) * std::max(factor, 0.0f);
+}
+
+void Renderer::specular_light(Color & pixel_clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray, Ray const& ray)
+{
+  glm::vec3 reflection = glm::normalize(glm::reflect(light_ray.direction, hit.normal_));
+
+  float factor = std::max(0.0f, glm::dot(reflection, glm::normalize(-(ray.direction))));
+
+  pixel_clr += (light -> color_) * (hit.shape_ -> get_material() -> ks_) * pow(factor, hit.shape_ -> get_material() -> m_);
+}

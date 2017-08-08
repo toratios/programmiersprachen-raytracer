@@ -10,6 +10,7 @@
 #include "camera.hpp"
 #include "light.hpp"
 #include "color.hpp"
+#include "composite.hpp"
 
 struct Scene
 {
@@ -25,7 +26,7 @@ struct Scene
 
 
     //Shapes
-    std::vector<std::shared_ptr<Shape>> shapes_;
+    std::vector<std::shared_ptr<Composite>> shapes_;
 
     //Materials
     std::map<std::string, std::shared_ptr<Material>> materials_;

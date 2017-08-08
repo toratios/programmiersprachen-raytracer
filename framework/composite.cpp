@@ -22,18 +22,18 @@
 
 	Hit Composite::intersect(Ray const& ray)
 	{
-		Hit hit;
+		Hit closest_hit;
 		Hit temp_hit;
 
 		for(auto& shape : shapes_)
 		{
 			temp_hit = shape -> intersect(ray);
 
-			if(temp_hit.t_ < hit.t_)
+			if(temp_hit.t_ < closest_hit.t_)
 			{
-				hit = temp_hit;
+				closest_hit = temp_hit;
 			}
 		}
 
-		return hit;
+		return closest_hit;
 	}
