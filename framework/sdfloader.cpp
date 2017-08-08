@@ -12,6 +12,8 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 	{
 		std::string line;
 		std::string word;
+
+		std::map<std::string, std::shared_ptr<Shape>> tempshapes;
 		
 		while(std::getline(inputfile, line))
 		{	
@@ -78,6 +80,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
 						std::shared_ptr<Shape> box = std::make_shared<Box>(min, max , material, boxname);
+						tempshapes.insert(std::pair<std::string, std::shared_ptr<Shape>>(boxname, box));
 					}
 
 					else if (word == "sphere")
@@ -99,6 +102,27 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
 						std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(center, r, material, spherename);
+						tempshapes.insert(std::pair<std::string, std::shared_ptr<Shape>>(spherename, sphere));
+					}
+
+					else if (word == "composite")
+					{
+						std::string compname;
+						std::string shapename;
+
+						std::shared_ptr<Shape> composite = std::make_shared<Composite>(compname);
+
+						while(!stream.eof())
+						{
+							stream >> shapename;
+							auto shape_ptr = tempshapes.find(shapename);
+
+							if(shape_ptr != tempshapes.end())
+							{
+								std::shared_ptr<Shape> tempshape = shape_ptr->second;
+								scene.composite_->add(tempshape);
+							}
+						}
 					}
 				}
 			}
