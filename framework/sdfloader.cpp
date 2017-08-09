@@ -135,27 +135,61 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 						stream >> lightname;
 
-						stream >> pos.x;
-						stream >> pos.y;
-						stream >> pos.z;
 
-						stream >> color.r;
-						stream >> color.g;
-						stream >> color.b;
+						if(lightname == "ambient")
+						{
+							stream >> color.r;
+							stream >> color.g;
+							stream >> color.b;
+
+							scene.ambient_ = color;
+						}
+						else
+						{
+							stream >> pos.x;
+							stream >> pos.y;
+							stream >> pos.z;
+
+							stream >> color.r;
+							stream >> color.g;
+							stream >> color.b;
 						
-						std::shared_ptr<Light> light = std::make_shared<Light>(lightname, pos, color);
-						scene.lights_.push_back(light);
+							std::shared_ptr<Light> light = std::make_shared<Light>(lightname, pos, color);
+							scene.lights_.push_back(light);
+						}
 					}
 
 					else if (word == "camera")
 					{
+						std::string cameraname;
+						float fov;
+						glm::vec3 eye;
+						glm::vec3 dir;
+						glm::vec3 up;
 
+						stream >> cameraname;
+
+						stream >> fov;
+
+						stream >> eye.x;
+						stream >> eye.y;
+						stream >> eye.z;
+
+						stream >> dir.x;
+						stream >> dir.y;
+						stream >> dir.z;
+
+						stream >> up.x;
+						stream >> up.y;
+						stream >> up.z;
+
+						scene.camera_ = Camera{cameraname, fov, eye, dir, up};
 					}
 				}
 			}
 		}
 	}
-	
+
 	else
 	{
 		std::cout << "File not found." << std::endl;
