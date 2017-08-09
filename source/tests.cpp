@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
-#include <box.cpp>
+
+/*#include <box.cpp>
 #include <sphere.cpp>
 #include <shape.cpp>
 #include <glm/glm.hpp>
@@ -10,7 +11,9 @@
 #include <hit.cpp>
 #include <color.hpp>
 #include <renderer.hpp>
-
+#include <camera.hpp>
+#include <scene.hpp>*/
+/*
 TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   Box b;
   glm::vec3 min = b.get_min();
@@ -29,7 +32,7 @@ TEST_CASE ("default constructor box", "[aufgabe 5.2/5.3]"){
   REQUIRE(col.g == 1.0f);
   REQUIRE(col.b == 1.0f);
   */
-}
+//}
 /*
 TEST_CASE ("user constructor box", "[aufgabe 5.2/5.3]"){
   Box b{glm::vec3{4.0,2.0,3.0},glm::vec3{1.0,5.0,6.0},Material{},"TestBox"};
@@ -138,7 +141,7 @@ TEST_CASE ("intersectRaySphere", "[intersect]"){
     distance);
   REQUIRE (distance == Approx(4.0f));
 }*/
-
+/*
 TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
   Sphere s{glm::vec3{5.0,0.0,0.0},1.0};
 
@@ -154,7 +157,7 @@ TEST_CASE ("intersectRaySphereAgain", "[aufgabe 5.6]"){
   REQUIRE (testhit.normal_.y == 0.0);
   REQUIRE (testhit.normal_.z == 0.0);
 }
-
+*/
 
 /*
 TEST_CASE ("blablabla", "[aufgabe 5.8]"){
@@ -171,7 +174,7 @@ TEST_CASE ("blablabla", "[aufgabe 5.8]"){
   //std::cout << "delete s2\n";
   delete s2;
 }*/
-
+/*
 TEST_CASE ("intersectRayBox", "[aufgabe 6.3]"){
 
   Box b{glm::vec3{-1.0},glm::vec3{1.0}};
@@ -234,7 +237,7 @@ TEST_CASE("Color Operatoren")
   clr_1 = clr_5;
 
   REQUIRE(clr_1 == clr_5);
-}
+}*/
 
 int main(int argc, char *argv[])
 {

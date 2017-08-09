@@ -8,7 +8,7 @@
 
 int main(int argc, char* argv[])
 {
-  unsigned const width = 800;
+  /*unsigned const width = 800;
   unsigned const height = 600;
   std::string const filename = "./checkerboard.ppm";
 
@@ -26,6 +26,6 @@ int main(int argc, char* argv[])
   }
 
   thr.join();
-
+*/
   return 0;
 }

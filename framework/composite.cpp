@@ -10,6 +10,11 @@
 		shapes_{}
 		{}
 
+	Composite::Composite(std::string name, std::vector<std::shared_ptr<Shape>> shapes):
+		name_{name},
+		shapes_{shapes}
+		{}
+
 	void Composite::add(std::shared_ptr<Shape> const& shape)
 	{
 		shapes_.push_back(shape);

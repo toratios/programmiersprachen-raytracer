@@ -19,6 +19,8 @@ public:
 
 	Composite(std::string name);
 
+	Composite(std::string name, std::vector<std::shared_ptr<Shape>> shapes);
+
 
 	void add(std::shared_ptr<Shape> const& shape);
 
