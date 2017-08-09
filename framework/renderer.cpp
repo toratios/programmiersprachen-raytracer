@@ -171,7 +171,6 @@ bool Renderer::shadow(Ray const& shadow_ray) const
   return 0;
 }
 
-//erzeugt Punkte!!!
 Color Renderer::diffuse(std::shared_ptr<Light> const& light, Hit const& hit, Ray const& light_ray) const
 {
   Color diffuse_color;

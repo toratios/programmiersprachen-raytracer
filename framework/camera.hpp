@@ -32,6 +32,8 @@ public:
 
     glm::vec3 const& get_up() const;
 
+    void set_eye(glm::vec3 const& eye);
+
     Ray generate_ray(float pos_x, float pos_y, float distance) const;
 
 private:

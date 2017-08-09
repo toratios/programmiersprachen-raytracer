@@ -51,6 +51,11 @@
    	return up_;
   }
 
+  void Camera::set_eye(glm::vec3 const& eye)
+  {
+  	eye_ = eye;
+  }
+
 	Ray Camera::generate_ray(float pos_x, float pos_y, float distance) const
 	{
 		Ray eye_ray{eye_, glm::vec3{pos_x, pos_y, -(distance)}};
