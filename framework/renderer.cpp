@@ -145,7 +145,7 @@ Color Renderer::point_light(std::shared_ptr<Light> const& light, Hit const& hit,
 
   Ray shadow_ray
   {
-    hit.intersection_ + (0.001f * light_direction),
+    hit.intersection_ + (0.01f * hit.normal_),
 
     light_direction
   };
@@ -171,6 +171,7 @@ bool Renderer::shadow(Ray const& shadow_ray) const
   return 0;
 }
 
+//erzeugt Punkte!!!
 Color Renderer::diffuse(std::shared_ptr<Light> const& light, Hit const& hit, Ray const& light_ray) const
 {
   Color diffuse_color;
@@ -216,3 +217,4 @@ Color Renderer::tone_mapping(Color const& raytrace_color) const
 
   return final_color;
 }
+

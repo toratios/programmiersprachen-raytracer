@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
     (glm::vec3{400.0f,400.0f,-800.0f}, 100.0f, test_material_4, "test_sphere_3");
 
   std::shared_ptr<Shape> test_sphere_4 = std::make_shared<Sphere>
-    (glm::vec3{200.0f,200.0f,-1300.0f}, 200.0f, test_material_2, "test_sphere_4");
+    (glm::vec3{200.0f,200.0f,-2000.0f}, 200.0f, test_material_2, "test_sphere_4");
 
 
   std::vector<std::shared_ptr<Shape>> shapes;
@@ -157,8 +157,8 @@ int main(int argc, char* argv[])
 
 //=================Renderer==============================================================
 
-  unsigned const width = 1000;
-  unsigned const height = 700;
+  unsigned const width = 2000;
+  unsigned const height = 1400;
 
   std::string const filename = "./test_.ppm";
 

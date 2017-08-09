@@ -47,7 +47,7 @@ public:
   Color reflection() const;
   Color refraction() const;
   Color tone_mapping(Color const& color) const;
-
+  
 private:
   Scene scene_;
   unsigned width_;
