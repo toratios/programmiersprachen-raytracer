@@ -26,7 +26,7 @@
 class Renderer
 {
 public:
-  Renderer(unsigned w, unsigned h, std::string const& file);
+  Renderer(unsigned w, unsigned h, std::string const& file, Scene const& scene);
 
   void render();
   void write(Pixel const& p);
@@ -36,17 +36,19 @@ public:
     return colorbuffer_;
   }
 
-  Hit closest_hit(Ray const& ray);
+  void render_scene();
+  Color raytrace(Ray const& ray) const;
+  Hit closest_hit(Ray const& ray) const;
+  Color ambient(Color const& ka) const;
+  Color point_light(std::shared_ptr<Light> const& light, Hit const& hit, Ray const& ray) const;
+  bool shadow(Ray const& shadow_ray) const;
+  Color diffuse(std::shared_ptr<Light> const& light, Hit const& hit, Ray const& light_ray) const;
+  Color specular(std::shared_ptr<Light> const& light, Hit const& hit,Ray const& ray, Ray const& light_ray) const;
+  Color reflection() const;
+  Color refraction() const;
+  Color tone_mapping(Color const& color) const;
 
-  void ambient_light(Color & clr, Color const& ka);
 
-  void point_light(Color & pixel_clr, std::shared_ptr<Light> const& light, Hit const& hit, Ray const& ray);
-
-  void diffuse_light(Color & clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray);
-
-  void specular_light(Color & pixel_clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray, Ray const& ray);
-
-  Color tone_mapping(Color const& color);
 
 
 private:

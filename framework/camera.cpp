@@ -51,23 +51,9 @@
     	return up_;
     }
 
-	std::vector<Ray> Camera::generate_rays(unsigned int width, unsigned int height) const
+	Ray Camera::generate_ray(float pos_x, float pos_y, float distance) const
 	{
-		std::vector<Ray> eye_rays;
+		Ray eye_ray{eye_, glm::vec3{pos_x, pos_y, -(distance)}};
 
-		float distance = (width / 2) / tan(fov_x_ * M_PI / 360);
-
-		for(int x = ((int)width / -2); x < ((int)width / 2); ++x)
-		{
-			for(int y = ((int)height / -2); y < ((int)height / 2); ++y)
-			{
-				glm::vec3 temp_direction(x, y, -(distance));
-
-				Ray temp_ray(eye_, temp_direction);
-
-				eye_rays.push_back(temp_ray);
-			}
-		}
-
-		return eye_rays;
+		return eye_ray;
 	}

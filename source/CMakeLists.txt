@@ -22,3 +22,15 @@ target_link_libraries(tests
   ${GLFW_LIBRARIES}
   )
 
+
+
+#Build raytracer_test
+add_executable(raytracer_test raytracer_test.cpp)
+
+target_link_libraries(raytracer_test ${FRAMEWORK_NAME} ${LIBRARIES}
+  glfw
+  ${GLFW_LIBRARIES}
+  )
+add_dependencies(raytracer_test glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
+
+install(TARGETS raytracer_test DESTINATION .)

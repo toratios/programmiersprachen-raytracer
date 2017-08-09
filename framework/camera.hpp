@@ -32,8 +32,7 @@ public:
 
     glm::vec3 const& get_up() const;
 
-
-    std::vector<Ray> generate_rays(unsigned int width, unsigned int heighth) const;
+    Ray generate_ray(float pos_x, float pos_y, float distance) const;
 
 private:
 

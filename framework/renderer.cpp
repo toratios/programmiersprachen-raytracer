@@ -9,12 +9,13 @@
 
 #include "renderer.hpp"
 
-Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
+Renderer::Renderer(unsigned w, unsigned h, std::string const& file, Scene const& scene)
   : width_(w)
   , height_(h)
   , colorbuffer_(w*h, Color(0.0, 0.0, 0.0))
   , filename_(file)
   , ppm_(width_, height_)
+  , scene_{scene}
 {}
 
 void Renderer::render()
@@ -52,7 +53,57 @@ void Renderer::write(Pixel const& p)
   ppm_.write(p);
 }
 
-Hit Renderer::closest_hit(Ray const& ray)
+void Renderer::render_scene()
+{
+  float distance = (width_ / 2) / tan(scene_.camera_.get_fov() * M_PI / 360);
+
+  float pos_y = (((float)height_) / -2);
+
+  for(unsigned y = 0; y < height_; ++y)
+  {
+    float pos_x = (((float)width_) / -2);
+
+    for(unsigned x = 0 ; x < width_; ++x)
+    {
+      Pixel pixel(x, y);
+
+      Ray temp_ray = scene_.camera_.generate_ray(pos_x, pos_y, distance);
+
+      Color temp_color = raytrace(temp_ray);
+
+      pixel.color = tone_mapping(temp_color);
+
+      write(pixel);
+
+      pos_x += 1.0f;
+    }
+
+    pos_y += 1.0f;
+  }
+
+  ppm_.save(filename_);
+}
+
+Color Renderer::raytrace(Ray const& ray) const
+{
+  Hit hit = closest_hit(ray); 
+     
+  if(hit.hit_)
+  {  
+    Color pixel_clr = ambient(hit.shape_ -> get_material() -> ka_);      
+            
+    for(auto& light : scene_.lights_) 
+    {
+      pixel_clr += point_light(light, hit, ray);
+    }
+
+    return pixel_clr;   
+  }
+
+  return scene_.ambient_; 
+}
+
+Hit Renderer::closest_hit(Ray const& ray) const
 {
   Hit closest_hit;
   Hit temp_hit;
@@ -70,46 +121,92 @@ Hit Renderer::closest_hit(Ray const& ray)
   return closest_hit;
 }
 
-void Renderer::ambient_light(Color & pixel_clr, Color const& ka)
+Color Renderer::ambient(Color const& ka) const
 {
-  pixel_clr += (scene_.ambient_ * ka); 
+  Color ambient_color;
+
+  ambient_color = (scene_.ambient_ * ka);
+
+  return ambient_color;
 }
 
-void Renderer::point_light(Color & pixel_clr, std::shared_ptr<Light> const& light, Hit const& hit, Ray const& ray)
+Color Renderer::point_light(std::shared_ptr<Light> const& light, Hit const& hit, Ray const& ray) const
 {
+  Color point_light_color;
+
   glm::vec3 light_direction = glm::normalize((light -> pos_) - (hit.intersection_));
 
-  Ray light_ray{hit.intersection_, light_direction};
-
-  float distance = glm::length(hit.intersection_ - (light -> pos_));
-
-  Hit light_hit = closest_hit(light_ray);
-
-  if(light_hit.t_ > distance)
+  Ray light_ray
   {
-    diffuse_light(pixel_clr, hit, light, light_ray);
+    hit.intersection_, 
 
-    specular_light(pixel_clr, hit, light, light_ray, ray);
+    light_direction
+  };
+
+  Ray shadow_ray
+  {
+    hit.intersection_ + (0.001f * light_direction),
+
+    light_direction
+  };
+
+  if(!shadow(shadow_ray))
+  {
+    point_light_color = (light -> color_) *
+                      (diffuse(light, hit, light_ray) + specular(light, hit, ray, light_ray));
   }
+
+  return point_light_color;
 }
 
-void Renderer::diffuse_light(Color & pixel_clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray)
+bool Renderer::shadow(Ray const& shadow_ray) const
 {
+  Hit shadow_hit = closest_hit(shadow_ray);
+
+  if(shadow_hit.hit_)
+  {
+    return 1;
+  }
+
+  return 0;
+}
+
+Color Renderer::diffuse(std::shared_ptr<Light> const& light, Hit const& hit, Ray const& light_ray) const
+{
+  Color diffuse_color;
+
   float factor = glm::dot(glm::normalize(hit.normal_), glm::normalize(light_ray.direction));
 
-  pixel_clr += (light -> color_) * (hit.shape_ -> get_material() -> kd_) * std::max(factor, 0.0f);
+  diffuse_color = (hit.shape_ -> get_material() -> kd_) * std::max(0.0f, factor);
+
+  return diffuse_color;
 }
 
-void Renderer::specular_light(Color & pixel_clr, Hit const& hit, std::shared_ptr<Light> light, Ray const& light_ray, Ray const& ray)
+
+Color Renderer::specular(std::shared_ptr<Light> const& light, Hit const& hit,Ray const& ray, Ray const& light_ray) const
 {
-  glm::vec3 reflection = glm::normalize(glm::reflect(light_ray.direction, hit.normal_));
+  Color specular_color;
+
+  glm::vec3 reflection = glm::normalize(glm::reflect(-(light_ray.direction), hit.normal_));
 
   float factor = std::max(0.0f, glm::dot(reflection, glm::normalize(-(ray.direction))));
 
-  pixel_clr += (light -> color_) * (hit.shape_ -> get_material() -> ks_) * pow(factor, hit.shape_ -> get_material() -> m_);
+  specular_color = (hit.shape_ -> get_material() -> ks_) * pow(factor, hit.shape_ -> get_material() -> m_);
+
+  return specular_color;
 }
 
-Color Renderer::tone_mapping(Color const& raytrace_color)
+Color Renderer::reflection() const
+{
+
+}
+
+Color Renderer::refraction() const
+{
+
+}
+
+Color Renderer::tone_mapping(Color const& raytrace_color) const
 {
   Color final_color;
 
