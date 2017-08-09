@@ -69,7 +69,7 @@ void Renderer::render_scene()
 
       Ray temp_ray = scene_.camera_.generate_ray(pos_x, pos_y, distance);
 
-      Color temp_color = raytrace(temp_ray);
+      Color temp_color = raytrace(temp_ray, 3);
 
       pixel.color = tone_mapping(temp_color);
 
@@ -84,7 +84,7 @@ void Renderer::render_scene()
   ppm_.save(filename_);
 }
 
-Color Renderer::raytrace(Ray const& ray) const
+Color Renderer::raytrace(Ray const& ray, unsigned depth) const
 {
   Hit hit = closest_hit(ray); 
      
@@ -95,6 +95,11 @@ Color Renderer::raytrace(Ray const& ray) const
     for(auto& light : scene_.lights_) 
     {
       pixel_clr += point_light(light, hit, ray);
+    }
+
+    if(depth > 0)
+    {
+      //pixel_clr *= reflection(hit, ray, depth);
     }
 
     return pixel_clr;   
@@ -196,12 +201,25 @@ Color Renderer::specular(std::shared_ptr<Light> const& light, Hit const& hit,Ray
   return specular_color;
 }
 
-Color Renderer::reflection() const
+Color Renderer::reflection(Hit const& hit, Ray const& ray, unsigned depth) const
 {
+  Color reflection_color;
 
+  glm::vec3 reflection = glm::normalize(glm::reflect(ray.direction, hit.normal_));
+
+  Ray reflection_ray
+  {
+    hit.intersection_ + (0.01f * reflection),
+
+    reflection
+  };
+
+  reflection_color = raytrace(reflection_ray, depth - 1);
+
+  return reflection_color;
 }
 
-Color Renderer::refraction() const
+Color Renderer::refraction(unsigned depth) const
 {
 
 }
