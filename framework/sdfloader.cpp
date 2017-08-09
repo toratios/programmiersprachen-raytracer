@@ -126,13 +126,41 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 							}
 						}*/
 					}
+
+					else if (word == "light")
+					{
+						std::string lightname;
+						Color color;
+						glm::vec3 pos;
+
+						stream >> lightname;
+
+						stream >> pos.x;
+						stream >> pos.y;
+						stream >> pos.z;
+
+						stream >> color.r;
+						stream >> color.g;
+						stream >> color.b;
+						
+						std::shared_ptr<Light> light = std::make_shared<Light>(lightname, pos, color);
+						scene.lights_.push_back(light);
+					}
+
+					else if (word == "camera")
+					{
+
+					}
 				}
 			}
 		}
 	}
+	
 	else
 	{
 		std::cout << "File not found." << std::endl;
 	}
+
+	return scene;
 }
 
