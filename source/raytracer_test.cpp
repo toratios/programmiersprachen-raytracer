@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 
   std::vector<std::shared_ptr<Light>> lights;
 
-  //lights.push_back(test_light_1);
+  lights.push_back(test_light_1);
   lights.push_back(test_light_2);
   lights.push_back(test_light_3);
 
@@ -108,6 +108,10 @@ int main(int argc, char* argv[])
     (glm::vec3{-0.0f,-280.0f,-1000.0f},glm::vec3{1000.0f,-259.0f,-2000.0f},
      test_material_5, "test_box_4");
 
+  std::shared_ptr<Shape> test_box_5 = std::make_shared<Box>
+    (glm::vec3{100.0f,500.0f,-800.0f},glm::vec3{200.0f,700.0f,-1000.0f},
+     test_material_1, "test_box_5");
+
 
 
   std::shared_ptr<Shape> test_sphere_1 = std::make_shared<Sphere>
@@ -133,6 +137,7 @@ int main(int argc, char* argv[])
   shapes.push_back(test_box_2);
   shapes.push_back(test_box_3);
   shapes.push_back(test_box_4);
+  shapes.push_back(test_box_5);
 
 
   shapes.push_back(test_sphere_1);

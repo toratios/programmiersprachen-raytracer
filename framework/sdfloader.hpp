@@ -6,11 +6,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
-//#include "material.hpp"
 #include "box.hpp"
 #include "sphere.hpp"
 #include "scene.hpp"
-//#include "composite.hpp"
 
 struct SDFloader{
 
