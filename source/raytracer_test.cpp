@@ -217,8 +217,8 @@ int main(int argc, char* argv[])
 
 //=================Renderer==============================================================
 
-  unsigned const width = 3840;
-  unsigned const height = 2160;
+  unsigned const width = 1920;
+  unsigned const height = 1080;
 
   std::string const filename = "./test_.ppm";
 
