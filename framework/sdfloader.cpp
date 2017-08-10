@@ -202,4 +202,3 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 	return scene;
 }
-
