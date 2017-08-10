@@ -99,7 +99,11 @@ Color Renderer::raytrace(Ray const& ray, unsigned depth) const
 
     if(depth > 0)
     {
-      //pixel_clr *= reflection(hit, ray, depth);
+      if((hit.shape_ -> get_material() -> kr_) > 0.0f)
+      {
+        pixel_clr = pixel_clr * (1.0f - (hit.shape_ -> get_material() -> kr_)) +
+                    reflection(hit,ray, depth - 1) * (hit.shape_ -> get_material() -> kr_);
+      }
     }
 
     return pixel_clr;   

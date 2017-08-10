@@ -37,15 +37,25 @@ public:
   }
 
   void render_scene();
+
   Color raytrace(Ray const& ray, unsigned depth) const;
+
   Hit closest_hit(Ray const& ray) const;
+
   Color ambient(Color const& ka) const;
+
   Color point_light(std::shared_ptr<Light> const& light, Hit const& hit, Ray const& ray) const;
+
   bool shadow(Ray const& shadow_ray) const;
+
   Color diffuse(std::shared_ptr<Light> const& light, Hit const& hit, Ray const& light_ray) const;
+
   Color specular(std::shared_ptr<Light> const& light, Hit const& hit,Ray const& ray, Ray const& light_ray) const;
+
   Color reflection(Hit const& hit, Ray const& ray, unsigned depth) const;
+
   Color refraction(unsigned depth) const;
+  
   Color tone_mapping(Color const& color) const;
   
 private:
