@@ -24,6 +24,8 @@
 #include <glm/glm.hpp>
 #include <string>
 
+#include <sdfloader.cpp>
+
 int main(int argc, char* argv[])
 {
 //=================Erstellen der Scene===================================================
@@ -215,8 +217,8 @@ int main(int argc, char* argv[])
 
 //=================Renderer==============================================================
 
-  unsigned const width = 2000;
-  unsigned const height = 1400;
+  unsigned const width = 3840;
+  unsigned const height = 2160;
 
   std::string const filename = "./test_.ppm";
 
