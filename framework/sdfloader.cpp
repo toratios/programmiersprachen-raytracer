@@ -86,7 +86,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
 						std::shared_ptr<Shape> box = std::make_shared<Box>(min, max , material, boxname);
 						tempshapesmap.insert(std::pair<std::string, std::shared_ptr<Shape>>(boxname, box));
-						std::cout << "\nbox added to tempmap " << boxname;
+						std::cout << "\nbox added to temshapepmap " << boxname;
 					}
 
 					else if (word == "sphere")
@@ -109,7 +109,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
 						std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(center, r, material, spherename);
 						tempshapesmap.insert(std::pair<std::string, std::shared_ptr<Shape>>(spherename, sphere));
-						std::cout << "\nsphere added to tempmap " << spherename;
+						std::cout << "\nsphere added to tempshapemap " << spherename;
 					}
 
 					else if (word == "composite")
@@ -129,7 +129,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 							if(shape_ptr != tempshapesmap.end())
 							{
 								shapes.push_back(shape_ptr->second);
-								std::cout << "\nshape added to tempvector " << shape_ptr->first;
+								std::cout << "\nshape added from tempshapemap to tempvector " << shape_ptr->first;
 							}
 
 							auto comp_ptr = tempcompmap.find(shapename);
@@ -137,12 +137,12 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 							if(comp_ptr != tempcompmap.end())
 							{
 								shapes.push_back(comp_ptr->second);
-								std::cout << "\ncomp added to tempvector " << comp_ptr->first;
+								std::cout << "\ncomp added from tempcompmap to tempvector " << comp_ptr->first;
 							}
 						}
 						std::shared_ptr<Composite> comp = std::make_shared<Composite>(compname, shapes);
 						tempcompmap.insert(std::pair<std::string, std::shared_ptr<Composite>>(compname, comp));
-						std::cout << "\ncomp added to tempmap " << compname;
+						std::cout << "\ncomp added to tempcompmap " << compname;
 					}
 				}
 
@@ -213,7 +213,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 		for(auto it = tempcompmap.cbegin(); it != tempcompmap.cend(); ++it)
 		{
     	composites.push_back(it->second);
-			std::cout << "\ncomp pushed in compvector: " << it->first;
+			std::cout << "\ncomp pushed from tempcompmap in compvector: " << it->first;
 		}
 
 		scene.shapes_ = composites;
