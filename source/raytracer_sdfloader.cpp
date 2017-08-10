@@ -28,8 +28,12 @@
 
 int main(int argc, char* argv[])
 {
+  Scene test_scene;
 
+  SDFloader loader{};
 
+  std::string file = "./sdf_test";
+  test_scene = loader.sdfLoad(file);
 
 //=================Renderer==============================================================
 

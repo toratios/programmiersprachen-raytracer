@@ -13,7 +13,7 @@
 struct SDFloader{
 
   public:
-	  SDFloader();
+	  //SDFloader();
 
 	  static Scene sdfLoad(std::string const& inputFile);
 };

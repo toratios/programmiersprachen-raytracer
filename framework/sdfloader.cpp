@@ -1,12 +1,13 @@
 #include "sdfloader.hpp"
 
 
+
 Scene SDFloader::sdfLoad(std::string const& inputFile)
 {
 	Scene scene;
 
 	std::fstream inputfile;
-	inputfile.open("material.txt");
+	inputfile.open(inputFile);
 
 	if(inputfile.is_open())
 	{
@@ -14,9 +15,9 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 		std::string word;
 
 		std::map<std::string, std::shared_ptr<Shape>> tempshapesmap;
+		std::map<std::string, std::shared_ptr<Composite>> tempcompmap;
 
   	std::vector<std::shared_ptr<Composite>> composites;
-  	scene.shapes_ = composites;
 		
 		while(std::getline(inputfile, line))
 		{	
@@ -56,6 +57,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 					std::shared_ptr<Material> material = std::make_shared<Material>(matname, ka, kd, ks, m);
 					scene.materials_.insert(std::pair<std::string, std::shared_ptr<Material>>(matname, material));
+					std::cout << "\nmaterial added to scene " << matname;
 				}
 
 				else if(word == "shape")
@@ -84,6 +86,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
 						std::shared_ptr<Shape> box = std::make_shared<Box>(min, max , material, boxname);
 						tempshapesmap.insert(std::pair<std::string, std::shared_ptr<Shape>>(boxname, box));
+						std::cout << "\nbox added to tempmap " << boxname;
 					}
 
 					else if (word == "sphere")
@@ -106,6 +109,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
 						std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(center, r, material, spherename);
 						tempshapesmap.insert(std::pair<std::string, std::shared_ptr<Shape>>(spherename, sphere));
+						std::cout << "\nsphere added to tempmap " << spherename;
 					}
 
 					else if (word == "composite")
@@ -125,74 +129,95 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 							if(shape_ptr != tempshapesmap.end())
 							{
 								shapes.push_back(shape_ptr->second);
+								std::cout << "\nshape added to tempvector " << shape_ptr->first;
+							}
+
+							auto comp_ptr = tempcompmap.find(shapename);
+
+							if(comp_ptr != tempcompmap.end())
+							{
+								shapes.push_back(comp_ptr->second);
+								std::cout << "\ncomp added to tempvector " << comp_ptr->first;
 							}
 						}
 						std::shared_ptr<Composite> comp = std::make_shared<Composite>(compname, shapes);
-
-  					scene.shapes_.push_back(comp);
+						tempcompmap.insert(std::pair<std::string, std::shared_ptr<Composite>>(compname, comp));
+						std::cout << "\ncomp added to tempmap " << compname;
 					}
+				}
 
-					else if (word == "light")
+				else if (word == "light")
+				{
+					std::string lightname;
+					Color color;
+					glm::vec3 pos;
+
+					stream >> lightname;
+
+
+					if(lightname == "ambient")
 					{
-						std::string lightname;
-						Color color;
-						glm::vec3 pos;
+						stream >> color.r;
+						stream >> color.g;
+						stream >> color.b;
 
-						stream >> lightname;
+						scene.ambient_ = color;
+						std::cout << "\nambientlight added to scene: " << lightname;
+					}
+					else
+					{
+						stream >> pos.x;
+						stream >> pos.y;
+						stream >> pos.z;
 
-
-						if(lightname == "ambient")
-						{
-							stream >> color.r;
-							stream >> color.g;
-							stream >> color.b;
-
-							scene.ambient_ = color;
-						}
-						else
-						{
-							stream >> pos.x;
-							stream >> pos.y;
-							stream >> pos.z;
-
-							stream >> color.r;
-							stream >> color.g;
-							stream >> color.b;
+						stream >> color.r;
+						stream >> color.g;
+						stream >> color.b;
 						
-							std::shared_ptr<Light> light = std::make_shared<Light>(lightname, pos, color);
-							scene.lights_.push_back(light);
-						}
+						std::shared_ptr<Light> light = std::make_shared<Light>(lightname, pos, color);
+						scene.lights_.push_back(light);
+						std::cout << "\nlight added to scene: " << lightname;
 					}
+				}
 
-					else if (word == "camera")
-					{
-						std::string cameraname;
-						float fov;
-						glm::vec3 eye;
-						glm::vec3 dir;
-						glm::vec3 up;
+				else if (word == "camera")
+				{
+					std::string cameraname;
+					float fov;
+					glm::vec3 eye;
+					glm::vec3 dir;
+					glm::vec3 up;
 
-						stream >> cameraname;
+					stream >> cameraname;
 
-						stream >> fov;
+					stream >> fov;
 
-						stream >> eye.x;
-						stream >> eye.y;
-						stream >> eye.z;
+					stream >> eye.x;
+					stream >> eye.y;
+					stream >> eye.z;
 
-						stream >> dir.x;
-						stream >> dir.y;
-						stream >> dir.z;
+					stream >> dir.x;
+					stream >> dir.y;
+					stream >> dir.z;
 
-						stream >> up.x;
-						stream >> up.y;
-						stream >> up.z;
+					stream >> up.x;
+					stream >> up.y;
+					stream >> up.z;
 
-						scene.camera_ = Camera{cameraname, fov, eye, dir, up};
-					}
+					scene.camera_ = Camera{cameraname, fov, eye, dir, up};
+					std::cout << "\ncamera added to scene: " << cameraname;
 				}
 			}
 		}
+
+		for(auto it = tempcompmap.cbegin(); it != tempcompmap.cend(); ++it)
+		{
+    	composites.push_back(it->second);
+			std::cout << "\ncomp pushed in compvector: " << it->first;
+		}
+
+		scene.shapes_ = composites;
+		std::cout << "\ncompvector added to scene";
 	}
 
 	else
