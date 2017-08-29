@@ -99,10 +99,23 @@ Color Renderer::raytrace(Ray const& ray, unsigned depth) const
 
     if(depth > 0)
     {
-      if((hit.shape_ -> get_material() -> kr_) > 0.0f)
+
+      float reflect = hit.shape_ -> get_material() -> reflect_;
+
+      if(reflect > 0.0f)
       {
-        pixel_clr = pixel_clr * (1.0f - (hit.shape_ -> get_material() -> kr_)) +
-                    reflection(hit,ray, depth - 1) * (hit.shape_ -> get_material() -> kr_);
+        Color reflection_color = reflection(hit, ray, depth);
+
+        pixel_clr = pixel_clr *  (1.0f - reflect) + reflection_color * reflect;
+      }
+
+      float opacity = hit.shape_ -> get_material() -> opac_;
+
+      if(opacity < 1.0f)
+      {
+      //  Color refraction_color = refraction(hit, ray, depth);
+
+      //  pixel_clr = pixel_clr * opacity + refraction_color * (1.0f - opacity);
       }
     }
 
@@ -145,13 +158,6 @@ Color Renderer::point_light(std::shared_ptr<Light> const& light, Hit const& hit,
 
   glm::vec3 light_direction = glm::normalize((light -> pos_) - (hit.intersection_));
 
-  Ray light_ray
-  {
-    hit.intersection_, 
-
-    light_direction
-  };
-
   Ray shadow_ray
   {
     hit.intersection_ + (0.01f * hit.normal_),
@@ -162,7 +168,7 @@ Color Renderer::point_light(std::shared_ptr<Light> const& light, Hit const& hit,
   if(!shadow(shadow_ray))
   {
     point_light_color = (light -> color_) *
-                      (diffuse(light, hit, light_ray) + specular(light, hit, ray, light_ray));
+                      (diffuse(light, hit, shadow_ray) + specular(light, hit, ray, shadow_ray));
   }
 
   return point_light_color;
@@ -223,9 +229,26 @@ Color Renderer::reflection(Hit const& hit, Ray const& ray, unsigned depth) const
   return reflection_color;
 }
 
-Color Renderer::refraction(unsigned depth) const
+Color Renderer::refraction(Hit const& hit, Ray const& ray, unsigned depth) const
 {
+  Color refraction_color;
 
+  float refraction_index = hit.shape_ -> get_material() -> refract_;
+
+  //glm::vec3 refraction = glm::normalize(glm::refract(ray.direction, hit.normal_, refraction_index));
+
+  glm::vec3 refraction = ray.direction;
+
+  Ray refraction_ray
+  {
+    hit.intersection_ + (0.01f * refraction),
+
+    refraction
+  };
+
+  refraction_color = raytrace(refraction_ray, depth - 1);
+
+  return refraction_color;
 }
 
 Color Renderer::tone_mapping(Color const& raytrace_color) const

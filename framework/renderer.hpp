@@ -29,6 +29,7 @@ public:
   Renderer(unsigned w, unsigned h, std::string const& file, Scene const& scene);
 
   void render();
+
   void write(Pixel const& p);
 
   inline std::vector<Color> const& colorbuffer() const
@@ -54,7 +55,7 @@ public:
 
   Color reflection(Hit const& hit, Ray const& ray, unsigned depth) const;
 
-  Color refraction(unsigned depth) const;
+  Color refraction(Hit const& hit, Ray const& ray, unsigned depth) const;
   
   Color tone_mapping(Color const& color) const;
   

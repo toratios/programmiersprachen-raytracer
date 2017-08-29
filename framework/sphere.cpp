@@ -44,7 +44,7 @@ std::ostream& Sphere::print(std::ostream& os) const{
 }
 
 Hit Sphere::intersect(Ray const& inray){
-  
+/*
   Hit spherehit;
   Ray ray;
   ray.origin = inray.origin;
@@ -57,5 +57,57 @@ Hit Sphere::intersect(Ray const& inray){
     spherehit.shape_ = this;
   }
 
-  return spherehit;
+  return spherehit;*/
+
+  Hit sphere_hit;
+
+  Ray ray
+  {
+    inray.origin,
+
+    glm::normalize(inray.direction)
+  };
+
+  float t0;
+  float t1;
+
+  glm::vec3 L = center_ - ray.origin;
+
+  float tca = glm::dot(L, ray.direction);
+
+  float d2 = glm::dot(L, L) - tca * tca;
+
+  if(d2 > (r_ * r_))
+  {
+    return sphere_hit;
+  }
+
+  float thc = sqrt((r_ * r_) - d2);
+
+  t0 = tca - thc;
+
+  t1 = tca + thc;
+
+  if(t0 > t1)
+  {
+    std::swap(t0, t1);
+  }
+
+  if(t0 < 0)
+  {
+    t0 = t1;
+
+    if(t0 < 0)
+    {
+      return sphere_hit;
+    }
+  }
+
+  sphere_hit.hit_ = true;
+  sphere_hit.t_ = t0;
+  sphere_hit.shape_ = this;
+  sphere_hit.intersection_ = ray.origin + ray.direction * sphere_hit.t_;
+  sphere_hit.normal_ = glm:: normalize(sphere_hit.intersection_ - center_);
+
+  return sphere_hit;
 }
