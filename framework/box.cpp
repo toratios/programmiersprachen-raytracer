@@ -59,6 +59,11 @@ Hit Box::intersect(Ray const& inray)
   ray.direction = glm::normalize(inray.direction);
   ray.origin = inray.origin;
 
+  if(transformed())
+  {
+    ray = transformRay(world_transformation_inv(), ray);
+  }
+
 
   glm::vec3 hitvec{glm::vec3{0.0}};
 
@@ -93,9 +98,17 @@ Hit Box::intersect(Ray const& inray)
     boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
     if(hitvec.x == min_.x){
       boxhit.normal_ = glm::vec3{-1.0,0.0,0.0};
+      if (transformed())
+      {
+        boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
+      }
       }
     else{
       boxhit.normal_ = glm::vec3{1.0,0.0,0.0};
+      if (transformed())
+      {
+        boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
+      }
     }
     boxhit.shape_ = this;
     return boxhit;
@@ -111,9 +124,17 @@ Hit Box::intersect(Ray const& inray)
     boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
     if(hitvec.y == min_.y){
       boxhit.normal_ = glm::vec3{0.0,-1.0,0.0};
+      if (transformed())
+      {
+        boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
+      }
       }
     else{
       boxhit.normal_ = glm::vec3{0.0,1.0,0.0};
+      if (transformed())
+      {
+        boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
+      }
     }
     boxhit.shape_ = this;    
     return boxhit;
@@ -129,9 +150,17 @@ Hit Box::intersect(Ray const& inray)
     boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
     if(hitvec.z == min_.z){
       boxhit.normal_ = glm::vec3{0.0,0.0,-1.0};
+      if (transformed())
+      {
+        boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
+      }
       }
     else{
       boxhit.normal_ = glm::vec3{0.0,0.0,1.0};
+      if (transformed())
+      {
+        boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
+      }
     }
     boxhit.shape_ = this;
     return boxhit;

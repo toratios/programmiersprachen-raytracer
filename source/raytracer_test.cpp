@@ -265,7 +265,7 @@ int main(int argc, char* argv[])
   //unsigned const width = 3840;
   //unsigned const height = 2160;
 
-  std::string const filename = "./test_.ppm";
+  std::string const filename = "./test_scale.ppm";
 
   Renderer test_renderer{width, height, filename, test_scene};
 
