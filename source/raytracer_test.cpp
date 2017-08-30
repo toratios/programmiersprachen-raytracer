@@ -204,6 +204,10 @@ int main(int argc, char* argv[])
       test_material_1, "test_triangle_2");
 
 
+  std::shared_ptr<Shape> test_cylinder_1 = std::make_shared<Cylinder>
+    (glm::vec3{500.0f,-200.0f,700.0f}, 200.0f, 400.0f, test_material_1, "test_cylinder_1");
+
+
   std::vector<std::shared_ptr<Shape>> shapes;
 
   //shapes.push_back(test_box_1);
@@ -239,7 +243,7 @@ int main(int argc, char* argv[])
   //shapes.push_back(test_sphere_4);
 
   shapes.push_back(test_triangle_1);
-  shapes.push_back(test_triangle_2);
+  //shapes.push_back(test_cylinder_1);
 
 
 

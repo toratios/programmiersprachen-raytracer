@@ -6,7 +6,7 @@ Triangle::Triangle(glm::vec3 const& a, glm::vec3 const& b, glm::vec3 const& c,
 	a_{a},
 	b_{b},
 	c_{c}
-	{check_orientation();}
+	{/*check_orientation();*/}
 
 
 glm::vec3 const& Triangle::get_a() const
@@ -61,8 +61,6 @@ Hit Triangle::intersect(Ray const& inray)
 	glm::vec3 a_c = c_ - a_;
 
 	glm::vec3 normal = glm::cross(a_b, a_c);
-
-	float area_2 = normal.length();
 
 
 	float NdotRayDirection = glm::dot(normal, ray.direction);
