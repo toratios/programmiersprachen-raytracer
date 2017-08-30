@@ -2,6 +2,8 @@
 #define RAY_HPP
 
 #include <glm/vec3.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/detail/func_matrix.hpp>
 
 struct Ray{
   glm::vec3 origin;
@@ -14,6 +16,17 @@ struct Ray{
   Ray(glm::vec3 ori, glm::vec3 dir):
   origin{ori},
   direction(dir) {}
+
+  friend Ray transformRay(glm::mat4x4 const& transformation_inv, Ray const& ray)
+	{	
+		Ray newray;
+		glm::vec3 new_origin(transformation_inv * glm::vec4(ray.origin, 1));
+    glm::vec3 new_direction(transformation_inv * glm::vec4(ray.direction, 0));
+
+    newray.origin = new_origin;
+    newray.direction = new_direction;
+		return newray;
+  } 
 };
 
 #endif

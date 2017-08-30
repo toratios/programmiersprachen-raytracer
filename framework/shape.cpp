@@ -60,3 +60,9 @@ glm::mat4x4 const& Shape::world_transformation() const{
 glm::mat4x4 const& Shape::world_transformation_inv() const{
   return world_transformation_inv_;
 }
+
+void Shape::scale(glm::vec3 const& scale_vec){
+  world_transformation_ = glm::scale(world_transformation_ , scale_vec) ;
+  world_transformation_inv_ = glm::scale(world_transformation_inv_, 1.0f / scale_vec) ;
+  transformed_ = true;
+}

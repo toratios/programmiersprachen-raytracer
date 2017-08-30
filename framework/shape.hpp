@@ -8,6 +8,7 @@
 #include "glm/mat4x4.hpp"
 #include "glm/vec3.hpp"
 #include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 class Hit;
 
@@ -29,6 +30,10 @@ public:
     glm::mat4x4 const& world_transformation_inv() const;
 
     virtual Hit intersect(Ray const& inray) = 0;
+
+    void scale(glm::vec3 const& scale_vec);
+    void translate(glm::vec3 const& translate_vec);
+    void rotate(float angle, glm::vec3 rotate_vec);
 
 
 private:
