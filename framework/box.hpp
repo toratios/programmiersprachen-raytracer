@@ -20,10 +20,7 @@ class Box: public Shape{
 
     void sortMinMax();
 
-    std::ostream& print(std::ostream& os) const override;
-    //float area() const override;
-    //float volume() const override;
-    Hit intersect(Ray const& ray) override;
+    Hit intersect(Ray const& inray) override;
 };
 
 #endif

@@ -15,15 +15,13 @@ class Sphere: public Shape{
     Sphere();
     Sphere(glm::vec3 const& center, float r);
     Sphere(glm::vec3 const& center, float r, std::shared_ptr<Material> const& mat, std::string const& name);
-    ~Sphere() /*override*/;
+    ~Sphere();
 
     glm::vec3 const& get_center() const;
     float get_r() const;
 
-    std::ostream& print(std::ostream& os) const override;
-    //float area() const override;
-    //float volume() const override;
-    Hit intersect(Ray const& ray) override;
+
+    Hit intersect(Ray const& inray) override;
 };
 
 #endif

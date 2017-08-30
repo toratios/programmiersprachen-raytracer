@@ -16,15 +16,18 @@ Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::shared_ptr<Material> c
   min_{min},
   max_{max} {sortMinMax();}
 
-glm::vec3 const& Box::get_min() const{
+glm::vec3 const& Box::get_min() const
+{
   return min_;
 }
 
-glm::vec3 const& Box::get_max() const{
+glm::vec3 const& Box::get_max() const
+{
   return max_;
 }
 
-void Box::sortMinMax(){
+void Box::sortMinMax()
+{
   float temp;
 
   if(min_.x > max_.x){
@@ -43,27 +46,10 @@ void Box::sortMinMax(){
     max_.z = temp;
   }
 }
-/*  
-float Box::area() const{
-  float x = max_.x - min_.x;
-  float y = max_.y - min_.y;
-  float z = max_.z - min_.z;
-  return (x*y*2+x*z*2+y*z*2);
-}
 
-float Box::volume() const{
-  float volume = (max_.x - min_.x)*(max_.y - min_.y)*(max_.z - min_.z);
-  return volume;
-}*/
 
-std::ostream& Box::print(std::ostream& os) const{
-  Shape::print(os);
-  os << "Min: " << "(" << min_.x << "," << min_.y << "," << min_.z << ")" << "\n" 
-     << "Min: " << "(" << max_.x << "," << max_.y << "," << max_.z << ")";
-  return os; 
-}
-
-Hit Box::intersect(Ray const& inray){
+Hit Box::intersect(Ray const& inray)
+{
   float hit_x = 0.0;
   float hit_y = 0.0;
   float hit_z = 0.0;

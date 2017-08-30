@@ -23,6 +23,10 @@
 #include <map>
 #include <glm/glm.hpp>
 #include <string>
+#include <triangle.hpp>
+#include <triangle.cpp>
+#include <cone.cpp>
+#include <cylinder.cpp>
 
 #include <sdfloader.cpp>
 
@@ -35,23 +39,27 @@ int main(int argc, char* argv[])
   glm::vec3 eye{0.0f,100.0f,0.0f};
   test_cam.set_eye(eye);
 
-  Scene test_scene{Color{0.0f,0.0f,0.0f}, test_cam};
+  Scene test_scene{Color{0.1f,0.1f,0.1f}, test_cam};
 
 //=================Lights================================================================
   std::shared_ptr<Light> test_light_1 = std::make_shared<Light>
         ("test_light_1", glm::vec3{2000.0f, 750.0f, -700.0f}, Color{1.0f,1.0f,1.0f});
 
   std::shared_ptr<Light> test_light_2 = std::make_shared<Light>
-        ("test_light_2", glm::vec3{500.0f, 1500.0f, -1700.0f}, Color{1.0f,1.0f,1.0f});
+        ("test_light_2", glm::vec3{500.0f, 1500.0f, -800.0f}, Color{1.0f,1.0f,1.0f});
 
   std::shared_ptr<Light> test_light_3 = std::make_shared<Light>
-        ("test_light_3", glm::vec3{0.0f, 1500.0f, -1700.0f}, Color{1.0f,1.0f,1.0f});
+        ("test_light_3", glm::vec3{0.0f, 1500.0f, -800.0f}, Color{1.0f,1.0f,1.0f});
+
+  std::shared_ptr<Light> test_light_4 = std::make_shared<Light>
+        ("test_light_4", glm::vec3{0.0f,100.0f,0.0f}, Color{1.0f,1.0f,1.0f});
 
   std::vector<std::shared_ptr<Light>> lights;
 
   lights.push_back(test_light_1);
   lights.push_back(test_light_2);
   lights.push_back(test_light_3);
+  lights.push_back(test_light_4);
 
   test_scene.lights_ = lights;
 
@@ -59,22 +67,22 @@ int main(int argc, char* argv[])
   std::map<std::string, std::shared_ptr<Material>> materials;
 
   std::shared_ptr<Material> test_material_1 = std::make_shared<Material>
-        ("test_material_1",Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, 500.0f, 0.1f);
+        ("test_material_1",Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, 200.0f, 0.1f);
 
   std::shared_ptr<Material> test_material_2 = std::make_shared<Material>
-        ("test_material_2",Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, 500.0f, 0.3f);
+        ("test_material_2",Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, 200.0f, 0.3f);
 
   std::shared_ptr<Material> test_material_4 = std::make_shared<Material>
         ("test_material_4",Color{0.7f,0.1f,8.0f}, Color{0.7f,0.1f,1.0f}, Color{0.7f,0.1f,1.0f}, 500.0f, 0.2f);
 
   std::shared_ptr<Material> test_material_3 = std::make_shared<Material>
-        ("test_material_3",Color{0.7f,0.7f,0.7f}, Color{0.99f,0.99f,0.99f}, Color{0.99f,0.99f,0.99f}, 1000.0f, 0.2f);
+        ("test_material_3",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, 0.2f, 0.0f);
 
   std::shared_ptr<Material> test_material_5 = std::make_shared<Material>
-        ("test_material_5",Color{0.1f,0.1f,0.1f}, Color{0.1f,0.1f,0.1f}, Color{0.1f,0.1f,0.1f}, 1000.0f, 0.2f);
+        ("test_material_5",Color{0.05f,0.05f,0.05f}, Color{0.05f,0.05f,0.05f}, Color{0.05f,0.05f,0.05f}, 0.0f, 0.0f);
 
   std::shared_ptr<Material> test_material_6 = std::make_shared<Material>
-        ("test_material_6",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, 1000.0f, 0.2f, 0.1f, 2.0f);
+        ("test_material_6",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, 1000.0f, 0.0f, 0.1f, 1.5f);
 
 
   materials.insert(std::pair<std::string, std::shared_ptr<Material>>("test_material_1", test_material_1));
@@ -160,8 +168,14 @@ int main(int argc, char* argv[])
 //=================Objects===============================================================
  
   std::shared_ptr<Shape> test_box_5 = std::make_shared<Box>
-    (glm::vec3{-10000.0f,300.0f,200.0f},glm::vec3{10000.0f,300.0f,-10000.0f},
-     test_material_2, "test_box_5");
+    (glm::vec3{-1000.0f,-260.0f,-500.0f},glm::vec3{-1000.0f,2000.0f,-1500.0f},
+     test_material_3, "test_box_5");
+
+  std::shared_ptr<Shape> test_box_6 = std::make_shared<Box>
+    (glm::vec3{-1000.0f,-260.0f,-1500.0f},glm::vec3{1000.0f,2000.0f,-1500.0f},
+     test_material_3, "test_box_6");
+
+
 
   std::shared_ptr<Shape> test_sphere_1 = std::make_shared<Sphere>
     (glm::vec3{130.0f,0.0f,-1100.0f}, 200.0f, test_material_1, "test_sphere_1");
@@ -173,12 +187,22 @@ int main(int argc, char* argv[])
     (glm::vec3{295.0f,-130.0f,-800.0f}, 120.0f, test_material_4, "test_sphere_3");
 
   std::shared_ptr<Shape> test_sphere_4 = std::make_shared<Sphere>
-    (glm::vec3{0.0f,-300.0f,-1200.0f}, 700.0f, test_material_6, "test_sphere_4");
+    (glm::vec3{100.0f,100.0f,-400.0f}, 300.0f, test_material_6, "test_sphere_4");
 
 
-  std::shared_ptr<Shape> test_box_6 = std::make_shared<Box>
-    (glm::vec3{-200.0f,-100.0f,-800.0f},glm::vec3{-90.0f,0.0f,-1000.0f},
-     test_material_1, "test_box_6");
+
+  std::shared_ptr<Shape> test_triangle_1 = std::make_shared<Triangle>
+    (glm::vec3{-1000.0f,100.0f,-1400.0f},
+      glm::vec3{0.0f,600.0f,-700.0f},
+      glm::vec3{1000.0f,200.0f,-1200.0f},
+      test_material_4, "test_triangle_1");
+
+  std::shared_ptr<Shape> test_triangle_2 = std::make_shared<Triangle>
+    (glm::vec3{700.0f,-200.0f,-900.0f},
+      glm::vec3{450.0f,200.0f,-750.0f},
+      glm::vec3{600.0f,-200.0f,-600.0f},
+      test_material_1, "test_triangle_2");
+
 
   std::vector<std::shared_ptr<Shape>> shapes;
 
@@ -214,6 +238,11 @@ int main(int argc, char* argv[])
   shapes.push_back(test_sphere_3);
   //shapes.push_back(test_sphere_4);
 
+  shapes.push_back(test_triangle_1);
+  shapes.push_back(test_triangle_2);
+
+
+
   std::shared_ptr<Composite> test_composite = std::make_shared<Composite>
                                               ("test_composite", shapes);
 
@@ -228,6 +257,9 @@ int main(int argc, char* argv[])
 
   unsigned const width = 1920;
   unsigned const height = 1080;
+
+  //unsigned const width = 3840;
+  //unsigned const height = 2160;
 
   std::string const filename = "./test_.ppm";
 
