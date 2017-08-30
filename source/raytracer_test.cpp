@@ -104,6 +104,9 @@ int main(int argc, char* argv[])
   std::shared_ptr<Shape> test_box_1_1 = std::make_shared<Box>
     (glm::vec3{-1000.0f,-260.0f,-500.0f},glm::vec3{-500.0f,-259.0f,-750.0f},
      test_material_5, "test_box_1");
+
+  test_box_1_1->scale(glm::vec3{3.0,3.0,3.0});
+
   std::shared_ptr<Shape> test_box_1_2 = std::make_shared<Box>
     (glm::vec3{-500.0f,-260.0f,-500.0f},glm::vec3{0.0f,-259.0f,-750.0f},
      test_material_3, "test_box_1");
@@ -261,7 +264,7 @@ int main(int argc, char* argv[])
   //unsigned const width = 3840;
   //unsigned const height = 2160;
 
-  std::string const filename = "./test_.ppm";
+  std::string const filename = "./test_scale.ppm";
 
   Renderer test_renderer{width, height, filename, test_scene};
 

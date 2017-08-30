@@ -19,13 +19,13 @@ struct Ray{
 
   friend Ray transformRay(glm::mat4x4 const& transformation_inv, Ray const& ray)
 	{	
-		Ray newray;
+		Ray new_ray;
 		glm::vec3 new_origin(transformation_inv * glm::vec4(ray.origin, 1));
     glm::vec3 new_direction(transformation_inv * glm::vec4(ray.direction, 0));
 
-    newray.origin = new_origin;
-    newray.direction = new_direction;
-		return newray;
+    new_ray.origin = new_origin;
+    new_ray.direction = new_direction;
+		return new_ray;
   } 
 };
 
