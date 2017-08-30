@@ -62,7 +62,19 @@ glm::mat4x4 const& Shape::world_transformation_inv() const{
 }
 
 void Shape::scale(glm::vec3 const& scale_vec){
-  world_transformation_ = glm::scale(world_transformation_, scale_vec) ;
-  world_transformation_inv_ = glm::scale(world_transformation_inv_, 1.0f / scale_vec) ;
+  world_transformation_ = glm::scale(world_transformation_, scale_vec);
+  world_transformation_inv_ = glm::inverse(world_transformation_);
+  transformed_ = true;
+}
+
+void Shape::translate(glm::vec3 const& translate_vec){
+  world_transformation_ = glm::translate(world_transformation_, translate_vec);
+  world_transformation_inv_ = glm::inverse(world_transformation_);
+  transformed_ = true;
+}
+
+void Shape::rotate(float angle, glm::vec3 rotate_vec){
+  world_transformation_ = glm::rotate(world_transformation_, angle, rotate_vec);
+  world_transformation_inv_ = glm::inverse(world_transformation_);
   transformed_ = true;
 }

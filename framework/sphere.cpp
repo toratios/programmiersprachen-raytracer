@@ -40,9 +40,9 @@ Hit Sphere::intersect(Ray const& inray)
 
   };
 
-  if(transformed()){
+  /*if(transformed()){
     ray = transformRay(world_transformation_inv(), ray);
-  }
+  }*/
 
   float t0;
   float t1;
@@ -84,10 +84,11 @@ Hit Sphere::intersect(Ray const& inray)
   sphere_hit.shape_ = this;
   sphere_hit.intersection_ = ray.origin + ray.direction * sphere_hit.t_;
   sphere_hit.normal_ = glm::normalize(sphere_hit.intersection_ - center_);
-  if (transformed())
+  /*if (transformed())
   {
+    sphere_hit.intersection_ = glm::vec3(world_transformation()* glm::vec4(sphere_hit.intersection_, 1));
     sphere_hit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * sphere_hit.normal_);    
-  }
+  }*/
 
   return sphere_hit;
 }
