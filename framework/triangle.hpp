@@ -2,6 +2,7 @@
 #define TRIANGLE_HPP
 
 #include <glm/vec3.hpp>
+#include <glm/gtx/intersect.hpp>
 #include <glm/glm.hpp>
 #include "shape.hpp"
 #include "hit.hpp"

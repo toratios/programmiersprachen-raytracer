@@ -1,4 +1,6 @@
 #include "cylinder.hpp"
+#include <vector>
+#include <utility>
 
 Cylinder::Cylinder(glm::vec3 const& center, float r, float height,
 					std::shared_ptr<Material> const& mat, std::string const& name):
@@ -27,5 +29,5 @@ float Cylinder::get_height() const
 
 Hit Cylinder::intersect(Ray const& inray)
 {
-	
+
 }
