@@ -24,7 +24,7 @@ target_link_libraries(tests
 
 
 
-#Build raytracer_sdfloader
+#Build raytracer_test
 add_executable(raytracer_test raytracer_test.cpp)
 
 target_link_libraries(raytracer_test ${FRAMEWORK_NAME} ${LIBRARIES}
@@ -46,3 +46,14 @@ target_link_libraries(raytracer_sdfloader ${FRAMEWORK_NAME} ${LIBRARIES}
 add_dependencies(raytracer_sdfloader glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
 
 install(TARGETS raytracer_sdfloader DESTINATION .)
+
+#Build raytracer_transtest
+add_executable(raytracer_transtest raytracer_transtest.cpp)
+
+target_link_libraries(raytracer_transtest ${FRAMEWORK_NAME} ${LIBRARIES}
+  glfw
+  ${GLFW_LIBRARIES}
+  )
+add_dependencies(raytracer_transtest glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
+
+install(TARGETS raytracer_transtest DESTINATION .)
