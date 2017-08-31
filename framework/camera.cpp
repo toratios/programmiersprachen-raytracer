@@ -5,7 +5,9 @@
 		fov_x_{0.0f},
 		eye_{0.0f,0.0f,0.0f},
 		dir_{0.0f,0.0f,-1.0f},
-		up_{0.0f,1.0f,0.0f}
+		up_{0.0f,1.0f,0.0f},
+		transformation_{glm::mat4(1.0)},
+		transformation_inv_{glm::mat4(1.0)}
 		{}
 
 
@@ -14,7 +16,9 @@
    	fov_x_{fov_x},
   	eye_{0.0f,0.0f,0.0f},
 		dir_{0.0f,0.0f,-1.0f},
-		up_{0.0f,1.0f,0.0f}
+		up_{0.0f,1.0f,0.0f},
+		transformation_{glm::mat4(1.0)},
+		transformation_inv_{glm::mat4(1.0)}
 		{}
 
   Camera::Camera(std::string name, float fov_x, glm::vec3 const& eye,
@@ -23,7 +27,9 @@
   	fov_x_{fov_x},
   	eye_{eye},
 		dir_{dir},
-		up_{up}
+		up_{up},
+		transformation_{glm::mat4(1.0)},
+		transformation_inv_{glm::mat4(1.0)}
 		{}
 
 	std::string Camera::get_name() const
@@ -61,4 +67,26 @@
 		Ray eye_ray{eye_, glm::vec3{pos_x, pos_y, -(distance)}};
 
 		return eye_ray;
+	}
+
+	glm::mat4x4 Camera::get_transformation() const
+	{
+		return transformation_;
+	}
+
+	glm::mat4x4 Camera::get_transformation_inv() const
+	{
+		return transformation_inv_;
+	}
+
+	void Camera::translate(glm::vec3 const& translate_vec)
+	{
+		transformation_ = glm::translate(transformation_, translate_vec);
+		transformation_inv_ = glm::inverse(transformation_);
+	}
+
+	void Camera::rotate(float angle, glm::vec3 rotate_vec)
+	{
+		transformation_ = glm::rotate(transformation_, angle, rotate_vec);
+		transformation_inv_ = glm::inverse(transformation_);
 	}

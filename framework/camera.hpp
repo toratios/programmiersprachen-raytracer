@@ -1,10 +1,12 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
-
+#define GLM_FORCE_RADIANS
 #include <glm/vec3.hpp>
 #include <string>
 #include <cmath>
 #include <vector>
+#include "glm/mat4x4.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 #include "ray.hpp"
 
@@ -36,6 +38,12 @@ public:
 
     Ray generate_ray(float pos_x, float pos_y, float distance) const;
 
+    glm::mat4x4 get_transformation() const;
+    glm::mat4x4 get_transformation_inv() const;
+
+    void translate(glm::vec3 const& translate_vec);
+    void rotate(float angle, glm::vec3 rotate_vec);
+
 private:
 
     std::string name_;	//Name
@@ -47,6 +55,9 @@ private:
     glm::vec3 dir_;     //Blickrichtung
 
     glm::vec3 up_;		//Up-Vector
+
+    glm::mat4x4 transformation_;
+    glm::mat4x4 transformation_inv_;
 
 };
 

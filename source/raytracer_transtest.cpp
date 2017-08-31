@@ -36,8 +36,26 @@ int main(int argc, char* argv[])
 
   Camera test_cam{"test_cam", 110.0f};
 
-  glm::vec3 eye{0.0f,100.0f,0.0f};
+  glm::vec3 eye{0.0f,0.0f,0.0f};
   test_cam.set_eye(eye);
+
+  glm::mat4x4 testtrans = test_cam.get_transformation();
+  glm::mat4x4 testtransinv = test_cam.get_transformation_inv();
+
+  std::cout << glm::to_string(testtrans) << "\n";
+
+  std::cout << glm::to_string(testtransinv) << "\n";
+
+  test_cam.translate(glm::vec3{100.0,50.0,200.0});
+
+  glm::mat4x4 testtrans2 = test_cam.get_transformation();
+  glm::mat4x4 testtransinv2 = test_cam.get_transformation_inv();
+
+  std::cout << glm::to_string(testtrans2) << "\n";
+
+  std::cout << glm::to_string(testtransinv2) << "\n";
+
+  std::cout << glm::to_string(test_cam.get_eye()) << "\n";
 
   Scene test_scene{Color{0.1f,0.1f,0.1f}, test_cam};
 
@@ -266,13 +284,13 @@ std::cout << "test\n";
   //unsigned const height = 2160;
 
   std::string const filename = "./test_scale.ppm";
-  /*
+  
   Renderer test_renderer{width, height, filename, test_scene};
 
   std::thread thr([&test_renderer]() { test_renderer.render_scene(); });
 
   thr.join();
-  */
+  
   return 0;
 
 }
