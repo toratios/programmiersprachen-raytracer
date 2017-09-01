@@ -71,8 +71,6 @@ void Renderer::render_scene()
 
       Color temp_color = raytrace(temp_ray, 3);
 
-      //Color temp_color = antialiase(temp_ray, 16, 3);
-
       pixel.color = tone_mapping(temp_color);
 
       write(pixel);
@@ -91,7 +89,15 @@ Color Renderer::raytrace(Ray const& ray, unsigned depth) const
   Hit hit = closest_hit(ray); 
      
   if(hit.hit_)
-  {  
+  { 
+    return shade(hit, ray, depth);
+  }
+
+  return scene_.ambient_; 
+}
+
+Color Renderer::shade(Hit const& hit, Ray const& ray, unsigned depth) const
+{
     Color pixel_clr = ambient(hit.shape_ -> get_material() -> ka_);      
             
     for(auto& light : scene_.lights_) 
@@ -101,16 +107,14 @@ Color Renderer::raytrace(Ray const& ray, unsigned depth) const
 
     if(depth > 0)
     {
+      //Reflection
+      Color ks = hit.shape_ -> get_material() -> ks_;
 
-      float reflect = hit.shape_ -> get_material() -> reflect_;
+      Color reflection_color = reflection(hit, ray, depth);
 
-      if(reflect > 0.0f)
-      {
-        Color reflection_color = reflection(hit, ray, depth);
-
-        pixel_clr = pixel_clr *  (1.0f - reflect) + reflection_color * reflect;
-      }
-
+      pixel_clr += reflection_color * ks;
+      
+      //Refraction
       float opacity = hit.shape_ -> get_material() -> opac_;
 
       if(opacity < 1.0f)
@@ -121,11 +125,9 @@ Color Renderer::raytrace(Ray const& ray, unsigned depth) const
       }
     }
 
-    return pixel_clr;   
-  }
-
-  return scene_.ambient_; 
+    return pixel_clr; 
 }
+
 
 Hit Renderer::closest_hit(Ray const& ray) const
 {
@@ -237,7 +239,13 @@ Color Renderer::refraction(Hit const& hit, Ray const& ray, unsigned depth) const
 
   float refraction_index = hit.shape_ -> get_material() -> refract_;
 
-  glm::vec3 refraction = glm::normalize(glm::refract(ray.direction, hit.normal_, refraction_index));
+  glm::vec3 normal = glm::normalize(hit.normal_);
+
+  //glm::vec3 refraction = glm::normalize(glm::refract(glm::normalize(ray.direction), normal, refraction_index));
+
+  //glm::vec3 refraction = glm::normalize(refraction_vector(ray.direction, normal, refraction_index));
+
+  glm::vec3 refraction = ray.direction;
 
   Ray refraction_ray
   {
@@ -251,6 +259,33 @@ Color Renderer::refraction(Hit const& hit, Ray const& ray, unsigned depth) const
   return refraction_color;
 }
 
+glm::vec3 Renderer::refraction_vector(glm::vec3 const& in, glm::vec3 const& norm, float eta) const
+{
+  glm::vec3 refraction;
+
+  glm::vec3 incident = glm::normalize(in);
+
+  glm::vec3 normal = glm::normalize(norm);
+
+  float N_dot_I = glm::dot(normal, incident);
+
+  float k = 1.0f - eta * eta * (1.0f - N_dot_I * N_dot_I);
+
+  if(k < 0.0f)
+  {
+    refraction = glm::vec3(0.0f);
+
+    return refraction;
+  }
+
+  else
+  {
+    refraction = eta * incident - (eta * N_dot_I + sqrtf(k)) * normal;
+
+    return refraction;
+  }
+}
+
 Color Renderer::tone_mapping(Color const& raytrace_color) const
 {
   Color final_color;
@@ -262,32 +297,4 @@ Color Renderer::tone_mapping(Color const& raytrace_color) const
   return final_color;
 }
 
-Color Renderer::antialiase(Ray const& ray, float factor, unsigned depth) const
-{
-  Color temp_color;
-
-  int samples = sqrt(factor);
-
-  --depth;
-
-  for (int x = 1; x < samples + 1; ++x)
-  {
-    for (int y = 1; y < samples + 1; ++y)
-    {
-      Ray aa_Ray;
-
-      aa_Ray.direction.x = ray.direction.x + (float)x / (float)samples - 0.5f; 
-      aa_Ray.direction.y = ray.direction.y + (float)y / (float)samples - 0.5f;
-      aa_Ray.direction.z = ray.direction.z;
-
-      temp_color += raytrace(aa_Ray, depth);
-    }
-  }
-
-  temp_color.r = temp_color.r / factor;
-  temp_color.g = temp_color.g / factor;
-  temp_color.b = temp_color.b / factor;
-
-  return temp_color;
-}
 
