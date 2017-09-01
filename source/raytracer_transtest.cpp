@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 
   std::cout << glm::to_string(testtransinv) << "\n";
 
-  test_cam.rotate(0.6f,glm::vec3{1.0,1.0,0.0});
+  test_cam.rotate(30.0f,glm::vec3{0.0,0.0,1.0});
   test_cam.translate(glm::vec3{0.0,0.0,-50.0});
 
   glm::mat4x4 testtrans2 = test_cam.get_transformation();
@@ -292,7 +292,7 @@ int main(int argc, char* argv[])
   //unsigned const width = 3840;
   //unsigned const height = 2160;
 
-  std::string const filename = "./test_rotation_4.ppm";
+  std::string const filename = "./test_rotation_7.ppm";
   
   Renderer test_renderer{width, height, filename, test_scene};
 

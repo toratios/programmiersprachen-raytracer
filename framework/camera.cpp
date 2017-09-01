@@ -100,9 +100,10 @@
 		transformation_inv_ = glm::inverse(transformation_);
 	}
 
-	void Camera::rotate(float angle, glm::vec3 rotate_vec)
+	void Camera::rotate(float angle, glm::vec3 const& rotate_vec)
 	{
-		glm::mat4x4 R = glm::rotate(glm::mat4(1.0), angle, rotate_vec);
+		float angle_rad = (angle*3.1415926535897f)/180.0f;
+		glm::mat4x4 R = glm::rotate(glm::mat4(1.0), angle_rad, rotate_vec);
 		rotation_ = R;
 		transformation_ = translation_ * rotation_;
 		transformation_inv_ = glm::inverse(transformation_);

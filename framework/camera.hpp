@@ -7,6 +7,7 @@
 #include <vector>
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include <cmath>
 
 #include "ray.hpp"
 
@@ -45,7 +46,7 @@ public:
     glm::mat4x4 get_transformation_inv() const;
 
     void translate(glm::vec3 const& translate_vec);
-    void rotate(float angle, glm::vec3 rotate_vec);
+    void rotate(float angle, glm::vec3 const& rotate_vec);
 
 private:
 
