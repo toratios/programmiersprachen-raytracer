@@ -26,7 +26,6 @@ public:
     std::shared_ptr<Material> const& get_material() const;
     std::string const& get_name() const;
 
-    bool transformed() const;
     glm::mat4x4 const& world_transformation() const;
     glm::mat4x4 const& world_transformation_inv() const;
 
@@ -42,10 +41,12 @@ private:
     std::shared_ptr<Material> mat_;
     std::string name_;
 
-    bool transformed_;
     glm::mat4x4 world_transformation_;
     glm::mat4x4 world_transformation_inv_;
 
+    glm::mat4x4 rotation_;
+    glm::mat4x4 translation_;
+    glm::mat4x4 scale_;
 };
 
 

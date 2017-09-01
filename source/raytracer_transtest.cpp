@@ -39,25 +39,10 @@ int main(int argc, char* argv[])
   glm::vec3 eye{0.0f,0.0f,0.0f};
   test_cam.set_eye(eye);
 
-  glm::mat4x4 testtrans = test_cam.get_transformation();
-  glm::mat4x4 testtransinv = test_cam.get_transformation_inv();
+  test_cam.rotate(0.0f,glm::vec3{1.0,0.0,0.0});
+  test_cam.translate(glm::vec3{0.0, 0.0, 0.0});
 
-  std::cout << glm::to_string(testtrans) << "\n";
-
-  std::cout << glm::to_string(testtransinv) << "\n";
-
-  test_cam.rotate(30.0f,glm::vec3{0.0,0.0,1.0});
-  test_cam.translate(glm::vec3{0.0,0.0,-50.0});
-
-  glm::mat4x4 testtrans2 = test_cam.get_transformation();
-  glm::mat4x4 testtransinv2 = test_cam.get_transformation_inv();
-
-  std::cout << glm::to_string(testtrans2) << "\n";
-
-  std::cout << glm::to_string(testtransinv2) << "\n";
-
-  std::cout << glm::to_string(test_cam.get_eye()) << "\n";
-
+  /*
   Ray testray{glm::vec3{10.0}, glm::vec3{100.0, 200.0, 300.0}};
 
   std::cout << glm::to_string(testray.origin);
@@ -66,7 +51,7 @@ int main(int argc, char* argv[])
       testray.direction = glm::vec3(test_cam.get_transformation_inv() * (glm::vec4(100.0, 200.0, 300.0, 0.0)));
 
   std::cout << glm::to_string(testray.direction);
-
+  */
   Scene test_scene{Color{0.1f,0.1f,0.1f}, test_cam};
 
 //=================Lights================================================================
@@ -264,14 +249,19 @@ int main(int argc, char* argv[])
 
   //shapes.push_back(test_box_5);
   //shapes.push_back(test_box_6);
-  shapes.push_back(test_sphere_1);
-  shapes.push_back(test_sphere_2);
-  shapes.push_back(test_sphere_3);
+  //shapes.push_back(test_sphere_1);
+  //shapes.push_back(test_sphere_2);
+  //shapes.push_back(test_sphere_3);
   //shapes.push_back(test_sphere_4);
 
   //shapes.push_back(test_triangle_1);
   //shapes.push_back(test_cylinder_1);
 
+  std::shared_ptr<Shape> test_trans_box = std::make_shared<Box>
+  (glm::vec3{ 50.0f, 50.0f,-100.0f},glm::vec3{100.0f,100.0f,-150.0f},
+   test_material_1, "test_trans_box");
+  
+  shapes.push_back(test_trans_box);
 
 
   std::shared_ptr<Composite> test_composite = std::make_shared<Composite>
@@ -292,7 +282,7 @@ int main(int argc, char* argv[])
   //unsigned const width = 3840;
   //unsigned const height = 2160;
 
-  std::string const filename = "./test_rotation_7.ppm";
+  std::string const filename = "./test_object_translation_1.ppm";
   
   Renderer test_renderer{width, height, filename, test_scene};
 
