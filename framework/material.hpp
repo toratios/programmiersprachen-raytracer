@@ -10,7 +10,6 @@ struct Material{
   Color kd_;
   Color ks_;
   float m_;
-  float reflect_;
   float opac_;
   float refract_;
 
@@ -20,7 +19,6 @@ struct Material{
   kd_{Color{0.2,0.2,0.2}},
   ks_{Color{0.3,0.3,0.3}},
   m_{0.0},
-  reflect_{0.0f},
   opac_{1.0},
   refract_{1.0}
   {}
@@ -31,29 +29,16 @@ struct Material{
   kd_{kd},
   ks_{ks},
   m_{m},
-  reflect_{0.0f},
   opac_{1.0},
   refract_{1.0}
   {}
 
-  Material(std::string const& name, Color const& ka, Color const& kd, Color const& ks, float m, float reflect):
+  Material(std::string const& name, Color const& ka, Color const& kd, Color const& ks, float m, float opac, float refract):
   name_{name},
   ka_{ka},
   kd_{kd},
   ks_{ks},
   m_{m},
-  reflect_{reflect},
-  opac_{1.0},
-  refract_{1.0}
-  {}
-
-  Material(std::string const& name, Color const& ka, Color const& kd, Color const& ks, float m, float reflect, float opac, float refract):
-  name_{name},
-  ka_{ka},
-  kd_{kd},
-  ks_{ks},
-  m_{m},
-  reflect_{reflect},
   opac_{opac},
   refract_{refract}
   {}

@@ -67,22 +67,22 @@ int main(int argc, char* argv[])
   std::map<std::string, std::shared_ptr<Material>> materials;
 
   std::shared_ptr<Material> test_material_1 = std::make_shared<Material>
-        ("test_material_1",Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, 200.0f, 0.1f);
+        ("test_material_1",Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, 200.0f);
 
   std::shared_ptr<Material> test_material_2 = std::make_shared<Material>
-        ("test_material_2",Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, 200.0f, 0.3f);
+        ("test_material_2",Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, 200.0f);
 
   std::shared_ptr<Material> test_material_4 = std::make_shared<Material>
-        ("test_material_4",Color{0.7f,0.1f,8.0f}, Color{0.7f,0.1f,1.0f}, Color{0.7f,0.1f,1.0f}, 500.0f, 0.2f);
+        ("test_material_4",Color{0.7f,0.1f,8.0f}, Color{0.7f,0.1f,1.0f}, Color{0.7f,0.1f,1.0f}, 500.0f);
 
   std::shared_ptr<Material> test_material_3 = std::make_shared<Material>
-        ("test_material_3",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, 0.2f, 0.0f);
+        ("test_material_3",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{0.2f,0.2f,0.2f}, 0.f);
 
   std::shared_ptr<Material> test_material_5 = std::make_shared<Material>
-        ("test_material_5",Color{0.05f,0.05f,0.05f}, Color{0.05f,0.05f,0.05f}, Color{0.05f,0.05f,0.05f}, 0.0f, 0.0f);
+        ("test_material_5",Color{0.0f,0.0f,0.0f}, Color{0.0f,0.0f,0.0f}, Color{0.02f,0.02f,0.02f}, 0.0f);
 
   std::shared_ptr<Material> test_material_6 = std::make_shared<Material>
-        ("test_material_6",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, 1000.0f, 0.0f, 0.1f, 1.5f);
+        ("test_material_6",Color{1.0f,0.0f,0.0f}, Color{1.0f,0.0f,0.0f}, Color{0.3f,0.3f,0.3f}, 1000.0f, 0.1f, 1.3f);
 
 
   materials.insert(std::pair<std::string, std::shared_ptr<Material>>("test_material_1", test_material_1));
@@ -168,8 +168,8 @@ int main(int argc, char* argv[])
 //=================Objects===============================================================
  
   std::shared_ptr<Shape> test_box_5 = std::make_shared<Box>
-    (glm::vec3{-1000.0f,-260.0f,-500.0f},glm::vec3{-1000.0f,2000.0f,-1500.0f},
-     test_material_3, "test_box_5");
+    (glm::vec3{-600.0f,-250.0f,-600.0f},glm::vec3{600.0f,-220.0f,-1200.0f},
+     test_material_6, "test_box_5");
 
   std::shared_ptr<Shape> test_box_6 = std::make_shared<Box>
     (glm::vec3{-1000.0f,-260.0f,-1500.0f},glm::vec3{1000.0f,2000.0f,-1500.0f},
@@ -187,7 +187,7 @@ int main(int argc, char* argv[])
     (glm::vec3{295.0f,-130.0f,-800.0f}, 120.0f, test_material_4, "test_sphere_3");
 
   std::shared_ptr<Shape> test_sphere_4 = std::make_shared<Sphere>
-    (glm::vec3{100.0f,100.0f,-400.0f}, 300.0f, test_material_6, "test_sphere_4");
+    (glm::vec3{100.0f,100.0f,-550.0f}, 150.0f, test_material_6, "test_sphere_4");
 
 
 
@@ -196,16 +196,6 @@ int main(int argc, char* argv[])
       glm::vec3{0.0f,600.0f,-700.0f},
       glm::vec3{1000.0f,200.0f,-1200.0f},
       test_material_4, "test_triangle_1");
-
-  std::shared_ptr<Shape> test_triangle_2 = std::make_shared<Triangle>
-    (glm::vec3{700.0f,-200.0f,-900.0f},
-      glm::vec3{450.0f,200.0f,-750.0f},
-      glm::vec3{600.0f,-200.0f,-600.0f},
-      test_material_1, "test_triangle_2");
-
-
-  std::shared_ptr<Shape> test_cylinder_1 = std::make_shared<Cylinder>
-    (glm::vec3{500.0f,-200.0f,700.0f}, 200.0f, 400.0f, test_material_1, "test_cylinder_1");
 
 
   std::vector<std::shared_ptr<Shape>> shapes;
@@ -240,10 +230,9 @@ int main(int argc, char* argv[])
   shapes.push_back(test_sphere_1);
   shapes.push_back(test_sphere_2);
   shapes.push_back(test_sphere_3);
-  //shapes.push_back(test_sphere_4);
+  shapes.push_back(test_sphere_4);
 
-  shapes.push_back(test_triangle_1);
-  //shapes.push_back(test_cylinder_1);
+  //shapes.push_back(test_triangle_1);
 
 
 
@@ -265,7 +254,7 @@ int main(int argc, char* argv[])
   //unsigned const width = 3840;
   //unsigned const height = 2160;
 
-  std::string const filename = "./test_scale.ppm";
+  std::string const filename = "./test_.ppm";
 
   Renderer test_renderer{width, height, filename, test_scene};
 
