@@ -65,6 +65,9 @@ void Shape::translate(glm::vec3 const& translate_vec){
 }
 
 void Shape::rotate(float angle, glm::vec3 rotate_vec){
-  world_transformation_ = glm::rotate(world_transformation_, angle, rotate_vec);
+  float angle_rad = (angle*3.1415926535897f)/180.0f;
+  glm::mat4x4 R = glm::rotate(glm::mat4(1.0), angle_rad, rotate_vec);
+  rotation_ = R;
+  world_transformation_ = translation_ * rotation_ * scale_;
   world_transformation_inv_ = glm::inverse(world_transformation_);
 }
