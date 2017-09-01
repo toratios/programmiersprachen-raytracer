@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
   test_cam.set_eye(eye);
 
   test_cam.rotate(0.0f,glm::vec3{1.0,0.0,0.0});
-  test_cam.translate(glm::vec3{0.0, 0.0, -30.0});
+  test_cam.translate(glm::vec3{0.0, 0.0, -50.0});
 
   /*
   Ray testray{glm::vec3{10.0}, glm::vec3{100.0, 200.0, 300.0}};
@@ -253,7 +253,7 @@ int main(int argc, char* argv[])
   //shapes.push_back(test_box_5);
   //shapes.push_back(test_box_6);
   //shapes.push_back(test_sphere_1);
-  shapes.push_back(test_sphere_2);
+  //shapes.push_back(test_sphere_2);
   //shapes.push_back(test_sphere_3);
   //shapes.push_back(test_sphere_4);
 
@@ -261,14 +261,15 @@ int main(int argc, char* argv[])
   //shapes.push_back(test_cylinder_1);
 
   std::shared_ptr<Shape> test_trans_box = std::make_shared<Box>
-  (glm::vec3{ 20.0f, 20.0f,20.0f},glm::vec3{-20.0f,-20.0f,-20.0f},
+  (glm::vec3{ 10.0f, 10.0f,10.0f},glm::vec3{-10.0f,-10.0f,-10.0f},
    test_material_1, "test_trans_box");
 
-  test_trans_box->translate(glm::vec3{0,0,-50});
-  test_trans_box->rotate(45.0f,glm::vec3{0.0,0.0,1.0});
+  //test_trans_box->translate(glm::vec3{0,0,-50});
+  //test_trans_box->rotate(45.0f,glm::vec3{0.0,0.0,1.0});
+  test_trans_box->scale(glm::vec3{0.5,1.0,1.0});
   
   
-  //shapes.push_back(test_trans_box);
+  shapes.push_back(test_trans_box);
 
 
   std::shared_ptr<Composite> test_composite = std::make_shared<Composite>
@@ -289,7 +290,7 @@ int main(int argc, char* argv[])
   //unsigned const width = 3840;
   //unsigned const height = 2160;
 
-  std::string const filename = "./test_scale_Sphere_3.ppm";
+  std::string const filename = "./test_scale_box_x.ppm";
   
   Renderer test_renderer{width, height, filename, test_scene};
 
