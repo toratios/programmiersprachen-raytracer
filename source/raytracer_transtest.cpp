@@ -95,22 +95,22 @@ int main(int argc, char* argv[])
   std::map<std::string, std::shared_ptr<Material>> materials;
 
   std::shared_ptr<Material> test_material_1 = std::make_shared<Material>
-        ("test_material_1",Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, 200.0f, 0.1f);
+        ("test_material_1",Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, Color{0.8f,0.7f,0.1f}, 200.0f);
 
   std::shared_ptr<Material> test_material_2 = std::make_shared<Material>
-        ("test_material_2",Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, 200.0f, 0.3f);
+        ("test_material_2",Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, Color{0.1f,0.8f,0.7f}, 200.0f);
 
   std::shared_ptr<Material> test_material_4 = std::make_shared<Material>
-        ("test_material_4",Color{0.7f,0.1f,8.0f}, Color{0.7f,0.1f,1.0f}, Color{0.7f,0.1f,1.0f}, 500.0f, 0.2f);
+        ("test_material_4",Color{0.7f,0.1f,8.0f}, Color{0.7f,0.1f,1.0f}, Color{0.7f,0.1f,1.0f}, 500.0f);
 
   std::shared_ptr<Material> test_material_3 = std::make_shared<Material>
-        ("test_material_3",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, 0.2f, 0.0f);
+        ("test_material_3",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, 0.0f);
 
   std::shared_ptr<Material> test_material_5 = std::make_shared<Material>
-        ("test_material_5",Color{0.05f,0.05f,0.05f}, Color{0.05f,0.05f,0.05f}, Color{0.05f,0.05f,0.05f}, 0.0f, 0.0f);
+        ("test_material_5",Color{0.05f,0.05f,0.05f}, Color{0.05f,0.05f,0.05f}, Color{0.05f,0.05f,0.05f}, 0.0f);
 
   std::shared_ptr<Material> test_material_6 = std::make_shared<Material>
-        ("test_material_6",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, 1000.0f, 0.0f, 0.1f, 1.5f);
+        ("test_material_6",Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, Color{1.0f,1.0f,1.0f}, 1000.0f, 0.1f, 1.5f);
 
 
   materials.insert(std::pair<std::string, std::shared_ptr<Material>>("test_material_1", test_material_1));
