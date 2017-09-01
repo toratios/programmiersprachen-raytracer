@@ -196,6 +196,8 @@ int main(int argc, char* argv[])
   std::shared_ptr<Shape> test_sphere_2 = std::make_shared<Sphere>
     (glm::vec3{-200.0f,50.0f,-850.0f}, 200.0f, test_material_2, "test_sphere_2");
 
+  test_sphere_2->translate(glm::vec3{0.0,20.0,20.0});
+
   std::shared_ptr<Shape> test_sphere_3 = std::make_shared<Sphere>
     (glm::vec3{295.0f,-130.0f,-800.0f}, 120.0f, test_material_4, "test_sphere_3");
 
@@ -250,7 +252,7 @@ int main(int argc, char* argv[])
   //shapes.push_back(test_box_5);
   //shapes.push_back(test_box_6);
   //shapes.push_back(test_sphere_1);
-  //shapes.push_back(test_sphere_2);
+  shapes.push_back(test_sphere_2);
   //shapes.push_back(test_sphere_3);
   //shapes.push_back(test_sphere_4);
 
@@ -260,6 +262,8 @@ int main(int argc, char* argv[])
   std::shared_ptr<Shape> test_trans_box = std::make_shared<Box>
   (glm::vec3{ 50.0f, 50.0f,-100.0f},glm::vec3{100.0f,100.0f,-150.0f},
    test_material_1, "test_trans_box");
+
+  test_trans_box->translate(glm::vec3{0,0,10});
   
   shapes.push_back(test_trans_box);
 
@@ -282,7 +286,7 @@ int main(int argc, char* argv[])
   //unsigned const width = 3840;
   //unsigned const height = 2160;
 
-  std::string const filename = "./test_object_translation_1.ppm";
+  std::string const filename = "./test_sphere_translation_yzpos.ppm";
   
   Renderer test_renderer{width, height, filename, test_scene};
 

@@ -93,6 +93,7 @@ Hit Box::intersect(Ray const& inray)
     boxhit.hit_ = true;
     boxhit.t_ = dis;
     boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
+    boxhit.intersection_ = glm::vec3(world_transformation()* glm::vec4(boxhit.intersection_, 1));
     if(hitvec.x == min_.x){
       boxhit.normal_ = glm::vec3{-1.0,0.0,0.0};
       boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
@@ -113,6 +114,7 @@ Hit Box::intersect(Ray const& inray)
     boxhit.hit_ = true;
     boxhit.t_ = dis;
     boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
+    boxhit.intersection_ = glm::vec3(world_transformation()* glm::vec4(boxhit.intersection_, 1));
     if(hitvec.y == min_.y){
       boxhit.normal_ = glm::vec3{0.0,-1.0,0.0};
       boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
@@ -133,6 +135,7 @@ Hit Box::intersect(Ray const& inray)
     boxhit.hit_ = true;
     boxhit.t_ = dis;
     boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
+    boxhit.intersection_ = glm::vec3(world_transformation()* glm::vec4(boxhit.intersection_, 1));
     if(hitvec.z == min_.z){
       boxhit.normal_ = glm::vec3{0.0,0.0,-1.0};
       boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
