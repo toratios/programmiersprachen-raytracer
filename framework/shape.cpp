@@ -49,6 +49,12 @@ glm::mat4x4 const& Shape::world_transformation_inv() const{
 }
 
 void Shape::scale(glm::vec3 const& scale_vec){
+  glm::mat4 S;
+  S[0] = glm::vec4{scale_vec.x, 0.0f, 0.0f, 0.0f};
+  S[1] = glm::vec4{0.0f, scale_vec.y, 0.0f, 0.0f};
+  S[2] = glm::vec4{0.0f, 0.0f, scale_vec.z, 0.0f};
+  S[3] = glm::vec4{0.0f, 0.0f, 0.0f, 1.0f};
+  scale_ = S;
   world_transformation_ = translation_ * rotation_ * scale_;
   world_transformation_inv_ = glm::inverse(world_transformation_);
 }
