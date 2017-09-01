@@ -10,6 +10,9 @@
 
 #include "ray.hpp"
 
+#include <iostream>
+#include "glm/ext.hpp"
+
 
 class Camera
 {
@@ -58,6 +61,9 @@ private:
 
     glm::mat4x4 transformation_;
     glm::mat4x4 transformation_inv_;
+
+    glm::mat4x4 rotation_;
+    glm::mat4x4 translation_;
 
 };
 

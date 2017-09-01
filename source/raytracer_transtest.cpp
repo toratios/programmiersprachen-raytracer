@@ -46,7 +46,8 @@ int main(int argc, char* argv[])
 
   std::cout << glm::to_string(testtransinv) << "\n";
 
-  test_cam.translate(glm::vec3{100.0,50.0,200.0});
+  //test_cam.rotate(0.0f,glm::vec3{0.0,0.0,0.0});
+  test_cam.translate(glm::vec3{0.0,0.0,-50.0});
 
   glm::mat4x4 testtrans2 = test_cam.get_transformation();
   glm::mat4x4 testtransinv2 = test_cam.get_transformation_inv();
@@ -56,6 +57,15 @@ int main(int argc, char* argv[])
   std::cout << glm::to_string(testtransinv2) << "\n";
 
   std::cout << glm::to_string(test_cam.get_eye()) << "\n";
+
+  Ray testray{glm::vec3{10.0}, glm::vec3{100.0, 200.0, 300.0}};
+
+  std::cout << glm::to_string(testray.origin);
+  
+      testray.origin = glm::vec3(test_cam.get_transformation_inv() * glm::vec4(0.0, 0.0, 0.0, 1.0));
+      testray.direction = glm::vec3(test_cam.get_transformation_inv() * (glm::vec4(100.0, 200.0, 300.0, 0.0)));
+
+  std::cout << glm::to_string(testray.direction);
 
   Scene test_scene{Color{0.1f,0.1f,0.1f}, test_cam};
 
@@ -207,8 +217,7 @@ int main(int argc, char* argv[])
   std::shared_ptr<Shape> test_sphere_4 = std::make_shared<Sphere>
     (glm::vec3{100.0f,100.0f,-400.0f}, 300.0f, test_material_6, "test_sphere_4");
 
-std::cout << "test\n";
-
+    /*
   std::shared_ptr<Shape> test_triangle_1 = std::make_shared<Triangle>
     (glm::vec3{-1000.0f,100.0f,-1400.0f},
       glm::vec3{0.0f,600.0f,-700.0f},
@@ -224,7 +233,7 @@ std::cout << "test\n";
 
   std::shared_ptr<Shape> test_cylinder_1 = std::make_shared<Cylinder>
     (glm::vec3{500.0f,-200.0f,700.0f}, 200.0f, 400.0f, test_material_1, "test_cylinder_1");
-
+      */
 
   std::vector<std::shared_ptr<Shape>> shapes;
 
@@ -260,7 +269,7 @@ std::cout << "test\n";
   shapes.push_back(test_sphere_3);
   //shapes.push_back(test_sphere_4);
 
-  shapes.push_back(test_triangle_1);
+  //shapes.push_back(test_triangle_1);
   //shapes.push_back(test_cylinder_1);
 
 
@@ -277,13 +286,13 @@ std::cout << "test\n";
 
 //=================Renderer==============================================================
 
-  unsigned const width = 1920;
-  unsigned const height = 1080;
+  unsigned const width = 1000;
+  unsigned const height = 1000;
 
   //unsigned const width = 3840;
   //unsigned const height = 2160;
 
-  std::string const filename = "./test_scale.ppm";
+  std::string const filename = "./test_translation_2.ppm";
   
   Renderer test_renderer{width, height, filename, test_scene};
 

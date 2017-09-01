@@ -7,7 +7,9 @@
 		dir_{0.0f,0.0f,-1.0f},
 		up_{0.0f,1.0f,0.0f},
 		transformation_{glm::mat4(1.0)},
-		transformation_inv_{glm::mat4(1.0)}
+		transformation_inv_{glm::mat4(1.0)},
+		rotation_{glm::mat4(1.0)},
+		translation_{glm::mat4(1.0)}
 		{}
 
 
@@ -18,7 +20,9 @@
 		dir_{0.0f,0.0f,-1.0f},
 		up_{0.0f,1.0f,0.0f},
 		transformation_{glm::mat4(1.0)},
-		transformation_inv_{glm::mat4(1.0)}
+		transformation_inv_{glm::mat4(1.0)},
+		rotation_{glm::mat4(1.0)},
+		translation_{glm::mat4(1.0)}
 		{}
 
   Camera::Camera(std::string name, float fov_x, glm::vec3 const& eye,
@@ -29,7 +33,9 @@
 		dir_{dir},
 		up_{up},
 		transformation_{glm::mat4(1.0)},
-		transformation_inv_{glm::mat4(1.0)}
+		transformation_inv_{glm::mat4(1.0)},
+		rotation_{glm::mat4(1.0)},
+		translation_{glm::mat4(1.0)}
 		{}
 
 	std::string Camera::get_name() const
@@ -64,8 +70,11 @@
 
 	Ray Camera::generate_ray(float pos_x, float pos_y, float distance) const
 	{
-		Ray eye_ray{eye_, glm::vec3{pos_x, pos_y, -(distance)}};
-
+		Ray eye_ray;
+    eye_ray.origin = glm::vec3(transformation_inv_ * glm::vec4(0, 0, 0, 1));
+		eye_ray.direction = glm::vec3(transformation_inv_ * (glm::vec4(pos_x, pos_y, -distance, 0)));
+		//std::cout << glm::to_string(eye_ray.origin) << "\n"; 
+		//std::cout << glm::to_string(eye_ray.direction) << "\n"; 
 		return eye_ray;
 	}
 
@@ -81,7 +90,13 @@
 
 	void Camera::translate(glm::vec3 const& translate_vec)
 	{
-		transformation_ = glm::translate(transformation_, translate_vec);
+		glm::mat4 T;
+    T[0] = glm::vec4{1.0f, 0.0f, 0.0f, 0.0f};
+    T[1] = glm::vec4{0.0f, 1.0f, 0.0f, 0.0f};
+    T[2] = glm::vec4{0.0f, 0.0f, 1.0f, 0.0f};
+		T[3] = glm::vec4{translate_vec.x, translate_vec.y, translate_vec.z, 1.0f};
+		translation_ = T;
+    transformation_ = translation_ * rotation_;
 		transformation_inv_ = glm::inverse(transformation_);
 	}
 
