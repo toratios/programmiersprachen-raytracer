@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
         ("test_material_5",Color{0.0f,0.0f,0.0f}, Color{0.0f,0.0f,0.0f}, Color{0.02f,0.02f,0.02f}, 0.0f);
 
   std::shared_ptr<Material> test_material_6 = std::make_shared<Material>
-        ("test_material_6",Color{0.0f,0.0f,0.0f}, Color{1.0f,0.0f,0.0f}, Color{1.0f,1.0f,1.0f}, 1000.0f, 0.1f, 1.3f);
+        ("test_material_6",Color{0.0f,0.0f,0.0f}, Color{1.0f,0.0f,0.0f}, Color{0.0f,0.0f,0.0f}, 1000.0f, 1.0f, 1.3f);
 
 
   materials.insert(std::pair<std::string, std::shared_ptr<Material>>("test_material_1", test_material_1));
@@ -171,10 +171,6 @@ int main(int argc, char* argv[])
     (glm::vec3{-600.0f,-250.0f,-600.0f},glm::vec3{600.0f,-220.0f,-1200.0f},
      test_material_6, "test_box_5");
 
-  std::shared_ptr<Shape> test_box_6 = std::make_shared<Box>
-    (glm::vec3{-1000.0f,-260.0f,-1500.0f},glm::vec3{1000.0f,2000.0f,-1500.0f},
-     test_material_3, "test_box_6");
-
 
 
   std::shared_ptr<Shape> test_sphere_1 = std::make_shared<Sphere>
@@ -196,6 +192,12 @@ int main(int argc, char* argv[])
       glm::vec3{0.0f,600.0f,-700.0f},
       glm::vec3{1000.0f,200.0f,-1200.0f},
       test_material_4, "test_triangle_1");
+
+
+  std::shared_ptr<Shape> test_cone_1 = std::make_shared<Cone>
+    (glm::vec3{600.0f,100.0f,-700.0f},
+      20.0f,
+      test_material_4, "test_cone_1");
 
 
   std::vector<std::shared_ptr<Shape>> shapes;
@@ -226,7 +228,7 @@ int main(int argc, char* argv[])
 
 
   //shapes.push_back(test_box_5);
-  //shapes.push_back(test_box_6);
+
   shapes.push_back(test_sphere_1);
   shapes.push_back(test_sphere_2);
   shapes.push_back(test_sphere_3);
@@ -234,6 +236,7 @@ int main(int argc, char* argv[])
 
   //shapes.push_back(test_triangle_1);
 
+  shapes.push_back(test_cone_1);
 
 
   std::shared_ptr<Composite> test_composite = std::make_shared<Composite>

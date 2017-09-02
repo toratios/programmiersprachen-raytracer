@@ -64,24 +64,33 @@ Hit Box::intersect(Ray const& inray)
 
   glm::vec3 hitvec{glm::vec3{0.0}};
 
-  if(ray.origin.x <= min_.x || (ray.origin.x > min_.x && ray.origin.x < max_.x && ray.direction.x < 0)){
+  if(ray.origin.x <= min_.x || (ray.origin.x > min_.x && ray.origin.x < max_.x && ray.direction.x < 0))
+  {
     hitvec.x = min_.x;  
   }
-  else if(ray.origin.x >= max_.x || (ray.origin.x > min_.x && ray.origin.x < max_.x && ray.direction.x > 0)){
+
+  else if(ray.origin.x >= max_.x || (ray.origin.x > min_.x && ray.origin.x < max_.x && ray.direction.x > 0))
+  {
     hitvec.x = max_.x;  
   }
 
-  if(ray.origin.y <= min_.y || (ray.origin.y > min_.y && ray.origin.y < max_.y && ray.direction.y < 0)){
+  if(ray.origin.y <= min_.y || (ray.origin.y > min_.y && ray.origin.y < max_.y && ray.direction.y < 0))
+  {
     hitvec.y = min_.y;  
   }
-  else if(ray.origin.y >= max_.y || (ray.origin.y > min_.y && ray.origin.y < max_.y && ray.direction.y > 0)){
+
+  else if(ray.origin.y >= max_.y || (ray.origin.y > min_.y && ray.origin.y < max_.y && ray.direction.y > 0))
+  {
     hitvec.y = max_.y;  
   }
 
-  if(ray.origin.z <= min_.z || (ray.origin.z > min_.z && ray.origin.z < max_.z && ray.direction.z < 0)){
+  if(ray.origin.z <= min_.z || (ray.origin.z > min_.z && ray.origin.z < max_.z && ray.direction.z < 0))
+  {
     hitvec.z = min_.z;  
   }
-  else if(ray.origin.z >= max_.z || (ray.origin.z > min_.z && ray.origin.z < max_.z && ray.direction.z > 0)){
+
+  else if(ray.origin.z >= max_.z || (ray.origin.z > min_.z && ray.origin.z < max_.z && ray.direction.z > 0))
+  {
     hitvec.z = max_.z;  
   }
 
@@ -89,19 +98,25 @@ Hit Box::intersect(Ray const& inray)
   hit_y = ray.origin.y + dis*ray.direction.y;
   hit_z = ray.origin.z + dis*ray.direction.z;;
   
-  if(hit_y >= min_.y && hit_y <= max_.y && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
+  if(hit_y >= min_.y && hit_y <= max_.y && hit_z >= min_.z && hit_z <= max_.z && dis >= 0)
+  {
     boxhit.hit_ = true;
     boxhit.t_ = dis;
     boxhit.intersection_ = ray.origin + ray.direction * boxhit.t_;
     boxhit.intersection_ = glm::vec3(world_transformation()* glm::vec4(boxhit.intersection_, 1));
-    if(hitvec.x == min_.x){
+
+    if(hitvec.x == min_.x)
+    {
       boxhit.normal_ = glm::vec3{-1.0,0.0,0.0};
       boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
     }
-    else{
+
+    else
+    {
       boxhit.normal_ = glm::vec3{1.0,0.0,0.0};
       boxhit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * boxhit.normal_);    
     }
+    
     boxhit.shape_ = this;
     return boxhit;
   }

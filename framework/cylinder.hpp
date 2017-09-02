@@ -26,6 +26,8 @@ private:
 
 	glm::vec3 center_;
 
+	glm::vec3 up_vector_;
+
 	float r_;
 
 	float height_;
