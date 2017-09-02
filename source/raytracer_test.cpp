@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 
   Camera test_cam{"test_cam", 110.0f};
 
-  glm::vec3 eye{0.0f,100.0f,0.0f};
+  glm::vec3 eye{0.0f,0.0f,0.0f};
   test_cam.set_eye(eye);
 
   Scene test_scene{Color{0.1f,0.1f,0.1f}, test_cam};
@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
         ("test_material_5",Color{0.0f,0.0f,0.0f}, Color{0.0f,0.0f,0.0f}, Color{0.02f,0.02f,0.02f}, 0.0f);
 
   std::shared_ptr<Material> test_material_6 = std::make_shared<Material>
-        ("test_material_6",Color{1.0f,0.0f,0.0f}, Color{1.0f,0.0f,0.0f}, Color{0.3f,0.3f,0.3f}, 1000.0f, 0.1f, 1.3f);
+        ("test_material_6",Color{0.0f,0.0f,0.0f}, Color{1.0f,0.0f,0.0f}, Color{1.0f,1.0f,1.0f}, 1000.0f, 0.1f, 1.3f);
 
 
   materials.insert(std::pair<std::string, std::shared_ptr<Material>>("test_material_1", test_material_1));
@@ -187,7 +187,7 @@ int main(int argc, char* argv[])
     (glm::vec3{295.0f,-130.0f,-800.0f}, 120.0f, test_material_4, "test_sphere_3");
 
   std::shared_ptr<Shape> test_sphere_4 = std::make_shared<Sphere>
-    (glm::vec3{100.0f,100.0f,-550.0f}, 150.0f, test_material_6, "test_sphere_4");
+    (glm::vec3{100.0f,-100.0f,-550.0f}, 150.0f, test_material_6, "test_sphere_4");
 
 
 
@@ -230,7 +230,7 @@ int main(int argc, char* argv[])
   shapes.push_back(test_sphere_1);
   shapes.push_back(test_sphere_2);
   shapes.push_back(test_sphere_3);
-  shapes.push_back(test_sphere_4);
+  //shapes.push_back(test_sphere_4);
 
   //shapes.push_back(test_triangle_1);
 
@@ -248,11 +248,11 @@ int main(int argc, char* argv[])
 
 //=================Renderer==============================================================
 
-  unsigned const width = 1920;
-  unsigned const height = 1080;
+  //unsigned const width = 1920;
+  //unsigned const height = 1080;
 
-  //unsigned const width = 3840;
-  //unsigned const height = 2160;
+  unsigned const width = 800;
+  unsigned const height = 600;
 
   std::string const filename = "./test_.ppm";
 

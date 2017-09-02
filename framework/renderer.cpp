@@ -237,13 +237,13 @@ Color Renderer::refraction(Hit const& hit, Ray const& ray, unsigned depth) const
 {
   Color refraction_color;
 
-  float refraction_index = hit.shape_ -> get_material() -> refract_;
+  float refractive_index = hit.shape_ -> get_material() -> refract_;
+
+  glm::vec3 incident = glm::normalize(ray.direction);
 
   glm::vec3 normal = glm::normalize(hit.normal_);
 
-  //glm::vec3 refraction = glm::normalize(glm::refract(glm::normalize(ray.direction), normal, refraction_index));
-
-  //glm::vec3 refraction = glm::normalize(refraction_vector(ray.direction, normal, refraction_index));
+  //glm::vec3 refraction = glm::normalize(glm::refract(incident, normal, refractive_index));
 
   glm::vec3 refraction = ray.direction;
 
@@ -257,33 +257,6 @@ Color Renderer::refraction(Hit const& hit, Ray const& ray, unsigned depth) const
   refraction_color = raytrace(refraction_ray, depth - 1);
 
   return refraction_color;
-}
-
-glm::vec3 Renderer::refraction_vector(glm::vec3 const& in, glm::vec3 const& norm, float eta) const
-{
-  glm::vec3 refraction;
-
-  glm::vec3 incident = glm::normalize(in);
-
-  glm::vec3 normal = glm::normalize(norm);
-
-  float N_dot_I = glm::dot(normal, incident);
-
-  float k = 1.0f - eta * eta * (1.0f - N_dot_I * N_dot_I);
-
-  if(k < 0.0f)
-  {
-    refraction = glm::vec3(0.0f);
-
-    return refraction;
-  }
-
-  else
-  {
-    refraction = eta * incident - (eta * N_dot_I + sqrtf(k)) * normal;
-
-    return refraction;
-  }
 }
 
 Color Renderer::tone_mapping(Color const& raytrace_color) const

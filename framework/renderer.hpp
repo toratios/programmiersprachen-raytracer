@@ -58,8 +58,6 @@ public:
   Color reflection(Hit const& hit, Ray const& ray, unsigned depth) const;
 
   Color refraction(Hit const& hit, Ray const& ray, unsigned depth) const;
-
-  glm::vec3 refraction_vector(glm::vec3 const& in, glm::vec3 const& norm, float eta) const;
   
   Color tone_mapping(Color const& color) const;
   
