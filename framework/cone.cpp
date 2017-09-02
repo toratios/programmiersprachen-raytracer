@@ -1,12 +1,13 @@
 #include <cone.hpp>
 #include <cmath>
 
-Cone::Cone(glm::vec3 const& center, float angle,
+Cone::Cone(glm::vec3 const& center, float angle,float height,
 			std::shared_ptr<Material> const& mat, std::string const& name):
 	Shape{mat, name},
 	center_{center},
 	axis_{glm::vec3{0.0f, -1.0f, 0.0f}},
-	angle_{angle}
+	angle_{angle},
+	height_{height}
 	{
 		angle_ = angle_ * M_PI / 180;
 
@@ -78,14 +79,21 @@ Hit Cone::intersect(Ray const& inray)
   	return cone_hit;
   }
 
+  glm::vec3 bottom = center_ + (axis_ * height_);
+
+  if(temp_intersection.y < bottom.y)
+  {
+  	return cone_hit;
+  }
+
   cone_hit.shape_ = this;
   cone_hit.hit_ = true;
   cone_hit.t_ = t_min;
   cone_hit.intersection_ = ray.origin + ray.direction * cone_hit.t_;
 
-  glm::vec3 ch = glm::normalize(center_ - cone_hit.intersection_);
+  glm::vec3 ch = -glm::normalize(center_ - cone_hit.intersection_);
 
-  glm::vec3 tangent_vector = glm::normalize(glm::cross(ray.direction, ch));
+  glm::vec3 tangent_vector = -glm::normalize(glm::cross(ray.direction, ch));
 
   cone_hit.normal_ = glm::normalize(glm::cross(tangent_vector, ch));
 

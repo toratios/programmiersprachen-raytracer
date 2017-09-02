@@ -10,8 +10,8 @@ class Cone : public Shape
 {
 public:
 
-	Cone(glm::vec3 const& center, float angle, std::shared_ptr<Material> const& mat,
-				std::string const& name);
+	Cone(glm::vec3 const& center, float angle, float height, 
+				std::shared_ptr<Material> const& mat, std::string const& name);
 
 	Hit intersect(Ray const& inray) override;
 
@@ -22,6 +22,8 @@ private:
 	glm::vec3 axis_;
 
 	float angle_;
+
+	float height_;
 };
 
 #endif
