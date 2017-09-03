@@ -36,8 +36,11 @@ int main(int argc, char* argv[])
 
   Camera test_cam{"test_cam", 110.0f};
 
-  glm::vec3 eye{0.0f,0.0f,0.0f};
-  test_cam.set_eye(eye);
+  test_cam.translate(glm::vec3{-1000.0f, 0.0f, -1000.0f});
+
+  test_cam.rotate(-90.0f, glm::vec3{0.0f, 1.0f, 0.0f});
+
+  
 
   Scene test_scene{Color{0.1f,0.1f,0.1f}, test_cam};
 
@@ -195,7 +198,7 @@ int main(int argc, char* argv[])
 
 
   std::shared_ptr<Shape> test_cone_1 = std::make_shared<Cone>
-    (glm::vec3{600.0f,100.0f,-700.0f},
+    (glm::vec3{600.0f,40.0f,-700.0f},
       20.0f, 300.0f,
       test_material_1, "test_cone_1");
 
@@ -245,7 +248,7 @@ int main(int argc, char* argv[])
   shapes.push_back(test_sphere_3);
   //shapes.push_back(test_sphere_4);
 
-  shapes.push_back(test_triangle_1);
+  //shapes.push_back(test_triangle_1);
 
   shapes.push_back(test_cone_1);
 
