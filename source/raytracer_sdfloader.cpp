@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
   unsigned const width = 1920;
   unsigned const height = 1080;
 
-  std::string const filename = "./test_sdf.ppm";
+  std::string const filename = "./test_sdf2.ppm";
 
   Renderer test_renderer{width, height, filename, test_scene};
 

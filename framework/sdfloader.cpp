@@ -303,6 +303,8 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 				stream >> shapename;
 
+				std::cout << "transformation\n";
+
 				if (shapename == "camera")
 				{
 					stream >> transform;
@@ -314,6 +316,8 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						stream >> vec.x;
 						stream >> vec.y;
 						stream >> vec.z;
+
+						std::cout << "cam rotation\n";
 						
 						scene.camera_.rotate(angle, vec);
 					}
@@ -322,6 +326,8 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						stream >> vec.x;
 						stream >> vec.y;
 						stream >> vec.z;
+
+						std::cout << "cam translation\n";
 
 						scene.camera_.translate(vec);
 					}
