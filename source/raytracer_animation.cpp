@@ -28,13 +28,14 @@
 
 int main(int argc, char* argv[])
 {
-for (int i = 1; i <= 180; i += 1){
+for (int i = 1; i <= 18; i += 1){
 
     Scene test_scene;
 
     SDFloader loader{};
 
-    std::string file = "./sdf_"+std::to_string(i);
+    std::string file = "scene"+std::to_string(i)+".txt";
+    std::cout << file;
     test_scene = loader.sdfLoad(file);
 
 //=================Renderer==============================================================
@@ -48,7 +49,7 @@ for (int i = 1; i <= 180; i += 1){
 
     std::thread thr([&test_renderer]() { test_renderer.render_scene(); });
 
-    std::cout  << "frame" << i <<"/5\n"; 
+    std::cout  << "frame" << i <<"/180\n"; 
 
     thr.join();
   }

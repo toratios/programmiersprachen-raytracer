@@ -61,7 +61,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 					std::shared_ptr<Material> material = std::make_shared<Material>(matname, ka, kd, ks, m, opac, refract);
 					scene.materials_.insert(std::pair<std::string, std::shared_ptr<Material>>(matname, material));
-					std::cout << "\nmaterial added to scene " << matname;
+					//std::cout << "\nmaterial added to scene " << matname;
 				}
 
 				else if(word == "shape")
@@ -90,7 +90,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
 						std::shared_ptr<Shape> box = std::make_shared<Box>(min, max , material, boxname);
 						tempshapesmap.insert(std::pair<std::string, std::shared_ptr<Shape>>(boxname, box));
-						std::cout << "\nbox added to temshapepmap " << boxname;
+						//std::cout << "\nbox added to temshapepmap " << boxname;
 					}
 
 					else if (word == "sphere")
@@ -113,7 +113,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
 						std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(center, r, material, spherename);
 						tempshapesmap.insert(std::pair<std::string, std::shared_ptr<Shape>>(spherename, sphere));
-						std::cout << "\nsphere added to tempshapemap " << spherename;
+						//std::cout << "\nsphere added to tempshapemap " << spherename;
 					}
 
 					else if (word == "cone")
@@ -210,7 +210,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 							if(shape_ptr != tempshapesmap.end())
 							{
 								shapes.push_back(shape_ptr->second);
-								std::cout << "\nshape added from tempshapemap to tempvector " << shape_ptr->first;
+								//std::cout << "\nshape added from tempshapemap to tempvector " << shape_ptr->first;
 							}
 
 							auto comp_ptr = tempcompmap.find(shapename);
@@ -218,12 +218,12 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 							if(comp_ptr != tempcompmap.end())
 							{
 								shapes.push_back(comp_ptr->second);
-								std::cout << "\ncomp added from tempcompmap to tempvector " << comp_ptr->first;
+								//std::cout << "\ncomp added from tempcompmap to tempvector " << comp_ptr->first;
 							}
 						}
 						std::shared_ptr<Composite> comp = std::make_shared<Composite>(compname, shapes);
 						tempcompmap.insert(std::pair<std::string, std::shared_ptr<Composite>>(compname, comp));
-						std::cout << "\ncomp added to tempcompmap " << compname;
+						//std::cout << "\ncomp added to tempcompmap " << compname;
 					}
 				}
 
@@ -244,7 +244,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						stream >> color.b;
 
 						scene.ambient_ = color;
-						std::cout << "\nambientlight added to scene: " << lightname;
+						//std::cout << "\nambientlight added to scene: " << lightname;
 					}
 					else
 					{
@@ -260,7 +260,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						
 						std::shared_ptr<Light> light = std::make_shared<Light>(lightname, pos, color, brightness);
 						scene.lights_.push_back(light);
-						std::cout << "\nlight added to scene: " << lightname;
+						//std::cout << "\nlight added to scene: " << lightname;
 					}
 				}
 
@@ -289,7 +289,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 					stream >> up.z;
 
 					scene.camera_ = Camera{cameraname, fov, eye, dir, up};
-					std::cout << "\ncamera added to scene: " << cameraname;
+					//std::cout << "\ncamera added to scene: " << cameraname;
 				}
 			}
 
@@ -303,7 +303,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 				stream >> shapename;
 
-				std::cout << "transformation\n";
+				//std::cout << "transformation\n";
 
 				if (shapename == "camera")
 				{
@@ -317,7 +317,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						stream >> vec.y;
 						stream >> vec.z;
 
-						std::cout << "cam rotation\n";
+						//std::cout << "cam rotation\n";
 						
 						scene.camera_.rotate(angle, vec);
 					}
@@ -327,7 +327,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						stream >> vec.y;
 						stream >> vec.z;
 
-						std::cout << "cam translation\n";
+						//std::cout << "cam translation\n";
 
 						scene.camera_.translate(vec);
 					}
@@ -374,11 +374,11 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 		for(auto it = tempcompmap.cbegin(); it != tempcompmap.cend(); ++it)
 		{
     	composites.push_back(it->second);
-			std::cout << "\ncomp pushed from tempcompmap in compvector: " << it->first;
+			//std::cout << "\ncomp pushed from tempcompmap in compvector: " << it->first;
 		}
 
 		scene.shapes_ = composites;
-		std::cout << "\ncompvector added to scene";
+		//std::cout << "\ncompvector added to scene";
 	}
 
 	else
