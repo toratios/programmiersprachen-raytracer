@@ -36,24 +36,25 @@ add_dependencies(raytracer_test glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
 install(TARGETS raytracer_test DESTINATION .)
 
 
-#Build raytracer_sdfloader
-add_executable(raytracer_sdfloader raytracer_sdfloader.cpp)
+#Build raytracer_animation
+add_executable(raytracer_animation raytracer_animation.cpp)
 
-target_link_libraries(raytracer_sdfloader ${FRAMEWORK_NAME} ${LIBRARIES}
+target_link_libraries(raytracer_animation ${FRAMEWORK_NAME} ${LIBRARIES}
   glfw
   ${GLFW_LIBRARIES}
   )
-add_dependencies(raytracer_sdfloader glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
+add_dependencies(raytracer_animation glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
 
-install(TARGETS raytracer_sdfloader DESTINATION .)
+install(TARGETS raytracer_animation DESTINATION .)
 
-#Build raytracer_transtest
-add_executable(raytracer_transtest raytracer_transtest.cpp)
+#Build sdf_generator
+add_executable(sdf_generator sdf_generator.cpp)
 
-target_link_libraries(raytracer_transtest ${FRAMEWORK_NAME} ${LIBRARIES}
+target_link_libraries(sdf_generator ${FRAMEWORK_NAME} ${LIBRARIES}
   glfw
   ${GLFW_LIBRARIES}
   )
-add_dependencies(raytracer_transtest glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
+add_dependencies(sdf_generator glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
 
-install(TARGETS raytracer_transtest DESTINATION .)
+install(TARGETS sdf_generator DESTINATION .)
+

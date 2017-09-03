@@ -28,25 +28,30 @@
 
 int main(int argc, char* argv[])
 {
-  Scene test_scene;
+for (int i = 1; i <= 180; i += 1){
 
-  SDFloader loader{};
+    Scene test_scene;
 
-  std::string file = "./sdf_test";
-  test_scene = loader.sdfLoad(file);
+    SDFloader loader{};
+
+    std::string file = "./sdf_"+std::to_string(i);
+    test_scene = loader.sdfLoad(file);
 
 //=================Renderer==============================================================
 
-  unsigned const width = 1920;
-  unsigned const height = 1080;
+    unsigned const width = 1920;
+    unsigned const height = 1080;
 
-  std::string const filename = "./test_sdf2.ppm";
+    std::string const filename = "./frame"+std::to_string(i)+".ppm";
 
-  Renderer test_renderer{width, height, filename, test_scene};
+    Renderer test_renderer{width, height, filename, test_scene};
 
-  std::thread thr([&test_renderer]() { test_renderer.render_scene(); });
+    std::thread thr([&test_renderer]() { test_renderer.render_scene(); });
 
-  thr.join();
+    std::cout  << "frame" << i <<"/5\n"; 
+
+    thr.join();
+  }
 
   return 0;
 }
