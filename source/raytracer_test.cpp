@@ -195,15 +195,20 @@ int main(int argc, char* argv[])
 
 
   std::shared_ptr<Shape> test_cone_1 = std::make_shared<Cone>
-    (glm::vec3{-600.0f,100.0f,-850.0f},
+    (glm::vec3{600.0f,100.0f,-700.0f},
       20.0f, 300.0f,
-      test_material_4, "test_cone_1");
+      test_material_1, "test_cone_1");
 
 
   std::shared_ptr<Shape> test_cylinder_1 = std::make_shared<Cylinder>
     (glm::vec3{00.0f,-257.0f,-900.0f},
       300.0f, 10.0f,
       test_material_1, "test_cylinder_1");
+
+  std::shared_ptr<Shape> test_cylinder_2 = std::make_shared<Cylinder>
+    (glm::vec3{-500.0f,-250.0f,-800.0f},
+      60.0f, 120.0f,
+      test_material_4, "test_cylinder_2");
 
 
   std::vector<std::shared_ptr<Shape>> shapes;
@@ -240,11 +245,12 @@ int main(int argc, char* argv[])
   shapes.push_back(test_sphere_3);
   //shapes.push_back(test_sphere_4);
 
-  //shapes.push_back(test_triangle_1);
+  shapes.push_back(test_triangle_1);
 
-  //shapes.push_back(test_cone_1);
+  shapes.push_back(test_cone_1);
 
   shapes.push_back(test_cylinder_1);
+  shapes.push_back(test_cylinder_2);
 
 
   std::shared_ptr<Composite> test_composite = std::make_shared<Composite>
