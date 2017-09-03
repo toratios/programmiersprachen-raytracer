@@ -292,6 +292,50 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 					std::cout << "\ncamera added to scene: " << cameraname;
 				}
 			}
+
+			else if (word == "transform")
+			{
+				std::string shapename;
+				std::string transform;
+
+				glm::vec3 vec;
+				float angle;
+
+				stream >> shapename;
+
+				auto shape_ptr = tempshapesmap.find(shapename);
+				if(shape_ptr != tempshapesmap.end())
+				{
+					stream >> transform;
+
+					if (transform == "scale")
+					{
+						stream >> vec.x;
+						stream >> vec.y;
+						stream >> vec.z;
+
+						shape_ptr->second->scale(vec);
+					}
+					else if (transform == "rotate")
+					{
+						stream >> angle;
+
+						stream >> vec.x;
+						stream >> vec.y;
+						stream >> vec.z;
+
+						shape_ptr->second->rotate(angle, vec);
+					}
+					else if (transform == "translate")
+					{
+						stream >> vec.x;
+						stream >> vec.y;
+						stream >> vec.z;
+
+						shape_ptr->second->translate(vec);
+					}
+				}
+			}
 		}
 
 		for(auto it = tempcompmap.cbegin(); it != tempcompmap.cend(); ++it)
