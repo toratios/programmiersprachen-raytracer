@@ -232,6 +232,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 					std::string lightname;
 					Color color;
 					glm::vec3 pos;
+					float brightness;
 
 					stream >> lightname;
 
@@ -254,8 +255,10 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						stream >> color.r;
 						stream >> color.g;
 						stream >> color.b;
+
+						stream >> brightness;
 						
-						std::shared_ptr<Light> light = std::make_shared<Light>(lightname, pos, color);
+						std::shared_ptr<Light> light = std::make_shared<Light>(lightname, pos, color, brightness);
 						scene.lights_.push_back(light);
 						std::cout << "\nlight added to scene: " << lightname;
 					}
