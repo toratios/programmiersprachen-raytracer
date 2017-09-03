@@ -72,18 +72,13 @@ Hit Cylinder::intersect(Ray const& inray)
   		if(glm::dot(axis_, (ray.origin - center_) + ray.direction * t1) > 0 &&
   				glm::dot(axis_, (ray.origin - center2) + ray.direction * t1) < 0)
   		{
-  			glm::vec3 temp_intersection = ray.origin + ray.direction * t1;
+        glm::vec3 temp_intersection = ray.origin + ray.direction * t1;
 
-  			glm::vec3 temp_center
-  			{
-  				center_.x,
-  				temp_intersection.y,
-  				center_.z
-  			};
+        glm::vec3 co = temp_intersection - center_;
+        
+        glm::vec3 temp_normal = co - (axis_ * (glm::dot(co, axis_) / glm::dot(axis_, axis_)));
 
-  			glm::vec3 temp_normal = temp_intersection - temp_center;
-
-  			points.push_back(std::make_pair(t1, temp_normal));
+        points.push_back(std::make_pair(t1, temp_normal));
   		}
   	}
 
@@ -92,16 +87,11 @@ Hit Cylinder::intersect(Ray const& inray)
   		if(glm::dot(axis_, (ray.origin - center_) + ray.direction * t2) > 0 &&
   				glm::dot(axis_, (ray.origin - center2) + ray.direction * t2) < 0)
   		{
-  			glm::vec3 temp_intersection = ray.origin + ray.direction * t2;
+        glm::vec3 temp_intersection = ray.origin + ray.direction * t2;
 
-  			glm::vec3 temp_center
-  			{
-  				center_.x,
-  				temp_intersection.y,
-  				center_.z
-  			};
-
-  			glm::vec3 temp_normal = temp_intersection - temp_center;
+        glm::vec3 co = temp_intersection - center_;
+        
+        glm::vec3 temp_normal = co - (axis_ * (glm::dot(co, axis_) / glm::dot(axis_, axis_)));
 
   			points.push_back(std::make_pair(t2, temp_normal));
   		}

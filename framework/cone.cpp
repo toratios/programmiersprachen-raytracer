@@ -129,11 +129,7 @@ Hit Cone::intersect(Ray const& inray)
       normal = glm::cross(temp_intersection - top, perp);
     }
 
-
-
-
     cone_hit.normal_ = glm::normalize(normal);
-
 
     return cone_hit;
   }  

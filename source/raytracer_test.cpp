@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 
   Camera test_cam{"test_cam", 110.0f};
 
-  //test_cam.translate(glm::vec3{-1000.0f, 0.0f, -1000.0f});
+  //test_cam.translate(glm::vec3{-1000.0f, 0.0f, -750.0f});
 
   //test_cam.rotate(-90.0f, glm::vec3{0.0f, 1.0f, 0.0f});
 
@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
   lights.push_back(test_light_1);
   lights.push_back(test_light_2);
   lights.push_back(test_light_3);
-  //lights.push_back(test_light_4);
+  lights.push_back(test_light_4);
 
   test_scene.lights_ = lights;
 
@@ -204,8 +204,8 @@ int main(int argc, char* argv[])
 
 
   std::shared_ptr<Shape> test_cylinder_1 = std::make_shared<Cylinder>
-    (glm::vec3{00.0f,-257.0f,-900.0f},
-      300.0f, 10.0f,
+    (glm::vec3{-60.0f,-270.0f,-870.0f},
+      300.0f, 20.0f,
       test_material_1, "test_cylinder_1");
 
   std::shared_ptr<Shape> test_cylinder_2 = std::make_shared<Cylinder>
@@ -241,7 +241,7 @@ int main(int argc, char* argv[])
 
 
 
-  shapes.push_back(test_box_5);
+  //shapes.push_back(test_box_5);
 
   //shapes.push_back(test_sphere_1);
   shapes.push_back(test_sphere_2);
@@ -252,7 +252,7 @@ int main(int argc, char* argv[])
 
   shapes.push_back(test_cone_1);
 
-  //shapes.push_back(test_cylinder_1);
+  shapes.push_back(test_cylinder_1);
   shapes.push_back(test_cylinder_2);
 
 
