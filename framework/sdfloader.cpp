@@ -138,7 +138,26 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 					else if (word == "cylinder")
 					{
-						
+						std::string cylname;
+						glm::vec3 center;
+						float r;
+						float height;
+						std::string matname;
+
+						stream >> cylname;
+
+						stream >> center.x;
+						stream >> center.y;
+						stream >> center.z;
+
+						stream >> r;
+						stream >> height;
+
+						stream >> matname;
+
+						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
+						std::shared_ptr<Shape> cyl = std::make_shared<Cylinder>(center, r, height, material, cylname);
+						tempshapesmap.insert(std::pair<std::string, std::shared_ptr<Shape>>(cylname, cyl));
 					}
 
 					else if (word == "triangle")
