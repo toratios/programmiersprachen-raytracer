@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
   lights.push_back(test_light_1);
   lights.push_back(test_light_2);
   lights.push_back(test_light_3);
-  lights.push_back(test_light_4);
+  //lights.push_back(test_light_4);
 
   test_scene.lights_ = lights;
 
@@ -201,8 +201,8 @@ int main(int argc, char* argv[])
 
 
   std::shared_ptr<Shape> test_cylinder_1 = std::make_shared<Cylinder>
-    (glm::vec3{-700.0f,-260.0f,-700.0f},
-      70.0f, 300.0f,
+    (glm::vec3{-400.0f,-200.0f,-700.0f},
+      70.0f, 100.0f,
       test_material_1, "test_cylinder_1");
 
 
@@ -240,9 +240,9 @@ int main(int argc, char* argv[])
   shapes.push_back(test_sphere_3);
   //shapes.push_back(test_sphere_4);
 
-  shapes.push_back(test_triangle_1);
+  //shapes.push_back(test_triangle_1);
 
-  shapes.push_back(test_cone_1);
+  //shapes.push_back(test_cone_1);
 
   shapes.push_back(test_cylinder_1);
 

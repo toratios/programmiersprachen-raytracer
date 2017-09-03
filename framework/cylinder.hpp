@@ -19,7 +19,6 @@ public:
 
 	float get_height() const;
 
-
 	Hit intersect(Ray const& inray) override;
 
 private:
