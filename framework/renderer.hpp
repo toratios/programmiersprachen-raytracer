@@ -60,6 +60,8 @@ public:
   Color refraction(Hit const& hit, Ray const& ray, unsigned depth) const;
   
   Color tone_mapping(Color const& color) const;
+
+  Color antialiase(Ray const& ray, float antialiase_faktor, unsigned int depth) const;
   
 private:
   Scene scene_;

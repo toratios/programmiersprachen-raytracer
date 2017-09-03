@@ -71,6 +71,8 @@ void Renderer::render_scene()
 
       Color temp_color = raytrace(temp_ray, 3);
 
+      //Color temp_color = antialiase(temp_ray, 4, 3);
+
       pixel.color = tone_mapping(temp_color);
 
       write(pixel);
@@ -269,5 +271,30 @@ Color Renderer::tone_mapping(Color const& raytrace_color) const
 
   return final_color;
 }
+
+Color Renderer::antialiase(Ray const& ray, float antialiase_faktor, unsigned int depth) const
+{
+  Color tempcolor;
+  int samples = sqrt(antialiase_faktor);
+  
+  for (int xAA=1;xAA<samples+1;++xAA){
+    for (int yAA=1;yAA<samples+1;++yAA){
+      Ray aaRay;
+
+      aaRay.origin = ray.origin;
+
+      aaRay.direction.x = ray.direction.x +(float) (xAA)/(float)samples-0.5f; 
+      aaRay.direction.y = ray.direction.y +(float) (yAA)/(float)samples-0.5f;
+      aaRay.direction.z = ray.direction.z;
+      tempcolor +=raytrace(aaRay, depth);
+    }
+  }
+  tempcolor.r = tempcolor.r/antialiase_faktor;
+  tempcolor.g = tempcolor.g/antialiase_faktor;
+  tempcolor.b = tempcolor.b/antialiase_faktor;
+
+  return tempcolor;
+}
+
 
 
