@@ -201,8 +201,8 @@ int main(int argc, char* argv[])
 
 
   std::shared_ptr<Shape> test_cylinder_1 = std::make_shared<Cylinder>
-    (glm::vec3{-400.0f,-200.0f,-700.0f},
-      70.0f, 100.0f,
+    (glm::vec3{00.0f,-257.0f,-900.0f},
+      300.0f, 10.0f,
       test_material_1, "test_cylinder_1");
 
 

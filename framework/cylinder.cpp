@@ -40,8 +40,6 @@ Hit Cylinder::intersect(Ray const& inray)
 
   Ray ray = transformRay(world_transformation_inv(), inray);
 
-  float Ird = ray.direction.length();
-
   ray.direction = glm::normalize(ray.direction);
 
   std::vector<std::pair<float, glm::vec3>> points;
@@ -150,7 +148,7 @@ Hit Cylinder::intersect(Ray const& inray)
 
 	if(flag)
 	{
-		float t = minT / Ird;
+		float t = minT;
 
 		cylinder_hit.hit_ = true;
 		cylinder_hit.shape_ = this;

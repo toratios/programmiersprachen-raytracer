@@ -24,6 +24,8 @@ private:
 	float angle_;
 
 	float height_;
+
+	float r_;
 };
 
 #endif
