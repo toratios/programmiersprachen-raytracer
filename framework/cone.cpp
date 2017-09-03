@@ -1,5 +1,6 @@
 #include <cone.hpp>
 #include <cmath>
+#include <vector>
 
 Cone::Cone(glm::vec3 const& center, float angle,float height,
 			std::shared_ptr<Material> const& mat, std::string const& name):
@@ -25,77 +26,117 @@ Hit Cone::intersect(Ray const& inray)
     glm::normalize(inray.direction)
   };
 
-  float cos2 = cos(angle_) * cos(angle_);
+  std::vector<float> points;
 
-  glm::vec3 co = ray.origin - center_;
+  float cos2a = cos(angle_) * cos(angle_);
+  float sin2a = 1 - cos2a;
+  glm::vec3 pa = center_ + axis_ * height_;
+  glm::vec3 va = -axis_;
+  glm::vec3 deltaP = ray.origin - pa;
 
-  float dv = glm::dot(ray.direction, axis_);
+  float c1 = glm::dot(ray.direction, va);
+  glm::vec3 c2 = va * c1;
+  float c3 = glm::dot(deltaP, va);
+  glm::vec3 c4 = va * c3;
 
-  float cov = glm::dot(co, axis_);
+  float a = cos2a * glm::dot(ray.direction - c2, ray.direction - c2) - sin2a * c1 * c1;
+  float b = 2 * cos2a * glm::dot(ray.direction - c2, deltaP - c4) - 2 * sin2a * (c1 * c3);
+  float c = cos2a * glm::dot(deltaP - c4, deltaP - c4) - sin2a * (c3 * c3);
 
-  float A = (dv * dv) - cos2;
+  float d = b * b - 4 * a * c;
 
-  float B = 2 * ((dv * cov) - glm::dot(ray.direction, co) * cos2);
-
-  float C = (cov * cov) - glm::dot(co, co) * cos2;
-
-
-  float delta = B * B - 4 * A * C;
-
-  float t1 = INFINITY;
-
-  float t2 = INFINITY;
-
-  if(delta < 0)
+  if(d < 0)
   {
-  	return cone_hit;
+    return cone_hit;
   }
 
-  else if(delta == 0)
+  else
   {
-  	t1 = (-B) / (2 * A);
+    d = sqrtf(d);
+
+    float t1 = ((-1 * b) + d) / (2 * a);
+    float t2 = ((-1 * b) - d) / (2 * a);
+
+    if(t1 >= 0)
+    {
+      if(glm::dot(axis_, (ray.origin - center_) + ray.direction * t1) > 0 &&
+          glm::dot(axis_, (ray.origin - pa) + ray.direction * t1) < 0)
+      {
+        points.push_back(t1);
+      }
+
+    }
+
+    if(t2 >= 0)
+    {
+      if(glm::dot(axis_, (ray.origin - center_) + ray.direction * t2) > 0 &&
+          glm::dot(axis_, (ray.origin - pa) + ray.direction * t2) < 0)
+      {
+        points.push_back(t2);
+      }
+
+    }
   }
 
-  else if(delta > 0)
-  {
-  	t1 = ((-B) - sqrtf(delta)) / (2 * A);
+  float denom = glm::dot(ray.direction, axis_);
 
-  	t2 = ((-B) + sqrtf(delta)) / (2 * A);
+  if(denom > 0.001f)
+  {
+    glm::vec3 co = center_ - ray.origin;
+    float t3 = glm::dot(co, axis_) / denom;
+
+    if(t3 > 0 && glm::dot(ray.direction * t3 - co, ray.direction * t3 - co) <= r_ * r_)
+    {
+      points.push_back(t3);
+    }
   }
 
-  float t_min = std::min(t1, t2);
+  float minT = INFINITY;
+  bool flag = false;
 
-  if(t_min < 0)
+  for(int i = 0; i < points.size(); ++i)
   {
-  	return cone_hit;
+    if(minT > points[i] && points[i] >= 0)
+    {
+      minT = points[i];
+      flag = true;
+    }
   }
 
-  glm::vec3 temp_intersection = ray.origin + ray.direction * t_min;
-
-  glm::vec3 p_c = temp_intersection - center_;
-
-  if(glm::dot(p_c, axis_) < 0)
+  if(flag)
   {
-  	return cone_hit;
-  }
+    glm::vec3 normal;
 
-  glm::vec3 bottom = center_ + (axis_ * height_);
+    float t = minT;
 
-  if(temp_intersection.y < bottom.y)
-  {
-  	return cone_hit;
-  }
+    cone_hit.hit_ = true;
+    cone_hit.shape_ = this;
+    cone_hit.t_ = t;
+    cone_hit.intersection_ = ray.origin + ray.direction * t;
 
-  cone_hit.shape_ = this;
-  cone_hit.hit_ = true;
-  cone_hit.t_ = t_min;
-  cone_hit.intersection_ = ray.origin + ray.direction * cone_hit.t_;
+    glm::vec3 temp_intersection = cone_hit.intersection_;
 
-  glm::vec3 ch = -glm::normalize(center_ - cone_hit.intersection_);
+    if(std::fabs(glm::dot(temp_intersection - center_, axis_)) < 0.01f)
+    {
+      normal = -axis_;
+    }
 
-  glm::vec3 tangent_vector = -glm::normalize(glm::cross(ray.direction, ch));
+    else
+    {
+      glm::vec3 top = center_ + axis_ * height_;
+      glm::vec3 perp = glm::cross(-axis_, temp_intersection - top);
 
-  cone_hit.normal_ = glm::normalize(glm::cross(tangent_vector, ch));
+      normal = glm::cross(temp_intersection - top, perp);
+    }
+
+
+
+
+    cone_hit.normal_ = glm::normalize(normal);
+
+
+    return cone_hit;
+  }  
 
   return cone_hit;
 }

@@ -36,9 +36,9 @@ int main(int argc, char* argv[])
 
   Camera test_cam{"test_cam", 110.0f};
 
-  test_cam.translate(glm::vec3{-1000.0f, 0.0f, -1000.0f});
+  //test_cam.translate(glm::vec3{-1000.0f, 0.0f, -1000.0f});
 
-  test_cam.rotate(-90.0f, glm::vec3{0.0f, 1.0f, 0.0f});
+  //test_cam.rotate(-90.0f, glm::vec3{0.0f, 1.0f, 0.0f});
 
   
 
@@ -171,8 +171,8 @@ int main(int argc, char* argv[])
 //=================Objects===============================================================
  
   std::shared_ptr<Shape> test_box_5 = std::make_shared<Box>
-    (glm::vec3{-600.0f,-250.0f,-600.0f},glm::vec3{600.0f,-220.0f,-1200.0f},
-     test_material_6, "test_box_5");
+    (glm::vec3{100.0f,-240.0f,-800.0f},glm::vec3{300.0f,-100.0f,-1000.0f},
+     test_material_4, "test_box_5");
 
 
 
@@ -194,13 +194,13 @@ int main(int argc, char* argv[])
     (glm::vec3{-1000.0f,100.0f,-1400.0f},
       glm::vec3{0.0f,600.0f,-700.0f},
       glm::vec3{1000.0f,200.0f,-1200.0f},
-      test_material_2, "test_triangle_1");
+      test_material_1, "test_triangle_1");
 
 
   std::shared_ptr<Shape> test_cone_1 = std::make_shared<Cone>
-    (glm::vec3{600.0f,40.0f,-700.0f},
-      20.0f, 300.0f,
-      test_material_1, "test_cone_1");
+    (glm::vec3{350.0f,200.0f,-600.0f},
+      20.0f, 200.0f,
+      test_material_2, "test_cone_1");
 
 
   std::shared_ptr<Shape> test_cylinder_1 = std::make_shared<Cylinder>
@@ -241,18 +241,18 @@ int main(int argc, char* argv[])
 
 
 
-  //shapes.push_back(test_box_5);
+  shapes.push_back(test_box_5);
 
-  shapes.push_back(test_sphere_1);
+  //shapes.push_back(test_sphere_1);
   shapes.push_back(test_sphere_2);
-  shapes.push_back(test_sphere_3);
+  //shapes.push_back(test_sphere_3);
   //shapes.push_back(test_sphere_4);
 
-  //shapes.push_back(test_triangle_1);
+  shapes.push_back(test_triangle_1);
 
   shapes.push_back(test_cone_1);
 
-  shapes.push_back(test_cylinder_1);
+  //shapes.push_back(test_cylinder_1);
   shapes.push_back(test_cylinder_2);
 
 
