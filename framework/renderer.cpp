@@ -272,28 +272,33 @@ Color Renderer::tone_mapping(Color const& raytrace_color) const
   return final_color;
 }
 
-Color Renderer::antialiase(Ray const& ray, float antialiase_faktor, unsigned int depth) const
+Color Renderer::antialiase(Ray const& ray, float factor, unsigned int depth) const
 {
-  Color tempcolor;
-  int samples = sqrt(antialiase_faktor);
+  Color temp_color;
+
+  int samples = sqrt(factor);
   
-  for (int xAA=1;xAA<samples+1;++xAA){
-    for (int yAA=1;yAA<samples+1;++yAA){
-      Ray aaRay;
+  for(int x=1; x < samples + 1; ++x)
+  {
+    for (int y=1; y < samples + 1; ++y)
+    {
+      Ray temp_ray;
 
-      aaRay.origin = ray.origin;
+      temp_ray.origin = ray.origin;
 
-      aaRay.direction.x = ray.direction.x +(float) (xAA)/(float)samples-0.5f; 
-      aaRay.direction.y = ray.direction.y +(float) (yAA)/(float)samples-0.5f;
-      aaRay.direction.z = ray.direction.z;
-      tempcolor +=raytrace(aaRay, depth);
+      temp_ray.direction.x = ray.direction.x + (float) (x) / (float) samples - 0.5f; 
+      temp_ray.direction.y = ray.direction.y + (float) (y) / (float) samples - 0.5f;
+      temp_ray.direction.z = ray.direction.z;
+
+      temp_color += raytrace(temp_ray, depth);
     }
   }
-  tempcolor.r = tempcolor.r/antialiase_faktor;
-  tempcolor.g = tempcolor.g/antialiase_faktor;
-  tempcolor.b = tempcolor.b/antialiase_faktor;
 
-  return tempcolor;
+  temp_color.r = temp_color.r / factor;
+  temp_color.g = temp_color.g / factor;
+  temp_color.b = temp_color.b / factor;
+
+  return temp_color;
 }
 
 

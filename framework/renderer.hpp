@@ -61,7 +61,7 @@ public:
   
   Color tone_mapping(Color const& color) const;
 
-  Color antialiase(Ray const& ray, float antialiase_faktor, unsigned int depth) const;
+  Color antialiase(Ray const& ray, float factor, unsigned int depth) const;
   
 private:
   Scene scene_;
