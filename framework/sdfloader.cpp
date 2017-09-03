@@ -112,6 +112,40 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						std::cout << "\nsphere added to tempshapemap " << spherename;
 					}
 
+					else if (word == "cone")
+					{
+						std::string conename;
+						glm::vec3 center;
+						float angle;
+						float height;
+						std::string matname;
+
+						stream >> conename;
+
+						stream >> center.x;
+						stream >> center.y;
+						stream >> center.z;
+
+						stream >> angle;
+						stream >> height;
+
+						stream >> matname;
+
+						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
+						std::shared_ptr<Shape> cone = std::make_shared<Cone>(center, angle, height, material, conename);
+						tempshapesmap.insert(std::pair<std::string, std::shared_ptr<Shape>>(conename, cone));
+					}
+
+					else if (word == "cylinder")
+					{
+						
+					}
+
+					else if (word == "triangle")
+					{
+
+					}
+
 					else if (word == "composite")
 					{
 						std::string compname;

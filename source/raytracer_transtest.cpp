@@ -224,7 +224,7 @@ int main(int argc, char* argv[])
       */
 
   std::vector<std::shared_ptr<Shape>> shapes;
-/*
+
   //shapes.push_back(test_box_1);
   shapes.push_back(test_box_1_1);
   shapes.push_back(test_box_1_2);
@@ -245,7 +245,7 @@ int main(int argc, char* argv[])
   shapes.push_back(test_box_4_2);
   shapes.push_back(test_box_4_3);
   shapes.push_back(test_box_4_4);
-*/
+
 
 
 
@@ -264,9 +264,9 @@ int main(int argc, char* argv[])
   (glm::vec3{ 10.0f, 10.0f,10.0f},glm::vec3{-10.0f,-10.0f,-10.0f},
    test_material_1, "test_trans_box");
 
-  //test_trans_box->translate(glm::vec3{0,0,-50});
-  //test_trans_box->rotate(45.0f,glm::vec3{0.0,0.0,1.0});
-  test_trans_box->scale(glm::vec3{0.5,1.0,1.0});
+  test_trans_box->translate(glm::vec3{0,0,-350});
+  test_trans_box->rotate(45.0f,glm::vec3{0.0,1.0,0.0});
+  test_trans_box->scale(glm::vec3{10.0,10.0,10.0});
   
   
   shapes.push_back(test_trans_box);
@@ -290,7 +290,7 @@ int main(int argc, char* argv[])
   //unsigned const width = 3840;
   //unsigned const height = 2160;
 
-  std::string const filename = "./test_scale_box_x.ppm";
+  std::string const filename = "./test_scale_box_.ppm";
   
   Renderer test_renderer{width, height, filename, test_scene};
 
