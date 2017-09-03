@@ -37,6 +37,8 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 					Color kd;
 					Color ks;
 					float m;
+					float opac;
+					float refract;
 
 					stream >> matname;
 
@@ -53,9 +55,11 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 					stream >> ks.b;
 
 					stream >> m;
+					stream >> opac;
+					stream >> refract;
 
 
-					std::shared_ptr<Material> material = std::make_shared<Material>(matname, ka, kd, ks, m);
+					std::shared_ptr<Material> material = std::make_shared<Material>(matname, ka, kd, ks, m, opac, refract);
 					scene.materials_.insert(std::pair<std::string, std::shared_ptr<Material>>(matname, material));
 					std::cout << "\nmaterial added to scene " << matname;
 				}
