@@ -303,28 +303,19 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 				stream >> shapename;
 
-				auto shape_ptr = tempshapesmap.find(shapename);
-				if(shape_ptr != tempshapesmap.end())
+				if (shapename == "camera")
 				{
 					stream >> transform;
 
-					if (transform == "scale")
-					{
-						stream >> vec.x;
-						stream >> vec.y;
-						stream >> vec.z;
-
-						shape_ptr->second->scale(vec);
-					}
-					else if (transform == "rotate")
+					if (transform == "rotate")
 					{
 						stream >> angle;
-
+						
 						stream >> vec.x;
 						stream >> vec.y;
 						stream >> vec.z;
-
-						shape_ptr->second->rotate(angle, vec);
+						
+						scene.camera_.rotate(angle, vec);
 					}
 					else if (transform == "translate")
 					{
@@ -332,7 +323,43 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 						stream >> vec.y;
 						stream >> vec.z;
 
-						shape_ptr->second->translate(vec);
+						scene.camera_.translate(vec);
+					}
+				}
+
+				else
+				{
+					auto shape_ptr = tempshapesmap.find(shapename);
+					if(shape_ptr != tempshapesmap.end())
+					{
+						stream >> transform;
+
+						if (transform == "scale")
+						{
+							stream >> vec.x;
+							stream >> vec.y;
+							stream >> vec.z;
+
+							shape_ptr->second->scale(vec);
+						}
+						else if (transform == "rotate")
+						{
+							stream >> angle;
+
+							stream >> vec.x;
+							stream >> vec.y;
+							stream >> vec.z;
+
+							shape_ptr->second->rotate(angle, vec);
+						}
+						else if (transform == "translate")
+						{
+							stream >> vec.x;
+							stream >> vec.y;
+							stream >> vec.z;
+
+							shape_ptr->second->translate(vec);
+						}
 					}
 				}
 			}
