@@ -166,7 +166,31 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 					else if (word == "triangle")
 					{
+						std::string triname;
+						glm::vec3 a;
+						glm::vec3 b;
+						glm::vec3 c;
+						std::string matname;
 
+						stream >> triname;
+
+						stream >> a.x;
+						stream >> a.y;
+						stream >> a.z;
+
+						stream >> b.x;
+						stream >> b.y;
+						stream >> b.z;
+
+						stream >> c.x;
+						stream >> c.y;
+						stream >> c.z;
+
+						stream >> matname;
+
+						std::shared_ptr<Material> material = (scene.materials_.find(matname)->second);
+						std::shared_ptr<Shape> tri = std::make_shared<Triangle>(a, b, c, material, triname);
+						tempshapesmap.insert(std::pair<std::string, std::shared_ptr<Shape>>(triname, tri));
 					}
 
 					else if (word == "composite")
