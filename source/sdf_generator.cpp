@@ -7,9 +7,9 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
   
-	const int imagecount = 181;
+	const int imagecount = 360;
 
-	for (int i = 1; i <= imagecount; i = i +30){
+	for (int i = 1; i <= imagecount; i = i + 1){
 
 		ofstream fOut("scene" + to_string(i) + ".txt");		
 
@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
       << "define camera eye 110" << endl
       
       << "transform camera translate 0 0 -1200" << endl
-       << "transform camera rotate "<<(15+(float)i)/2<<" 0 1 0" << endl
+       << "transform camera rotate "<<((float)i)<<" 0 1 0" << endl
 
       
 
