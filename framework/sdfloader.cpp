@@ -383,7 +383,7 @@ Scene SDFloader::sdfLoad(std::string const& inputFile)
 
 	else
 	{
-		std::cout << "File not found." << std::endl;
+		std::cout << "File not found.\n" << std::endl;
 	}
 
 	return scene;
