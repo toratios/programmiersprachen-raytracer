@@ -28,7 +28,7 @@
 
 int main(int argc, char* argv[])
 {
-for (int i = 1; i <= 180; i += 1){
+for (int i = 1; i <= 360; i += 1){
 
     Scene test_scene;
 
