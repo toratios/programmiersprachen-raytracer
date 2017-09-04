@@ -28,7 +28,7 @@
 
 int main(int argc, char* argv[])
 {
-for (int i = 1; i <= 18; i += 1){
+for (int i = 1; i <= 181; i += 30){
 
     Scene test_scene;
 
@@ -40,8 +40,11 @@ for (int i = 1; i <= 18; i += 1){
 
 //=================Renderer==============================================================
 
-    unsigned const width = 1920;
-    unsigned const height = 1080;
+   // unsigned const width = 1920;
+    //unsigned const height = 1080;
+
+    unsigned const width = 400;
+    unsigned const height = 300;
 
     std::string const filename = "./frame"+std::to_string(i)+".ppm";
 
