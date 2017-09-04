@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
         ("test_material_5",Color{0.5f,0.5f,0.5f}, Color{0.0f,0.0f,0.0f}, Color{0.03f,0.03f,0.03f}, 0.0f);
 
   std::shared_ptr<Material> test_material_6 = std::make_shared<Material>
-        ("test_material_6",Color{1.0f,0.0f,0.0f}, Color{1.0f,0.0f,0.0f}, Color{1.0f,0.0f,0.0f}, 1000.0f, 1.0f, 1.3f);
+        ("test_material_6",Color{1.0f,0.0f,0.0f}, Color{1.0f,0.0f,0.0f}, Color{1.0f,0.0f,0.0f}, 1000.0f, 0.2f, 1.3f);
 
 
   materials.insert(std::pair<std::string, std::shared_ptr<Material>>("test_material_1", test_material_1));
@@ -268,11 +268,11 @@ int main(int argc, char* argv[])
 
 //=================Renderer==============================================================
 
-  //unsigned const width = 1920;
-  //unsigned const height = 1080;
+  unsigned const width = 1920;
+  unsigned const height = 1080;
 
-  unsigned const width = 800;
-  unsigned const height = 600;
+  //unsigned const width = 800;
+  //unsigned const height = 600;
 
   std::string const filename = "./test_.ppm";
 
