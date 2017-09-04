@@ -19,19 +19,21 @@ int main(int argc, char* argv[]) {
       //Camera
       << "define camera eye 110" << endl
       
-      << "transform camera rotate "<<(15+(float)i)/2<<" 0 1 0" << endl
       << "transform camera translate 0 0 -1200" << endl
+       << "transform camera rotate "<<(15+(float)i)/2<<" 0 1 0" << endl
+
       
 
       //Lights
       << "define light ambient 0.1 0.1 0.1" << endl
-      << "define light light_1 0.0 2000.0 0.0 1.0 1.0 1.0" << endl
-      //<< "define light light_2 -1200.0 1300.0 500.0 1.0 1.0 1.0" << endl
+      << "define light light_1 -2000.0 2000.0 0.0 1.0 1.0 1.0 1.0" << endl
+      << "define light light_2 -1200.0 1300.0 500.0 1.0 1.0 1.0 1.0" << endl
+      << "define light light_3 0.0 2000.0 0.0 1.0 1.0 1.0 1.5" << endl
       
 
       //Materials
       << "define material black 0.5 0.5 0.5 0.0 0.0 0.0 0.03 0.03 0.03 0.0 1.0 1.0" << endl
-      << "define material white 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.0 1.0 1.0" << endl
+      << "define material white 0.5 0.5 0.5 1.0 1.0 1.0 0.5 0.5 0.5 0.0 1.0 1.0" << endl
       << "define material blue 0.1 0.8 0.7 0.1 0.8 0.7 0.1 0.8 0.7 200.0 1.0 1.0" << endl
       << "define material yellow 0.8 0.7 0.1 0.8 0.7 0.1 0.8 0.7 0.1 200.0 1.0 1.0" << endl
       << "define material red 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1000.0 1.0 1.0" << endl
@@ -106,9 +108,11 @@ int main(int argc, char* argv[]) {
 
       << "define shape sphere purple_sphere 50.0 -200.0 -400.0 100.0 purple" << endl
 
+      << "define shape cone yellow_cone -500.0 -100.0 500.0 20.0 200.0 yellow" << endl
 
+      << "define shape cylinder red_cylinder -250.0 -320.0 250.0 80.0 200.0 red" << endl
 
-      << "define shape composite objects red_sphere blue_sphere purple_sphere" << endl
+      << "define shape composite objects red_sphere blue_sphere purple_sphere yellow_cone red_cylinder" << endl
 
 
       << "define shape composite everything floor objects" << endl;

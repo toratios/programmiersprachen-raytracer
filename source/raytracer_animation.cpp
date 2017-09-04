@@ -40,11 +40,8 @@ for (int i = 1; i <= 181; i += 30){
 
 //=================Renderer==============================================================
 
-   // unsigned const width = 1920;
-    //unsigned const height = 1080;
-
-    unsigned const width = 400;
-    unsigned const height = 300;
+    unsigned const width = 1280;
+    unsigned const height = 720;
 
     std::string const filename = "./frame"+std::to_string(i)+".ppm";
 
