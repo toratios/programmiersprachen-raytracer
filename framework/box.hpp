@@ -6,21 +6,29 @@
 #include "shape.hpp"
 #include "hit.hpp"
 
-class Box: public Shape{
-    glm::vec3 min_;
-    glm::vec3 max_;
+class Box: public Shape
+{
+public:
 
-  public:
-    Box();
-    Box(glm::vec3 const& min, glm::vec3 const& max);
-    Box(glm::vec3 const& min, glm::vec3 const& max, std::shared_ptr<Material> const& mat, std::string const& name);
+  Box();
 
-    glm::vec3 const& get_min() const;
-    glm::vec3 const& get_max() const;
+  Box(glm::vec3 const& min, glm::vec3 const& max);
 
-    void sortMinMax();
+  Box(glm::vec3 const& min, glm::vec3 const& max, std::shared_ptr<Material> const& mat, std::string const& name);
 
-    Hit intersect(Ray const& inray) override;
+  glm::vec3 const& get_min() const;
+  
+  glm::vec3 const& get_max() const;
+
+  void sortMinMax();
+
+  Hit intersect(Ray const& inray) override;
+
+private:
+
+	glm::vec3 min_; 
+
+  glm::vec3 max_;
 };
 
 #endif
