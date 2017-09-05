@@ -38,9 +38,14 @@ Hit Cylinder::intersect(Ray const& inray)
 {
 	Hit cylinder_hit;
 
-  Ray ray = transformRay(world_transformation_inv(), inray);
+  Ray ray
+  {
+    inray.origin,
 
-  ray.direction = glm::normalize(ray.direction);
+    glm::normalize(inray.direction)
+  };
+
+  ray = transformRay(world_transformation_inv(), ray);
 
   std::vector<std::pair<float, glm::vec3>> points;
 
@@ -145,6 +150,9 @@ Hit Cylinder::intersect(Ray const& inray)
 		cylinder_hit.t_ = t;
 		cylinder_hit.intersection_ = ray.origin + ray.direction * t;
 		cylinder_hit.normal_ = glm::normalize(normal);
+
+    cylinder_hit.intersection_ = glm::vec3(world_transformation()* glm::vec4(cylinder_hit.intersection_, 1));
+    cylinder_hit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * cylinder_hit.normal_);
 
 		return cylinder_hit;
 	}  

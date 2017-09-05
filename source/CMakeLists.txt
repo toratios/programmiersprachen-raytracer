@@ -41,3 +41,5 @@ add_dependencies(sdf_generator glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
 
 install(TARGETS sdf_generator DESTINATION .)
 
+
+

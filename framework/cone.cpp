@@ -26,6 +26,8 @@ Hit Cone::intersect(Ray const& inray)
     glm::normalize(inray.direction)
   };
 
+  ray = transformRay(world_transformation_inv(), ray);
+
   std::vector<float> points;
 
   float cos2a = cos(angle_) * cos(angle_);
@@ -130,6 +132,9 @@ Hit Cone::intersect(Ray const& inray)
     }
 
     cone_hit.normal_ = glm::normalize(normal);
+
+    cone_hit.intersection_ = glm::vec3(world_transformation()* glm::vec4(cone_hit.intersection_, 1));
+    cone_hit.normal_ = glm::vec3(glm::mat3(glm::transpose(world_transformation_inv())) * cone_hit.normal_);
 
     return cone_hit;
   }  

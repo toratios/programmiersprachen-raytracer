@@ -198,9 +198,12 @@ int main(int argc, char* argv[])
 
 
   std::shared_ptr<Shape> test_cone_1 = std::make_shared<Cone>
-    (glm::vec3{350.0f,200.0f,-600.0f},
+    (glm::vec3{0.0,0.0,0.0},
       20.0f, 200.0f,
       test_material_2, "test_cone_1");
+
+  //test_cone_1.rotate(90.0,glm::vec3{0.0,0.0,1.0});
+  //test_cone_1.translate(glm::vec3{350.0,200.0,-600.0});
 
 
   std::shared_ptr<Shape> test_cylinder_1 = std::make_shared<Cylinder>
@@ -244,16 +247,16 @@ int main(int argc, char* argv[])
   //shapes.push_back(test_box_5);
 
   //shapes.push_back(test_sphere_1);
-  shapes.push_back(test_sphere_2);
+  //shapes.push_back(test_sphere_2);
   //shapes.push_back(test_sphere_3);
-  shapes.push_back(test_sphere_4);
+  //shapes.push_back(test_sphere_4);
 
-  shapes.push_back(test_triangle_1);
+  //shapes.push_back(test_triangle_1);
 
   shapes.push_back(test_cone_1);
 
   //shapes.push_back(test_cylinder_1);
-  shapes.push_back(test_cylinder_2);
+  //shapes.push_back(test_cylinder_2);
 
 
   std::shared_ptr<Composite> test_composite = std::make_shared<Composite>
@@ -268,11 +271,11 @@ int main(int argc, char* argv[])
 
 //=================Renderer==============================================================
 
-  unsigned const width = 1920;
-  unsigned const height = 1080;
+  //unsigned const width = 1920;
+  //unsigned const height = 1080;
 
-  //unsigned const width = 800;
-  //unsigned const height = 600;
+  unsigned const width = 800;
+  unsigned const height = 600;
 
   std::string const filename = "./test_.ppm";
 

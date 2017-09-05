@@ -37,8 +37,8 @@ int main(int argc, char* argv[])
 
 //=================Renderer==============================================================
 
-  unsigned const width = 1920;
-  unsigned const height = 1080;
+  unsigned const width = 800;
+  unsigned const height = 600;
 
   std::string const filename = "./test_sdf2.ppm";
 
